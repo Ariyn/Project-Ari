@@ -5,7 +5,7 @@ public class Plane {
 	int fuel, fuelTank, fuelPercent; // 연료, 연료최대량, 연료량(%)
 	int speed, height; // 속도, 고도
 	int x,y; // 좌표 
-	int latitude, altitude; // 위도, 경도
+	int latitude, altitude; // 위도(가로선), 경도(세로선)
 	
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
@@ -17,7 +17,8 @@ public class Plane {
 	}
 	
 	public void Position(){ // 비행기 위치 보여주는 메소드
-		
+	
+	
 	}
 	
 	public void Move(){ // 비행기 좌표 이동(연료 소모 표시)
