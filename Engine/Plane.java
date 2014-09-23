@@ -5,7 +5,7 @@ public class Plane {
 	int fuel, fuelTank, fuelPercent; // 연료, 연료최대량, 연료량(%)
 	int speed, height; // 속도, 고도
 	int x,y; // 좌표 
-	int latitude, altitude; // 위도, 경도
+	int latitude, altitude; // 위도(가로선), 경도(세로선)
 	
 	int status; // 비행기 상태, 0 : 땅위, 1 : 비행중, 2 : 특수상황
 	
@@ -18,6 +18,7 @@ public class Plane {
 		code = 10;
 	}
 	
+
 	public int PositionX(){ // 비행기 위도
 		return latitude;
 	}
