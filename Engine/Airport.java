@@ -13,8 +13,12 @@ public class Airport {
 		
 	}
 	
-	public void Position(){ // 공항 위치 보여주는 메소드
-		
+	public int PositionX(){ // 공항 위치 보여주는 메소드
+		return latitude;
+	}
+	
+	public int PositionY(){
+		return altitude;
 	}
 	
 	public void LandingPermitSign(){ // 비행기 착륙 허가
@@ -33,9 +37,12 @@ public class Airport {
 		
 	}
 	
-	public void OnPlane(){ // 현재 공항에 체류중인 비행기
+	public void PlaneSignReceive(){ // 목적 공항에 비행기 탐색 신청
 		
 	}
 	
+	public void OnPlane(){ // 현재 공항에 체류중인 비행기 보여주는 메소드
+		
+	}
 	
 }
