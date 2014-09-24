@@ -9,8 +9,10 @@ public class Airport {
 	// 비행기 이착륙은 허가 후 이착륙 가능 허가 메소드에서는 큐에 비행기 객체들을 집어넣어 순차적으로 허가시킨다.
 	// 비행기 객체는 트리구조로 저장
 	
-	public Airport(){
-		
+	
+	public Airport(int airportX,int airportY){
+		this.latitude=airportX;
+		this.altitude=airportY;
 	}
 	
 	public int PositionX(){ // 공항 위치 보여주는 메소드
