@@ -11,17 +11,6 @@
 				{
 					"num":1,
 					"length":20,
-					"test":[
-						{
-							"num":[
-							{
-								"num":1,
-								"length":20
-							}
-						],
-							"length":20
-						}
-					],
 				}
 			],
 			"maximum_airplane":20
