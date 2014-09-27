@@ -47,19 +47,11 @@ public class DS
 
 class Queue
 {
-	public int MAXIMUM_INFINITE = -1;
 	LinkedList<Node<?>> nodes;
-	int maximum;
 	
 	public Queue()
 	{
 		this.nodes = new LinkedList<Node<?>>();
-		this.maximum = this.MAXIMUM_INFINITE;
-	}
-	
-	public void SetMaximum(int e)
-	{
-		this.maximum = e;
 	}
 	
 	public boolean Push(Node<?> e) throws CloneNotSupportedException
@@ -70,18 +62,11 @@ class Queue
 		boolean suc = false;
 		if(n != null)
 		{
-			if(this.nodes.size() >= this.maximum)
-			{
-				suc = false;
-			}
-			else
-			{
-				this.nodes.push(n);
-				
-				if(n1 != null)
-					n1.SetChild(n);
-				suc = true;
-			}
+			this.nodes.push(n);
+			
+			if(n1 != null)
+				n1.SetChild(n);
+			suc = true;
 		}
 		return suc;
 	}
