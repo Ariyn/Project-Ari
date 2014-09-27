@@ -16,7 +16,7 @@ import org.json.simple.parser.*;
 
 public class Main {
 	
-	ArrayList airportList = new ArrayList();
+	ArrayList <Airport> airportList = new ArrayList();
 	
 	public static void main(String argv[]){
 		Main mai = new Main(); // 메인 클래스
@@ -42,8 +42,15 @@ public class Main {
 	}
 	
 	public void test528(){
-		Airport a = (Airport) airportList.get(0);
+		Airport a =  airportList.get(0);
+		Airport b =  airportList.get(1);
+		
 		System.out.println("test Name :!>!!  : "+a.getName());
+		System.out.println("test Name :!>!!  : altitude : "+a.PositionX() + " latitude : " +a.PositionY());
+		System.out.println("test Name :!>!!  : runwayLength : "+a.getRunwayLength(0));
+		System.out.println("test Name :!>!!  : "+b.getName());
+		System.out.println("test Name :!>!!  : altitude : "+b.PositionX() + " latitude : " +b.PositionY());
+		System.out.println("test Name :!>!!  : runwayLength : "+b.getRunwayLength(0));
 	}
 	
 	public JSONArray JsonParsingArr(Object o){
@@ -64,10 +71,13 @@ public class Main {
 	
 	public JSONObject JsonParsing(Object o){
 		
-		JSONObject __o = new JSONObject();
+			long number=0;
+		
+			JSONObject __o = new JSONObject();
 			
 			JSONObject _o = (JSONObject) o;
 			
+			ArrayList airportRunway = new ArrayList();
 			
 			if(!_o.isEmpty()) {
 				
@@ -86,8 +96,27 @@ public class Main {
 					}
 					
 					if(i.equals("name")){ // 이름 등록
-						Airport test1 = (Airport) airportList.get(airportList.size()-1);
+						Airport test1 = airportList.get(airportList.size()-1);
 						test1.setName(_o.get(i).toString());
+						airportList.set(airportList.size()-1, test1);
+					}else if(i.equals("altitude")){
+						Airport test1 =  airportList.get(airportList.size()-1);
+						test1.setPositionX((long)_o.get(i));
+						airportList.set(airportList.size()-1, test1);
+					}else if(i.equals("latitude")){
+						Airport test1 = airportList.get(airportList.size()-1);
+						test1.setPositionY((long)_o.get(i));
+						airportList.set(airportList.size()-1, test1);
+					}
+					
+					if(i.equals("num")){
+						number = (long)_o.get(i) - 1;
+					}
+					if(i.equals("length")){
+						Airport test1 = airportList.get(airportList.size()-1);
+						airportRunway.add((int)number, (long)_o.get(i));
+						number = 0;
+						test1.setRunwyas((int)number, (long)airportRunway.get(airportRunway.size()-1));
 						airportList.set(airportList.size()-1, test1);
 					}
 					
