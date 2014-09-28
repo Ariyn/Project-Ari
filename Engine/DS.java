@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+import Airport;
 
 public class DS
 {
@@ -30,16 +31,21 @@ public class DS
 	public static void main(String argv[])
 	{
 		CBTree t = new CBTree();
-		t.Add(131);
-		t.Add(132);
-		t.Add(133);
-		t.Add(134);
-		t.Add(135);
-		t.Add(136);
-		t.Add(137);
-		t.Add(138);
+		t.Add("AA0117");
+		t.Add("AA0118");
+		t.Add("AA0119");
+		t.Add("AA0120");
+		t.Add("AA0121");
+		t.Add("AA0122");
+		t.Add("AA0123");
+		t.Add("AA0124");
 		
-		t.IndexOfValue(136);
+		CBNode<?> n = t.NodeOfValue("AA0119");
+		//System.out.println(n+" "+n.Get()+" "+n.GetChildren()+" "+ n.GetParent());
+		t.Pop(t.NodeOfValue("AA0119"));
+		t._Print();
+		
+		//System.out.println("test");
 	}
 	
 	
@@ -47,11 +53,25 @@ public class DS
 
 class Queue
 {
+	public int UNLIMIT_QUE = -1;
 	LinkedList<Node<?>> nodes;
+	
+	int maximum;
 	
 	public Queue()
 	{
 		this.nodes = new LinkedList<Node<?>>();
+		this.maximum = this.UNLIMIT_QUE;
+	}
+	
+	public boolean Contain(Class<?> e)
+	{
+		System.out.println(e);
+		return false;
+	}
+	public void SetMaximum(int max)
+	{
+		this.maximum = max;
 	}
 	
 	public boolean Push(Node<?> e) throws CloneNotSupportedException
@@ -70,27 +90,37 @@ class Queue
 		}
 		return suc;
 	}
-	public boolean Push(int e)
+	public boolean Push(Class<?> c)
 	{
-		Node<?> n1 = this.nodes.getFirst();
-		Node<Integer> n = new Node<Integer>(e);
-		
-		this.nodes.push(n);
-		if(n1 != null)
-			n1.SetChild(n);
-		
-		return true;
+		Node<Class<?>> n = new Node<Class<?>>(c);
+		try {
+			boolean a = false;
+			if(this.maximum == this.UNLIMIT_QUE || this.nodes.size() < this.maximum){
+				a = this.Push(n);
+			}
+			return a;
+		} catch (CloneNotSupportedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return false;
+		}
 	}
 	public boolean Push(String e)
 	{
 		Node<?> n1 = this.nodes.getFirst();
 		Node<String> n = new Node<String>(e);
 		
-		this.nodes.push(n);
-		if(n1 != null)
-			n1.SetChild(n);
-		
-		return true;
+		try {
+			boolean a = false;
+			if(this.maximum == this.UNLIMIT_QUE || this.nodes.size() < this.maximum){
+				a = this.Push(n);
+			}
+			return a;
+		} catch (CloneNotSupportedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return false;
+		}
 	}
 	
 	public Node<?> Pop()
@@ -102,13 +132,19 @@ class Queue
 
 class Stack
 {
+	public int UNLIMIT_STACK = -1;
 	LinkedList<Node<?>> nodes;
 	int index;
+	int maximum;
 	
 	public Stack()
 	{
 		this.nodes = new LinkedList<Node<?>>();
 		this.index = 0;
+	}
+	public void SetMaxium(int max)
+	{
+		this.maximum = max;
 	}
 	
 	public boolean Add(Node<?> e) throws CloneNotSupportedException
@@ -127,11 +163,15 @@ class Stack
 		}
 		return suc;
 	}
-	public boolean Add(int e)
+	public boolean Add(Class<?> c)
 	{
-		Node<Integer> n = new Node<Integer>(e);
+		Node<Class<?>> n = new Node<Class<?>>(c);
 		try {
-			return this.Add(n);
+			boolean a = false;
+			if(this.maximum == this.UNLIMIT_STACK || this.nodes.size() < this.maximum){
+				a = this.Add(n);
+			}
+			return a;
 		} catch (CloneNotSupportedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -182,6 +222,16 @@ class CBTree
 	public void _Print()
 	{
 		System.out.println(this.children);
+		
+		for(CBNode<?> i:this.children)
+		{
+			System.out.print("self   "+i.Get()+", ");
+			if(i.GetLeftChild() != null)
+				System.out.print("left   "+i.GetLeftChild().Get()+", ");
+			if(i.GetRightChild() != null)
+				System.out.print("right   "+i.GetRightChild().Get());
+			System.out.println();
+		}
 	}
 	
 	public int Add(CBNode<?> e)
@@ -193,10 +243,17 @@ class CBTree
 			boolean suc = this.children.add(tn);
 			if(suc)
 			{
+				//System.out.println("suc");
 				ret = this.children.indexOf(tn);
 				CBNode<?> parent = this.children.get((ret-1)/2);
-				if(parent.SetChild(tn))
-					ret = -1;
+				if(parent != tn){
+					//System.out.println(parent);
+					tn.SetParent(parent);
+					//System.out.println(tn.GetParent());
+					
+					if(parent.AddChildren(tn))
+						ret = -1;
+				}
 			}
 		}
 		return ret;
@@ -239,7 +296,10 @@ class CBTree
 	{
 		return this.children.size()/2 +1;
 	}
-	
+	public int Depth(Class<?> e)
+	{
+		return 0;
+	}
 	
 	public int IndexOfObject(CBNode<?> e)
 	{
@@ -264,6 +324,10 @@ class CBTree
 	{
 		return this.children.indexOf(this._SearchValue(e));
 	}
+	public CBNode<?> NodeOfValue(String e)
+	{
+		return this._SearchValue(e);
+	}
 	
 	private CBNode<?> _SearchValue(int e)
 	{
@@ -282,6 +346,24 @@ class CBTree
 	{
 		return this.children.indexOf(this._SearchValue(e));
 	}
+	
+	private CBNode<?> _SearchValue(Class<?> e)
+	{
+		CBNode<?> ret = null;
+		for(CBNode<?> n : this.children.toArray(new CBNode<?>[0]))
+		{
+			if(n.Get().equals(e))
+			{
+				ret = n;
+				break;
+			}
+		}
+		return ret;
+	}
+	public int IndexOfValue(Class<?> e)
+	{
+		return this.children.indexOf(this._SearchValue(e));
+	}
 }
 
 class CBNode<T> extends Node<T> implements Cloneable
@@ -293,6 +375,8 @@ class CBNode<T> extends Node<T> implements Cloneable
 	private void _CBNode()
 	{
 		this._children = new CBNode<?>[2];
+		this._children[0] = null;
+		this._children[1] = null;
 		this._parent = null;
 	}
 	
@@ -314,11 +398,19 @@ class CBNode<T> extends Node<T> implements Cloneable
 	public boolean AddChildren(CBNode<?> e)
 	{
 		boolean suc = false;
+		int len = -1;
 		
-		if(this._children.length < 2){
-			this._children[this._children.length] = e;
+		if(this._children[0] == null) {
+			//System.out.println(e.Get());
+			len = 0;
+			suc = true;
+		} else if(this._children[1] == null){
+			len = 1;
 			suc = true;
 		}
+		if(len != -1)
+			this._children[len] = e;
+		
 		return suc;
 	}
 	public boolean AddChildren(String e)
@@ -335,6 +427,11 @@ class CBNode<T> extends Node<T> implements Cloneable
 	public CBNode<?> GetParent()
 	{
 		return this._parent;
+	}
+	public boolean SetParent(CBNode<?> e)
+	{
+		this._parent = e;
+		return true;
 	}
 	public CBNode<?>[] GetChildren()
 	{
