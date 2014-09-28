@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Airport {
 	
 	String name; // 공항명
-	long latitude, altitude; // 공항의 위도, 경도
+	double latitude, altitude; // 공항의 위도, 경도
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	
 	long[] runways = new long[1];// 활주로 길이
@@ -22,11 +22,11 @@ public class Airport {
 		name = text;
 	}
 	
-	public void setPositionX(long x){
+	public void setPositionX(double x){
 		latitude = x;
 	}
 	
-	public void setPositionY(long y){
+	public void setPositionY(double y){
 		altitude = y;
 	}
 	
@@ -39,11 +39,11 @@ public class Airport {
 		return name;
 	}
 	
-	public long PositionX(){ // 공항 위치 보여주는 메소드
+	public double getPositionX(){ // 공항 위치 보여주는 메소드
 		return latitude;
 	}
 	
-	public long PositionY(){
+	public double getPositionY(){
 		return altitude;
 	}
 	
@@ -52,12 +52,11 @@ public class Airport {
 	}
 	
 	public void LandingPermitSign(){ // 비행기 착륙 허가
-	
-		
+	//큐가 비어있는지 확인후 비어있으면 허가 
 	}
 	
 	public void PlaneLanding(){ // 비행기 착륙
-		
+	
 	}
 	
 	public void TakeOffPermitSign(){ // 비행기 이륙 허가

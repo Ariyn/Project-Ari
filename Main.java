@@ -24,7 +24,7 @@ public class Main {
 		
 		try{
 			Object obj = parser.parse(new FileReader("C:\\Users\\rockpell\\workspace\\Project-Ari\\src\\Engine\\resource\\airport_text.json"));
-			
+
 			JSONObject jsonObject = (JSONObject) obj;
 			
 			JSONObject abc = mai.JsonParsing(obj); // ÆÄ½Ì
@@ -46,10 +46,10 @@ public class Main {
 		Airport b =  airportList.get(1);
 		
 		System.out.println("test Name :!>!!  : "+a.getName());
-		System.out.println("test Name :!>!!  : altitude : "+a.PositionX() + " latitude : " +a.PositionY());
+		System.out.println("test Name :!>!!  : altitude : "+a.getPositionX() + " latitude : " +a.getPositionY());
 		System.out.println("test Name :!>!!  : runwayLength : "+a.getRunwayLength(0));
 		System.out.println("test Name :!>!!  : "+b.getName());
-		System.out.println("test Name :!>!!  : altitude : "+b.PositionX() + " latitude : " +b.PositionY());
+		System.out.println("test Name :!>!!  : altitude : "+b.getPositionX() + " latitude : " +b.getPositionY());
 		System.out.println("test Name :!>!!  : runwayLength : "+b.getRunwayLength(0));
 	}
 	
