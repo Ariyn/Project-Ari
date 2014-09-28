@@ -15,9 +15,7 @@ package Engine;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 
-import Airport;
 
 public class DS
 {
@@ -30,8 +28,10 @@ public class DS
 	
 	public static void main(String argv[])
 	{
+		Plane p = new Plane();
+		
 		CBTree t = new CBTree();
-		t.Add("AA0117");
+		t.Add(p);
 		t.Add("AA0118");
 		t.Add("AA0119");
 		t.Add("AA0120");
@@ -90,9 +90,9 @@ class Queue
 		}
 		return suc;
 	}
-	public boolean Push(Class<?> c)
+	public boolean Push(Plane c)
 	{
-		Node<Class<?>> n = new Node<Class<?>>(c);
+		Node<Plane> n = new Node<Plane>(c);
 		try {
 			boolean a = false;
 			if(this.maximum == this.UNLIMIT_QUE || this.nodes.size() < this.maximum){
@@ -163,9 +163,9 @@ class Stack
 		}
 		return suc;
 	}
-	public boolean Add(Class<?> c)
+	public boolean Add(Plane c)
 	{
-		Node<Class<?>> n = new Node<Class<?>>(c);
+		Node<Plane> n = new Node<Plane>(c);
 		try {
 			boolean a = false;
 			if(this.maximum == this.UNLIMIT_STACK || this.nodes.size() < this.maximum){
@@ -268,6 +268,13 @@ class CBTree
 	public void Add(String e)
 	{
 		CBNode<String> tn = new CBNode<String>(e);
+		int ind = this.Add(tn);
+		if(ind == -1)
+			ind=ind;
+	}
+	public void Add(Plane e)
+	{
+		CBNode<Plane> tn = new CBNode<Plane>(e);
 		int ind = this.Add(tn);
 		if(ind == -1)
 			ind=ind;
