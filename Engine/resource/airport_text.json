@@ -1,0 +1,32 @@
+{
+	"Airports" :
+	{
+		"Dalars":
+		{
+			"name":"Dalars",
+			"companies":{"KAL":10, "AA":50},
+			"position":{"latitude":10, "altitude":15},
+			"runways":
+			[
+				{
+					"num":1,
+					"length":20,
+				}
+			],
+			"maximum_airplane":20
+		},
+		"Narita":
+		{
+			"name":"Narita",
+			"position":{"latitude":189, "altitude":37},
+			"runways":
+			[
+				{
+					"num":1,
+					"length":25
+				}
+			],
+			"maximum_airplane":20
+		}
+	}
+}

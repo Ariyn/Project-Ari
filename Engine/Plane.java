@@ -13,11 +13,6 @@ public class Plane {
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
 	boolean hiJack; // 하이잭 유무
-	
-	public Plane(){
-		code = 10;
-	}
-	
 
 	public int PositionX(){ // 비행기 위도
 		return latitude;
