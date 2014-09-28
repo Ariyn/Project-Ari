@@ -17,6 +17,9 @@ import org.json.simple.parser.*;
 public class Main {
 	
 	ArrayList <Airport> airportList = new ArrayList();
+	ArrayList <Plane> planeList = new ArrayList();
+	
+	String testText;
 	
 	public static void main(String argv[]){
 		Main mai = new Main(); // 메인 클래스
@@ -51,6 +54,7 @@ public class Main {
 		System.out.println("test Name :!>!!  : "+b.getName());
 		System.out.println("test Name :!>!!  : altitude : "+b.PositionX() + " latitude : " +b.PositionY());
 		System.out.println("test Name :!>!!  : runwayLength : "+b.getRunwayLength(0));
+		
 	}
 	
 	public JSONArray JsonParsingArr(Object o){
@@ -88,36 +92,63 @@ public class Main {
 				for(Object i : keys){
 					
 					System.out.print("here      "+i+"       ");
+					if(i.equals("Airports")){
+						testText = i.toString();
+					}else if(i.equals("PlaneType")){
+						testText = i.toString();
+					}
+					
 					if(i.equals("Dalars")){  // 공항 리스트 추가
 						airportList.add(new Airport());
-					}
-					else if(i.equals("Narita")){
+					}else if(i.equals("Narita")){
 						airportList.add(new Airport());
+					}else if(i.equals("A330")){
+						planeList.add(new Plane());
+					}else if(i.equals("MIG-29")){
+						planeList.add(new Plane());
 					}
 					
-					if(i.equals("name")){ // 이름 등록
-						Airport test1 = airportList.get(airportList.size()-1);
-						test1.setName(_o.get(i).toString());
-						airportList.set(airportList.size()-1, test1);
-					}else if(i.equals("altitude")){
-						Airport test1 =  airportList.get(airportList.size()-1);
-						test1.setPositionX((long)_o.get(i));
-						airportList.set(airportList.size()-1, test1);
-					}else if(i.equals("latitude")){
-						Airport test1 = airportList.get(airportList.size()-1);
-						test1.setPositionY((long)_o.get(i));
-						airportList.set(airportList.size()-1, test1);
+					if(testText == "Airports"){
+						if(i.equals("name")){ // 이름 등록
+							Airport test1 = airportList.get(airportList.size()-1);
+							test1.setName(_o.get(i).toString());
+							airportList.set(airportList.size()-1, test1);
+						}else if(i.equals("altitude")){
+							Airport test1 =  airportList.get(airportList.size()-1);
+							test1.setPositionX((long)_o.get(i));
+							airportList.set(airportList.size()-1, test1);
+						}else if(i.equals("latitude")){
+							Airport test1 = airportList.get(airportList.size()-1);
+							test1.setPositionY((long)_o.get(i));
+							airportList.set(airportList.size()-1, test1);
+						}
+						
+						if(i.equals("num")){
+							number = (long)_o.get(i) - 1;
+						}
+						if(i.equals("length")){
+							Airport test1 = airportList.get(airportList.size()-1);
+							airportRunway.add((int)number, (long)_o.get(i));
+							number = 0;
+							test1.setRunwyas((int)number, (long)airportRunway.get(airportRunway.size()-1));
+							airportList.set(airportList.size()-1, test1);
+						}
+						
 					}
 					
-					if(i.equals("num")){
-						number = (long)_o.get(i) - 1;
-					}
-					if(i.equals("length")){
-						Airport test1 = airportList.get(airportList.size()-1);
-						airportRunway.add((int)number, (long)_o.get(i));
-						number = 0;
-						test1.setRunwyas((int)number, (long)airportRunway.get(airportRunway.size()-1));
-						airportList.set(airportList.size()-1, test1);
+					if(testText == "PlaneType"){
+						if(i.equals("fuleTank")){
+							Plane test2 = planeList.get(planeList.size()-1);
+						}else if(i.equals("code")){
+							Plane test2 = planeList.get(planeList.size()-1);
+						}else if(i.equals("engine")){
+							Plane test2 = planeList.get(planeList.size()-1);
+						}else if(i.equals("company")){
+							Plane test2 = planeList.get(planeList.size()-1);
+						}else if(i.equals("maxSpeed")){
+							Plane test2 = planeList.get(planeList.size()-1);
+						}
+						
 					}
 					
 					System.out.print(_o.get(i)+"       \n");
@@ -135,7 +166,6 @@ public class Main {
 							__o.put(i, _v);
 						} else if(_tempO instanceof JSONArray){
 							JSONArray ab = JsonParsingArr(_tempO);
-							//System.out.println("!@S");
 							
 							__o.put(i, ab);
 						}
