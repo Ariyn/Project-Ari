@@ -26,9 +26,9 @@ public class Main {
 		JSONParser parser = new JSONParser();
 		
 		try{
-			Object obj = parser.parse(new FileReader("C:\\Users\\rockpell\\workspace\\Project-Ari\\src\\Engine\\resource\\airport_text.json"));
+			Object obj = parser.parse(new FileReader("/Users/hongjuhyeong/Documents/workspace/project-ahri/src/Engine/resource/airport_text.json"));
 
-			JSONObject jsonObject = (JSONObject) obj;
+			//JSONObject jsonObject = (JSONObject) obj;
 			
 			JSONObject abc = mai.JsonParsing(obj); // ÆÄ½Ì
 			
