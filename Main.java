@@ -19,7 +19,7 @@ public class Main {
 	
 	public static void main(String argv[]){
 		Main mai = new Main(); // 메인 클래스
-		Engine eng = new Engine();
+		Engine eng = Engine.getInstance();
 		JSONParser parser = new JSONParser();
 		
 		try{

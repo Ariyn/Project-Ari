@@ -7,11 +7,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Engine {
-	
 	ArrayList <Airport> airportList = new ArrayList();
 	ArrayList <Plane> planeList = new ArrayList();
 	
 	String testText="a";
+	
+	private static Engine instance = new Engine();
+	private Engine(){}
+	public static Engine getInstance(){
+		if(instance == null)
+			instance = new Engine();
+		return instance;
+	}
 	
 	public JSONArray JsonParsingArr(Object o){
 		JSONArray _o = (JSONArray) o;

@@ -55,8 +55,8 @@ public class Airport {
 	//큐가 비어있는지 확인후 비어있으면 허가 
 	}
 	
-	public void PlaneLanding(){ // 비행기 착륙
-	
+	public void PlaneLanding(Plane pl){ // 비행기 착륙
+		System.out.println("PlaneLading : "+q.Push(pl));
 	}
 	
 	public void TakeOffPermitSign(){ // 비행기 이륙 허가
