@@ -16,7 +16,7 @@ public class Airport {
 	
 
 	Queue q = new Queue();
-	Plane p = new Plane();
+	//Plane p = new Plane();
 
 	public void setName(String text){
 		name = text;
