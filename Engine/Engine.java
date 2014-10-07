@@ -1,29 +1,84 @@
 package Engine;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.*;
 
 public class Engine {
+	ArrayList <Airport> airportList = new ArrayList<Airport>();
+	ArrayList <Plane> planeList = new ArrayList<Plane>();
 	
-	ArrayList <Airport> airportList = new ArrayList();
-	ArrayList <Plane> planeList = new ArrayList();
 	
-	String testText="a";
+	String testText;
+	boolean firstInit = false;
+	
+	public Engine() {
+		this.FileRead();
+		
+		this.firstInit = true;
+	}
+	
+	public void EngineRun() {
+		
+	}
+	
+	public void FileRead() {
+//		airports.json, planetype.json, flyingplane.json
+//		그 외 기타 json파일들(=새롭게 추가될 수 있는 파일)
+		ArrayList<String> errorFile = new ArrayList<String>();
+		
+		if(! this.firstInit){
+			String[] arr = new String[3];
+			arr[0] = "src\\resource\\airport_text.json";
+			arr[1] = "src\\resource\\airport_text.json";
+			arr[2] = "src\\resource\\airport_text.json";
+			
+			for(String i : arr){
+				try {
+					this._FileRead(new FileReader(i));
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					errorFile.add(i);
+				}
+			}
+		} else {
+			
+		}
+	}
+	
+	private void _FileRead(FileReader fr) {
+		Engine engine = new Engine();
+		JSONParser parser = new JSONParser();
+		try{
+			Object obj = parser.parse(fr);
+
+			JSONObject jsonObject = (JSONObject) obj;
+			
+			JSONObject abc = engine.JsonParsing(obj); // 파싱
+
+		}catch(IOException e){
+			e.printStackTrace();
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
+	}
 	
 	public JSONArray JsonParsingArr(Object o){
 		JSONArray _o = (JSONArray) o;
 		JSONArray ro = new JSONArray();
 		int abc = _o.size();
 		for(int i=0; i<abc; i++){
-			JSONObject order = (JSONObject) _o.get(i);
-			System.out.print("!!!     ");
-			System.out.println(order);
-			//_o.get(i) = JsonParsing(order);
-			ro.add(i,JsonParsing(order));
-			
+			ro.add(i,JsonParsing(_o.get(i)));
 		}
 		
 		return ro;
@@ -48,10 +103,9 @@ public class Engine {
 				for(Object i : keys){
 					
 					System.out.print("here      "+i+"       ");
-					if(i.equals("Airports")){
+					if(i.equals("Airports") || i.equals("PlaneType")){
 						testText = i.toString();
-					}else if(i.equals("PlaneType")){
-						testText = i.toString();
+						System.out.println("does it works?????" + testText);
 					}
 					
 					if(i.equals("Dalars")){  // 공항 리스트 추가
@@ -64,7 +118,7 @@ public class Engine {
 						planeList.add(new Plane());
 					}
 					
-					if(testText.equals("Airports")){
+					if(testText == "Airports"){
 						if(i.equals("name")){ // 이름 등록
 							Airport test1 = airportList.get(airportList.size()-1);
 							test1.setName(_o.get(i).toString());
@@ -92,7 +146,7 @@ public class Engine {
 						
 					}
 					
-					if(testText.equals("PlaneType")){
+					if(testText == "PlaneType"){
 						if(i.equals("fuleTank")){
 							Plane test2 = planeList.get(planeList.size()-1);
 						}else if(i.equals("code")){
@@ -106,8 +160,6 @@ public class Engine {
 						}
 						
 					}
-					
-					System.out.print(_o.get(i)+"       \n");
 					
 					//System.out.println(_o.get(i).getClass());
 					
