@@ -113,7 +113,6 @@ public class Engine {
 					System.out.print("here      "+i+"       ");
 					if(i.equals("Airports") || i.equals("PlaneType")){
 						testText = i.toString();
-						System.out.println("does it works?????" + testText);
 					}
 					
 					if(i.equals("Dalars")){  // 공항 리스트 추가

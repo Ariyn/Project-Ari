@@ -5,7 +5,7 @@ public class Plane {
 	int fuelTank, fuel; // 연료, 연료최대량, 연료량(%)
 	double speed, height; // 속도, 고도
 	double x,y; // 좌표  
-	double dx, dy, dz, angleX, angleY; //기울기
+	double dx, dy, dz, angleX=0, angleY=0; //기울기
 	double latitude, altitude; // 위도(가로선), 경도(세로선)
 	String name;//비행기이름
 	

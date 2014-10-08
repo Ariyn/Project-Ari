@@ -75,4 +75,8 @@ public class Airport {
 		
 	}
 	
+	public void SetPlane(Plane pl){ // 비행기 공항에 생성
+		pl.setPositionX(this.altitude);
+		pl.setPositionY(this.latitude);
+	}
 }
