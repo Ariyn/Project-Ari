@@ -125,7 +125,7 @@ public class Engine {
 						planeList.add(new Plane());
 					}
 					
-					if(testText == "Airports"){
+					if(testText.equals("Airports")){
 						if(i.equals("name")){ // 이름 등록
 							Airport test1 = airportList.get(airportList.size()-1);
 							test1.setName(_o.get(i).toString());
@@ -153,9 +153,10 @@ public class Engine {
 						
 					}
 					
-					if(testText == "PlaneType"){
+					if(testText.equals("PlaneType")){
 						if(i.equals("fuleTank")){
 							Plane test2 = planeList.get(planeList.size()-1);
+							//test2.setfuelTank();
 						}else if(i.equals("code")){
 							Plane test2 = planeList.get(planeList.size()-1);
 						}else if(i.equals("engine")){
