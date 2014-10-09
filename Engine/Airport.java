@@ -206,7 +206,7 @@ public class Airport {
 	
 	LinkedList nowPlane = new LinkedList();
 	
-	Queue q = new Queue();
+	PlaneQueue q = new PlaneQueue();
 	//Plane p = new Plane();
 
 	public void setName(String text){
