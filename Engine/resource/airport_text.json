@@ -1,0 +1,86 @@
+{
+	"Airports" :
+	{
+		"Dalars":
+		{
+			"name":"Dalars",
+			"companies":{"KAL":10, "AA":50},
+			"position":{"latitude":10, "altitude":15},
+			"runways":
+			[
+				{
+					"num":1,
+					"length":20,
+				}
+			],
+			"maximum_airplane":20
+		},
+		"Narita":
+		{
+			"name":"Narita",
+			"position":{"latitude":189, "altitude":37},
+			"runways":
+			[
+				{
+					"num":1,
+					"length":25
+				}
+			],
+			"maximum_airplane":20
+		}
+	}
+	
+	"PlaneType" :
+	{
+		"A330":
+		{
+			"company":"airbus"
+			"code":"A330",
+			"fuleTank":"500",
+			"maxSpeed":"30"
+			"engine":3
+			
+		},
+		
+		"MIG-29":
+		{
+			"company":"russia"
+			"code":"MIG-29",
+			"fuleTank":"300",
+			"maxSpeed":"70"
+			"weapons":
+			{
+				"ARM":3,
+				"Anti Ship Missile":6
+			}
+		}
+	}
+	
+	"Flying_Planes":
+	[
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"codeName":"aa012",
+			"coordinate":{
+				"x":"0",
+				"y":"0",
+				"altitude":165,
+				"latitude":24
+			}
+		},
+		
+		{
+			"modelNumber":"MiG-29",
+			"company":"RA",
+			"codeName":"RA-0024",
+			"coordinate":{
+				"x":"0",
+				"y":"0",
+				"altitude":120,
+				"latitude":40
+			}
+		}
+		
+	]
+}
