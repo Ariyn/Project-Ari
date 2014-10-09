@@ -3,26 +3,25 @@ package Engine;
 public class Plane {
 	public int code; double weight, length; // 비행기 기종, 무게, 길이
 	int fuelTank, fuel; // 연료, 연료최대량, 연료량(%)
-	double speed, height; // 속도, 고도
+	double Maxspeed, height, speed; // 최고속도, 고도,속도
 	double x,y; // 좌표  
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
-	double latitude, altitude; // 위도(가로선), 경도(세로선)
+	long latitude, altitude; // 위도(가로선), 경도(세로선)
 	String name;//비행기이름
 	
-	int status; // 비행기 상태, 0 : 땅위, 1 : 비행중, 2 : 특수상황
+	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
-	boolean hiJack; // 하이잭 유무
-	
 
 	//getter
-	public double getPositionX(){ // 비행기 위도
+	Airport port =new Airport();
+	public long getPositionX(){ // 비행기 위도
 		return latitude;
 	}
 	
-	public double getPostionY(){ // 비행기 경도
+	public long getPostionY(){ // 비행기 경도
 		return altitude;
 	}
 	
@@ -40,15 +39,18 @@ public class Plane {
 		return fuelTank;
 	}
 	
+	public double getMaxSpeed(){
+		return Maxspeed;
+	}
 	public double getSpeed(){
 		return speed;
 	}
 	//setter
-	public void setPositionX(double x){
+	public void setPositionX(long x){
 		latitude=x;
 	}
 	
-	public void setPositionY(double y){
+	public void setPositionY(long y){
 		altitude=y;
 	}
 	
@@ -66,12 +68,27 @@ public class Plane {
 	public void setfuelTank(int f){
 		fuelTank=f;
 	}
-	public void setSpeed(int s){
-		speed=s;
+	public void setMaxSpeed(int s){
+		Maxspeed=s;
 	}
-	public void Move(){ // 비행기 좌표 이동
-		x=x+(speed-speed*Math.acos(angleX));
-		y=y+(speed-speed*Math.asin(angleX));
+	public void setSpeed(double x){
+		speed=x;
+	}
+	public void TMove(){ // 비행기 좌표 이동
+		
+		x=x+(Maxspeed-Maxspeed*Math.acos(angleX));
+		y=y+(Maxspeed-Maxspeed*Math.asin(angleX));
+	//	비행중 이륙 착륙
+	}
+	public void SMove(){
+		if (status==0){ //이륙 
+			x=x+speed/2;
+			y=y+speed/2;
+		}
+		else if(status==1){ //착륙
+			x=x+speed/2;
+			y=y+speed/2;
+		}
 	}
 
 /*	public void Search(){ // 주변 비행기 탐색
