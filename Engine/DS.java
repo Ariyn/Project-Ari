@@ -405,7 +405,6 @@ class Node<T> implements Cloneable
 	        return null; 
 	    }
 	}		
-	
 	public boolean SetChild(Node<?> e)
 	{
 		this._post = e;
