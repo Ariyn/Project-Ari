@@ -83,13 +83,14 @@ public class Engine {
 	}
 	
 	public void setData(JSONObject data){
+		int indexi = 0;
+		ArrayList portName = new ArrayList();
+		ArrayList typeNmae = new ArrayList();
 		
-		ArrayList abdx = new ArrayList();
+		portName.add("Dalars");
+		portName.add("Narita");
 		
-		abdx.add("Dalars");
-		abdx.add("Narita");
-		
-		for (Iterator<String> i = abdx.iterator(); i.hasNext();){
+		for (Iterator<String> i = portName.iterator(); i.hasNext();){
 			Airport medium = new Airport();
 			
 			String item = i.next();
@@ -102,7 +103,10 @@ public class Engine {
 			medium.setName(airportName.get("name").toString());
 			medium.setPositionX( (long) airportPosition.get("latitude") );
 			medium.setPositionY( (long) airportPosition.get("longtitude"));
-			medium.setRunwyas( (long)( (JSONObject)airportRunways.get(0)).get("num"), (long)( (JSONObject)airportRunways.get(0)).get("length") );
+			while(indexi<airportRunways.size() ){
+				medium.setRunwyas( (long)( (JSONObject)airportRunways.get(0)).get("num"), (long)( (JSONObject)airportRunways.get(0)).get("length") );
+				indexi+=1;
+			}
 			medium.setMaxAirplane( (long)airportName.get("maximum_airplane") );
 					
 			airportTypeList.add(medium);

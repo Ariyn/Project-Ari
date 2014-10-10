@@ -56,31 +56,4 @@
 		}
 	}
 	
-	"Flying_Planes":
-	[
-		{
-			"modelNumber":"A330",
-			"company":"aa",
-			"codeName":"aa012",
-			"coordinate":{
-				"x":"0",
-				"y":"0",
-				"longtitude":165,
-				"latitude":24
-			}
-		},
-		
-		{
-			"modelNumber":"MiG-29",
-			"company":"RA",
-			"codeName":"RA-0024",
-			"coordinate":{
-				"x":"0",
-				"y":"0",
-				"longtitude":120,
-				"latitude":40
-			}
-		}
-		
-	]
 }
