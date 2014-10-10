@@ -15,7 +15,7 @@ import org.json.simple.parser.*;
 
 public class Engine {
 
-	ArrayList <Airport> airportList = new ArrayList<Airport>();
+	ArrayList <Airport> airportTypeList = new ArrayList<Airport>();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();
 
 	String testText = "a";
@@ -86,14 +86,19 @@ public class Engine {
 		
 		JSONObject airportObject = (JSONObject) data.get("Airports");
 		JSONObject airportName1 = (JSONObject) airportObject.get("Dalars");
+		JSONObject airportPosition = (JSONObject) airportName1.get("position");
+		JSONArray airportRunways = (JSONArray) airportName1.get("runways");
 		
-		medium.setName(((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("name").toString());
-		medium.setPositionX( (long) ((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("latitude") );
-		medium.setPositionY( (long) ((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("longtitude") );
-		medium.setRunwyas( (int)( (JSONObject)((JSONArray)((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("runways")).get(0)).get("num"), (long)( (JSONObject)((JSONArray)((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("runways")).get(0)).get("length"));
-		
+		medium.setName(airportName1.get("name").toString());
+		medium.setPositionX( (long) airportPosition.get("latitude") );
+		medium.setPositionY( (long) airportPosition.get("longtitude"));
+		medium.setRunwyas( (long)( (JSONObject)airportRunways.get(0)).get("num"), (long)( (JSONObject)airportRunways.get(0)).get("length") );
+		medium.setMaxAirplane( (long)airportName1.get("maximum_airplane") );
+				
+		airportTypeList.add(medium);
 	}
 	
+	/*
 	public JSONArray JsonParsingArr(Object o){
 		JSONArray _o = (JSONArray) o;
 		JSONArray ro = new JSONArray();
@@ -125,7 +130,7 @@ public class Engine {
 					
 					System.out.print("here      "+i+"       ");
 					
-					/*
+					
 					if(i.equals("Airports") || i.equals("PlaneType")){
 						testText = i.toString();
 					}
@@ -145,7 +150,7 @@ public class Engine {
 							Airport test1 = airportList.get(airportList.size()-1);
 							test1.setName(_o.get(i).toString());
 							airportList.set(airportList.size()-1, test1);
-						}else if(i.equals("altitude")){
+						}else if(i.equals("longtitude")){
 							Airport test1 =  airportList.get(airportList.size()-1);
 							test1.setPositionX((long)_o.get(i));
 							airportList.set(airportList.size()-1, test1);
@@ -183,7 +188,7 @@ public class Engine {
 						}
 						
 					}
-					*/
+					
 					//System.out.println(_o.get(i).getClass());
 					
 					Object _tempO = _o.get(i);
@@ -208,7 +213,7 @@ public class Engine {
 			}
 			return _o;
 		
-	}
+	}*/
 }
 
 class JSONNewObject extends JSONObject{

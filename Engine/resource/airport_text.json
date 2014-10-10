@@ -5,11 +5,11 @@
 		{
 			"name":"Dalars",
 			"companies":{"KAL":10, "AA":50},
-			"position":{"latitude":10, "altitude":15},
+			"position":{"latitude":10, "longtitude":15},
 			"runways":
 			[
 				{
-					"num":1,
+					"num":0,
 					"length":20,
 				}
 			],
@@ -18,11 +18,11 @@
 		"Narita":
 		{
 			"name":"Narita",
-			"position":{"latitude":189, "altitude":37},
+			"position":{"latitude":189, "longtitude":37},
 			"runways":
 			[
 				{
-					"num":1,
+					"num":0,
 					"length":25
 				}
 			],
@@ -65,7 +65,7 @@
 			"coordinate":{
 				"x":"0",
 				"y":"0",
-				"altitude":165,
+				"longtitude":165,
 				"latitude":24
 			}
 		},
@@ -77,7 +77,7 @@
 			"coordinate":{
 				"x":"0",
 				"y":"0",
-				"altitude":120,
+				"longtitude":120,
 				"latitude":40
 			}
 		}

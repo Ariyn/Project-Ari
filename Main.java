@@ -27,9 +27,9 @@ public class Main {
 
 			JSONObject jsonObject = (JSONObject) obj;
 			
-			JSONObject abc = eng.JsonParsing(obj); // ÆÄ½Ì
+			//JSONObject abc = eng.JsonParsing(obj); // ÆÄ½Ì
 			
-			eng.setData(abc);
+			eng.setData(jsonObject);
 			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -46,10 +46,10 @@ public class Main {
 		Airport b =  airportList.get(1);
 		
 		System.out.println("test Name :!>!!  : "+a.getName());
-		System.out.println("test Name :!>!!  : altitude : "+a.getPositionX() + " latitude : " +a.getPositionY());
+		System.out.println("test Name :!>!!  : longtitude : "+a.getPositionX() + " latitude : " +a.getPositionY());
 		System.out.println("test Name :!>!!  : runwayLength : "+a.getRunwayLength(0));
 		System.out.println("test Name :!>!!  : "+b.getName());
-		System.out.println("test Name :!>!!  : altitude : "+b.getPositionX() + " latitude : " +b.getPositionY());
+		System.out.println("test Name :!>!!  : longtitude : "+b.getPositionX() + " latitude : " +b.getPositionY());
 		System.out.println("test Name :!>!!  : runwayLength : "+b.getRunwayLength(0));
 		
 	}*/
