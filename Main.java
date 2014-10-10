@@ -27,8 +27,6 @@ public class Main {
 
 			JSONObject jsonObject = (JSONObject) obj;
 			
-			//JSONObject abc = eng.JsonParsing(obj); // ÆÄ½Ì
-			
 			eng.setData(jsonObject);
 			
 		}catch(FileNotFoundException e){
