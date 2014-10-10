@@ -294,8 +294,10 @@ class CBTree
 	}
 	public CBNode<?> Pop(CBNode<?> me)
 	{
+		CBNode<?> n = null;
 		int num = this.children.indexOf(me);
-		CBNode<?> n = this._Pop(num);
+		if(num != -1)
+			n = this._Pop(num);
 		return n;
 	}
 	

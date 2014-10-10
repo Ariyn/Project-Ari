@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Airport {
 	
 	String name; // 공항명
-	double latitude, altitude; // 공항의 위도, 경도
+	long latitude, altitude; // 공항의 위도, 경도
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	
 	long[] runways = new long[1];// 활주로 길이
@@ -213,11 +213,11 @@ public class Airport {
 		name = text;
 	}
 	
-	public void setPositionX(double x){
+	public void setPositionX(long x){
 		latitude = x;
 	}
 	
-	public void setPositionY(double y){
+	public void setPositionY(long y){
 		altitude = y;
 	}
 	
