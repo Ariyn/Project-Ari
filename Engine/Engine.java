@@ -81,6 +81,19 @@ public class Engine {
 		return instance;
 	}
 	
+	public void setData(JSONObject data){
+		Airport medium = new Airport();
+		
+		JSONObject airportObject = (JSONObject) data.get("Airports");
+		JSONObject airportName1 = (JSONObject) airportObject.get("Dalars");
+		
+		medium.setName(((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("name").toString());
+		medium.setPositionX( (long) ((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("latitude") );
+		medium.setPositionY( (long) ((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("longtitude") );
+		medium.setRunwyas( (int)( (JSONObject)((JSONArray)((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("runways")).get(0)).get("num"), (long)( (JSONObject)((JSONArray)((JSONObject)((JSONObject)data.get("Airports")).get("Dalars")).get("runways")).get(0)).get("length"));
+		
+	}
+	
 	public JSONArray JsonParsingArr(Object o){
 		JSONArray _o = (JSONArray) o;
 		JSONArray ro = new JSONArray();
@@ -111,6 +124,8 @@ public class Engine {
 				for(Object i : keys){
 					
 					System.out.print("here      "+i+"       ");
+					
+					/*
 					if(i.equals("Airports") || i.equals("PlaneType")){
 						testText = i.toString();
 					}
@@ -168,7 +183,7 @@ public class Engine {
 						}
 						
 					}
-					
+					*/
 					//System.out.println(_o.get(i).getClass());
 					
 					Object _tempO = _o.get(i);
@@ -192,6 +207,12 @@ public class Engine {
 				}
 			}
 			return _o;
+		
+	}
+}
+
+class JSONNewObject extends JSONObject{
+	public void get(){
 		
 	}
 }

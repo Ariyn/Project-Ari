@@ -29,6 +29,8 @@ public class Main {
 			
 			JSONObject abc = eng.JsonParsing(obj); // ÆÄ½Ì
 			
+			eng.setData(abc);
+			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}catch(IOException e){
