@@ -2,15 +2,15 @@ package Engine;
 
 import java.util.ArrayList;
 
-public class CBTree
+public class CBTree<T>
 {
-	CBNode<?> root;
-	ArrayList<CBNode<?>> children;
+	CBNode<T> root;
+	ArrayList<CBNode<T>> children;
 	
 	public CBTree()
 	{
 		this.root = null;
-		this.children = new ArrayList<CBNode<?>>();
+		this.children = new ArrayList<CBNode<T>>();
 	}
 	
 	@SuppressWarnings("unused")
@@ -38,10 +38,11 @@ public class CBTree
 		}
 	}
 	
-	public int Add(CBNode<?> e)
+	public int Add(CBNode<T> e)
 	{
 		int ret = -1;
-		CBNode<?> tn = (CBNode<?>)e.clone();
+		@SuppressWarnings("unchecked")
+		CBNode<T> tn = (CBNode<T>) e.clone();
 		if(tn != null)
 		{
 			boolean suc = this.children.add(tn);
@@ -62,47 +63,49 @@ public class CBTree
 		}
 		return ret;
 	}
-	public void Add(int e)
-	{
-		CBNode<Integer> tn = new CBNode<Integer>(e);
-		int ind = this.Add(tn);
-		if(ind == -1)
-			ind=ind;
-	}
-	public void Add(String e)
-	{
-		CBNode<String> tn = new CBNode<String>(e);
-		int ind = this.Add(tn);
-		if(ind == -1)
-			ind=ind;
-	}
-	public void Add(Plane e)
-	{
-		CBNode<Plane> tn = new CBNode<Plane>(e);
-		int ind = this.Add(tn);
-		if(ind == -1)
-			ind=ind;
-	}
+//	public void Add(int e)
+//	{
+//		CBNode<Integer> tn = new CBNode<Integer>(e);
+//		int ind = this.Add(tn);
+//		if(ind == -1)
+//			ind=ind;
+//	}
+//	public void Add(String e)
+//	{
+//		CBNode<String> tn = new CBNode<String>(e);
+//		int ind = this.Add(tn);
+//		if(ind == -1)
+//			ind=ind;
+//	}
+//	public void Add(Plane e)
+//	{
+//		CBNode<Plane> tn = new CBNode<Plane>(e);
+//		int ind = this.Add(tn);
+//		if(ind == -1)
+//			ind=ind;
+//	}
 	
-	private CBNode<?> _Pop(int e)
+	private CBNode<T> _Pop(int e)
 	{
-		CBNode<?> tn = this.children.get(e);
+		CBNode<T> tn = this.children.get(e);
 		tn.GetParent().RemoveChild(tn);
 		this.children.remove(e);
 		return tn;
 	}
-	public CBNode<?> Pop()
+	public CBNode<T> Pop()
 	{
 		int num = this.children.size();
 		return this._Pop(num-1);
 	}
-	public CBNode<?> Pop(CBNode<?> me)
+	@SuppressWarnings("unchecked")
+	public CBNode<T> Pop(CBNode<T> me)
 	{
 		CBNode<?> n = null;
 		int num = this.children.indexOf(me);
 		if(num != -1)
 			n = this._Pop(num);
-		return n;
+		
+		return (CBNode<T>) n;
 	}
 	
 	public int Depth()

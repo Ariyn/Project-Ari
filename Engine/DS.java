@@ -14,7 +14,48 @@ package Engine;
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+
+class GNode implements Cloneable
+{
+	private ArrayList<GNode> _vertex;
+	private ArrayList<Double> _edge;
+	
+	private int x, y;
+	private int altitude, latitude, longitude;
+	
+	public GNode(int x, int y, int lat, int lon, int alt) {
+		this.x = x;
+		this.y = y;
+		
+		this.altitude=alt;
+		this.latitude=lat;
+		this.longitude = lon;
+		
+		this._vertex = new ArrayList<GNode>();
+		this._edge = new ArrayList<Double>();
+	}
+	
+	public void addElement(GNode g, double distance) {
+//		double length = Math.sqrt(
+//				Math.pow(this.altitude() - g.altitude(),2) +
+//				Math.pow(this.latitude() - g.latitude(), 2) +
+//				Math.pow(this.longitude() - g.longitude(), 2)
+//		);
+		
+		this._vertex.add(g);
+		this._edge.add(new Double(distance));
+	}
+	
+	public int altitude() {
+		return this.altitude;
+	}
+	public int latitude() {
+		return this.latitude;
+	}
+	public int longitude() {
+		return this.longitude;
+	}
+}
 
 class CBNode<T> extends Node<T> implements Cloneable
 {
