@@ -77,7 +77,7 @@ class Queue
 	public boolean Push(Node<?> e) throws CloneNotSupportedException
 	{
 		Node<?> n = (Node<?>)e.clone();
-		Node<?> n1 = this.nodes.getFirst();
+		Node<?> n1 = this.nodes.getLast();
 		
 		boolean suc = false;
 		if(n != null)
@@ -294,8 +294,10 @@ class CBTree
 	}
 	public CBNode<?> Pop(CBNode<?> me)
 	{
+		CBNode<?> n = null;
 		int num = this.children.indexOf(me);
-		CBNode<?> n = this._Pop(num);
+		if(num != -1)
+			n = this._Pop(num);
 		return n;
 	}
 	
@@ -393,7 +395,7 @@ class CBNode<T> extends Node<T> implements Cloneable
 		this._CBNode();
 	}
 	
-	public CBNode<?> clone(){  
+	public CBNode<?> clone(){
 	    try{  
 	        return (CBNode<?>)super.clone();  
 	    }catch(Exception e){ 
@@ -508,7 +510,7 @@ class Node<T> implements Cloneable
 	    	e.printStackTrace();
 	        return null; 
 	    }
-	}		
+	}
 	public boolean SetChild(Node<?> e)
 	{
 		this._post = e;
