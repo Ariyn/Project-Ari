@@ -1,25 +1,19 @@
 package Engine;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
 
 public class Engine {
 
-	ArrayList <Airport> airportTypeList = new ArrayList<Airport>();
-	ArrayList <Plane> planeList = new ArrayList<Plane>();
+	ArrayList <Airport> airportList = new ArrayList<Airport>();
+	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
+	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 
 	String testText = "a";
+
 	/*boolean firstInit = false;
 	
 	public Engine() {
@@ -85,36 +79,43 @@ public class Engine {
 	public void setData(JSONObject data){
 		int indexi = 0;
 		ArrayList portName = new ArrayList();
-		ArrayList typeNmae = new ArrayList();
+		ArrayList typeName = new ArrayList();
 		
 		portName.add("Dalars");
 		portName.add("Narita");
 		
-		for (Iterator<String> i = portName.iterator(); i.hasNext();){
-			Airport medium = new Airport();
+		typeName.add("A330");
+		typeName.add("MIG-29");
+		
+		for(Iterator<String> i= typeName.iterator(); i.hasNext();){
+			Plane medium = new Plane();
 			
 			String item = i.next();
 			
-			JSONObject airportObject = (JSONObject) data.get("Airports");
-			JSONObject airportName = (JSONObject) airportObject.get(item);
-			JSONObject airportPosition = (JSONObject) airportName.get("position");
-			JSONArray airportRunways = (JSONArray) airportName.get("runways");
+			JSONObject planeObject = (JSONObject) data.get("PlaneType");
+			JSONObject planeType = (JSONObject) planeObject.get(item);
 			
-			medium.setName(airportName.get("name").toString());
-			medium.setPositionX( (long) airportPosition.get("latitude") );
-			medium.setPositionY( (long) airportPosition.get("longtitude"));
-			while(indexi<airportRunways.size() ){
-				medium.setRunwyas( (long)( (JSONObject)airportRunways.get(0)).get("num"), (long)( (JSONObject)airportRunways.get(0)).get("length") );
-				indexi+=1;
-			}
-			medium.setMaxAirplane( (long)airportName.get("maximum_airplane") );
-					
-			airportTypeList.add(medium);
+			medium.setName(planeType.get("code").toString());
+			medium.setfuelTank((long) planeType.get("fuleTank"));
+			medium.setMaxSpeed((long)planeType.get("maxSpeed"));
 			
-			System.out.println("i : "+item);
+			planeTypeList.add(medium);
 		}
+		System.out.println(" "+airportList.get(0).getName() + " " +airportList.get(1).getName());
+		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
+
+	}
+	
+	public void Run() {
+		for(Plane i : this.planeList) {
+//			i.
+		}
+	}
+	public void Start() {
 		
-		System.out.println(" "+airportTypeList.get(0).getName() + " " +airportTypeList.get(1).getName());
+	}
+	public void Stop() {
+		
 		
 	}
 	

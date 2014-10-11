@@ -12,23 +12,28 @@ public class Graph {
 		
 		if(this.head == null)
 			this.head = g;
-		else {
-			double small = 0;
-			int ind = 0;
-			
-			for(GNode alg : this.vertex) {
-				double dis = this.CalcDistance(alg, g);
-				if(small == 0 || dis < small) {
-					small = dis;
-					ind = this.vertex.indexOf(alg);
-				}
-			}
-			
-			GNode alg = this.vertex.get(ind);
-			
-			alg.addElement(g, small);
-			g.addElement(alg, small);
-		}		
+//		else {
+//			double small = 0;
+//			int ind = 0;
+//			
+//			for(GNode alg : this.vertex) {
+//				double dis = this.CalcDistance(alg, g);
+//				if(small == 0 || dis < small) {
+//					small = dis;
+//					ind = this.vertex.indexOf(alg);
+//				}
+//			}
+//			
+//			GNode alg = this.vertex.get(ind);
+//			
+//			alg.addElement(g, small);
+//			g.addElement(alg, small);
+//		}	
+	}
+	
+	public void VertexSetEdges(GNode fromN, GNode to) {
+		double dis = this.CalcDistance(fromN, to);
+		fromN.addElement(to, dis);
 	}
 	
 	private double CalcDistance(GNode a, GNode b){

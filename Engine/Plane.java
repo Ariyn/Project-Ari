@@ -2,6 +2,7 @@ package Engine;
 
 public class Plane {
 	double weight, length; // 무게, 길이
+
 	int fuelTank, fuel; // 연료최대량, 연료량(%)
 	double Maxspeed, altitude, speed; // 최고속도, 고도,속도
 	double x,y; // 좌표  
@@ -84,6 +85,7 @@ public class Plane {
 
 	public void Move(){
 		if (status==0){ //이륙 
+
 			x=x+(speed-speed*Math.acos(angleX)/2);
 			y=y+(speed-speed*Math.acos(angleX)/2);;
 			altitude+=speed/2;
@@ -97,6 +99,7 @@ public class Plane {
 		else { // 비행중
 			x=x+(Maxspeed-Maxspeed*Math.acos(angleX));
 			y=y+(Maxspeed-Maxspeed*Math.asin(angleX));
+
 		}
 	}
 
