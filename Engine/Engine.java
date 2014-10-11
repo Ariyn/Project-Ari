@@ -136,4 +136,12 @@ public class Engine {
 		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
 	}
 	
+	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
+		
+		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
+		
+		for(Object i : flyingPlane){
+			
+		}
+	}
 }

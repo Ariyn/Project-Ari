@@ -24,11 +24,13 @@ public class Main {
 		
 		try{
 			Object obj = parser.parse(new FileReader("Engine\\resource\\airport_text.json"));
-
+			Object fpText = parser.parse(new FileReader("Engine\\resource\\FlyingPlane_text_json"));
 
 			JSONObject jsonObject = (JSONObject) obj;
+			JSONObject jsonObject2 = (JSONObject) fpText;
 			
 			eng.setData(jsonObject);
+			eng.createPlane(jsonObject2);
 			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class Main {
 		}catch(ParseException e){
 			e.printStackTrace();
 		}
-		
+	
 	}
 	
 }

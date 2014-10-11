@@ -8,15 +8,22 @@ public class Plane {
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
 	long latitude, longtitude; // 위도(가로선), 경도(세로선)
 	String name, company;//비행기이름, 회사명
-	
+	String startSpot, endSpot; // 출발공항, 도착공항
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
-
 	//getter
-	Airport port =new Airport();
+	
+	public Plane(){
+		
+	}
+	
+	public Plane(Plane type){
+		
+	}
+	
 	public long getPositionX(){ // 비행기 위도
 		return latitude;
 	}
@@ -45,6 +52,7 @@ public class Plane {
 	public double getSpeed(){
 		return speed;
 	}
+	
 	//setter
 	public void setPositionX(long x){
 		latitude=x;
