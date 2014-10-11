@@ -95,14 +95,14 @@ public class Engine {
 			JSONObject planeObject = (JSONObject) data.get("PlaneType");
 			JSONObject planeType = (JSONObject) planeObject.get(item);
 			
-			medium.setName(planeType.get("code").toString());
-			medium.setfuelTank((long) planeType.get("fuleTank"));
-			medium.setMaxSpeed((long)planeType.get("maxSpeed"));
+			medium.set("Name", planeType.get("code").toString());
+			medium.set("FuelTank", (long) planeType.get("fuleTank"));
+			medium.set("MaxSpeed", (long)planeType.get("maxSpeed"));
 			
 			planeTypeList.add(medium);
 		}
-		System.out.println(" "+airportList.get(0).getName() + " " +airportList.get(1).getName());
-		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
+		System.out.println(" "+airportList.get(0).getString("Name") + " " +airportList.get(1).getString("Name"));
+		System.out.println(""+planeTypeList.get(0).getString("Name")+ " " +planeTypeList.get(1).getString("Name"));
 
 	}
 	

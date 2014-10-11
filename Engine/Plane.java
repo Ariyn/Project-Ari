@@ -25,74 +25,87 @@ public class Plane {
 		
 	}
 
-	public long getPositionX(){ // 비행기 위도
-		return latitude;
+
+	public long getLong(String s){
+		switch(s){
+		case "Latitude":
+			return latitude;
+		case "Longtitude":
+			return longtitude;
+		default:
+			return 0;
+		}
+
 	}
-	
-	public long getPostionY(){ // 비행기 경도
-		return longtitude;
+	public double getDouble(String s){
+		switch(s){
+		case "Altitude":
+			return altitude;
+		case "MaxSpeed":
+			return Maxspeed;
+		case "speed":
+			return speed;
+			
+		default:
+			return 0;
+		}
 	}
-	
-	public String getName(){//비행기 이름 
-		return name;
-	}
-	
-	public double getAltitude(){//비행기 고도 
-		return altitude;
-	}
-	public int getfuel(){//비행기 현재 연료(%)
-		return fuel;
-	}
-	public int getfuelTank(){//비행기 연료 최대
-		return fuelTank;
-	}
-	
-	public double getMaxSpeed(){
-		return Maxspeed;
-	}
-	public double getSpeed(){
-		return speed;
+	public int getInt(String s){
+		switch(s){
+		case "FuelTank":
+			return fuelTank;
+		default:
+			return 0;
+		}
 	}
 
-	public String getCompany(){
-		return company;
+	public String getString(String s){
+		switch(s){
+		case "Name":
+			return name;
+		case "Company":
+			return company;
+		default:
+			return " ";
+		}
+
 	}
 
 	//setter
-	public void setPositionX(long x){
-		latitude=x;
+	public void set(String s, long l){
+		switch(s)
+		{
+		case "Latitude":
+			latitude=l;
+			break;
+		case "Longtitude":
+			longtitude=l;
+			break;
+		case "Altitude":
+			altitude=(double)l;
+			break;
+		case "FuelTank":
+			fuelTank=(int)l;
+			break;
+		case "Maxspeed":
+			Maxspeed=l;
+			break;
+		case "Speed":
+			speed=(double)l;
+			break;
+		}
+	}
+	public void set(String s, String str){
+		switch(s){
+		case "Name":
+			name=str;
+			break;
+		case "Company":
+			company=str;
+			break;
+		}
 	}
 	
-	public void setPositionY(long y){
-		longtitude=y;
-	}
-	
-	public void setName(String text){
-		name=text;
-	}
-	public void setAltitude(double x){
-		altitude=x;
-	}
-	
-	public void setfuel(int t){//1초에 4리터
-		fuel=100;
-	}
-	
-	public void setfuelTank(long f){
-		int number = (int)f;
-		fuelTank=number;
-	}
-	public void setMaxSpeed(long s){
-		int number = (int)s;
-		Maxspeed=number;
-	}
-	public void setSpeed(double x){
-		speed=x;
-	}
-	public void setSCompany(String s){
-		company=s;
-	}
-
 	public void Move(){
 		if (status==0){ //이륙 
 
@@ -113,6 +126,9 @@ public class Plane {
 		}
 	}
 
+	public void Fuel(){
+		fuel=100-(4/fuelTank)*100;
+	}
 /*	public void Search(){ // 주변 비행기 탐색(주변그래프를 탐색한다)
 		
 	}*/
@@ -121,20 +137,21 @@ public class Plane {
 	public void Data(){ // 비행기 정보 출력
 		System.out.println("Airplane name: "+name);
 		System.out.println("Airplane company: "+company);
-		System.out.println("Airplane weight : "+weight);
-		System.out.println("Airplane length : "+length);
-		System.out.println("Airplane fuelTank : "+fuelTank);
-		System.out.println("Airplane fuel: "+fuel);
-		System.out.println("Airplane Maxspeed: "+Maxspeed);
-		System.out.println("Airplane speed: "+speed);
-		System.out.println("Airplane altitude: "+altitude);
+		System.out.println("Airplane weight : "+weight+"T");
+		System.out.println("Airplane length : "+length+"m");
+		System.out.println("Airplane fuelTank : "+fuelTank+"L");
+	}
+	public void Data2(){ //실시간으로 바뀌는 비행기 데이터
+		System.out.println("Airplane fuel: "+fuel+"%");
+		System.out.println("Airplane Maxspeed: "+Maxspeed*10+"m/s");
+		System.out.println("Airplane speed: "+speed*10+"m/s");
+		System.out.println("Airplane altitude: "+altitude+"m");
 		System.out.println("Airplane latitude: "+latitude);
 		System.out.println("Airplane longtitude: "+longtitude);
 		if(status==0)System.out.println("이륙");
 		else if(status==1)System.out.println("착륙");
 		else System.out.println("비행중");
 	}
-	
 	
 	public boolean LandingSign(){ // 공항에 착륙 허가 신청
 		boolean sign = false;
