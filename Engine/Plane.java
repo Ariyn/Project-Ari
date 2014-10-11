@@ -1,13 +1,13 @@
 package Engine;
 
 public class Plane {
-	public int code; double weight, length; // 비행기 기종, 무게, 길이
+	double weight, length; // 무게, 길이
 	int fuelTank, fuel; // 연료, 연료최대량, 연료량(%)
-	double Maxspeed, height, speed; // 최고속도, 고도,속도
+	double Maxspeed, altitude, speed; // 최고속도, 고도,속도
 	double x,y; // 좌표  
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
 	long latitude, longtitude; // 위도(가로선), 경도(세로선)
-	String name;//비행기이름
+	String name, company;//비행기이름, 회사명
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
@@ -29,8 +29,8 @@ public class Plane {
 		return name;
 	}
 	
-	public double getHeihgt(){//비행기 고도 
-		return height;
+	public double getAltitude(){//비행기 고도 
+		return altitude;
 	}
 	public int getfuel(){//비행기 현재 연료(%)
 		return fuel;
@@ -57,19 +57,21 @@ public class Plane {
 	public void setName(String text){
 		name=text;
 	}
-	public void setHeight(double x){
-		height=x;
+	public void setAltitude(double x){
+		altitude=x;
 	}
 	
 	public void setfuel(int t,int usefuel){//t는 시간 usefuel은 사용연료
 		fuel=100-t*usefuel;
 	}
 	
-	public void setfuelTank(int f){
-		fuelTank=f;
+	public void setfuelTank(long f){
+		int number = (int)f;
+		fuelTank=number;
 	}
-	public void setMaxSpeed(int s){
-		Maxspeed=s;
+	public void setMaxSpeed(long s){
+		int number = (int)s;
+		Maxspeed=number;
 	}
 	public void setSpeed(double x){
 		speed=x;
@@ -84,8 +86,11 @@ public class Plane {
 		if (status==0){ //이륙 
 			x=x+speed/2;
 			y=y+speed/2;
+			altitude+=speed/2;
+			if(altitude>=1300)status=2;
 		}
-		else if(status==1){ //착륙
+		else if(status==2){ //착륙
+			status=1;
 			x=x+speed/2;
 			y=y+speed/2;
 		}

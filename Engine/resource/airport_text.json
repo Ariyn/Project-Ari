@@ -36,8 +36,8 @@
 		{
 			"company":"airbus"
 			"code":"A330",
-			"fuleTank":"500",
-			"maxSpeed":"30"
+			"fuleTank":500,
+			"maxSpeed":30
 			"engine":3
 			
 		},
@@ -46,8 +46,9 @@
 		{
 			"company":"russia"
 			"code":"MIG-29",
-			"fuleTank":"300",
-			"maxSpeed":"70"
+			"fuleTank":300,
+			"maxSpeed":70
+			"engine":2,
 			"weapons":
 			{
 				"ARM":3,
@@ -56,31 +57,4 @@
 		}
 	},
 	
-	"Flying_Planes":
-	[
-		{
-			"modelNumber":"A330",
-			"company":"aa",
-			"codeName":"aa012",
-			"coordinate":{
-				"x":"0",
-				"y":"0",
-				"longtitude":165,
-				"latitude":24
-			}
-		},
-		
-		{
-			"modelNumber":"MiG-29",
-			"company":"RA",
-			"codeName":"RA-0024",
-			"coordinate":{
-				"x":"0",
-				"y":"0",
-				"longtitude":120,
-				"latitude":40
-			}
-		}
-		
-	]
 }

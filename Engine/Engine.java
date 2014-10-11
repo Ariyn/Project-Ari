@@ -8,8 +8,9 @@ import org.json.simple.JSONObject;
 
 public class Engine {
 
-	ArrayList <Airport> airportTypeList = new ArrayList<Airport>();
-	ArrayList <Plane> planeList = new ArrayList<Plane>();
+	ArrayList <Airport> airportList = new ArrayList<Airport>();
+	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
+	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 
 	String testText = "a";
 
@@ -76,45 +77,45 @@ public class Engine {
 	}
 	
 	public void setData(JSONObject data){
+		int indexi = 0;
+		ArrayList portName = new ArrayList();
+		ArrayList typeName = new ArrayList();
 		
-		ArrayList abdx = new ArrayList();
+		portName.add("Dalars");
+		portName.add("Narita");
 		
-		abdx.add("Dalars");
-		abdx.add("Narita");
+		typeName.add("A330");
+		typeName.add("MIG-29");
 		
-		for (Iterator<String> i = abdx.iterator(); i.hasNext();){
-			Airport medium = new Airport();
+		for(Iterator<String> i= typeName.iterator(); i.hasNext();){
+			Plane medium = new Plane();
 			
 			String item = i.next();
 			
-			JSONObject airportObject = (JSONObject) data.get("Airports");
-			JSONObject airportName = (JSONObject) airportObject.get(item);
-			JSONObject airportPosition = (JSONObject) airportName.get("position");
-			JSONArray airportRunways = (JSONArray) airportName.get("runways");
+			JSONObject planeObject = (JSONObject) data.get("PlaneType");
+			JSONObject planeType = (JSONObject) planeObject.get(item);
 			
-			medium.setName(airportName.get("name").toString());
-			medium.setPositionX( (long) airportPosition.get("latitude") );
-			medium.setPositionY( (long) airportPosition.get("longtitude"));
-			medium.setRunwyas( (long)( (JSONObject)airportRunways.get(0)).get("num"), (long)( (JSONObject)airportRunways.get(0)).get("length") );
-			medium.setMaxAirplane( (long)airportName.get("maximum_airplane") );
-					
-			airportTypeList.add(medium);
+			medium.setName(planeType.get("code").toString());
+			medium.setfuelTank((long) planeType.get("fuleTank"));
+			medium.setMaxSpeed((long)planeType.get("maxSpeed"));
 			
-			System.out.println("i : "+item);
+			planeTypeList.add(medium);
 		}
-		
-		System.out.println(" "+airportTypeList.get(0).getName() + " " +airportTypeList.get(1).getName());	
+		System.out.println(" "+airportList.get(0).getName() + " " +airportList.get(1).getName());
+		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
+
 	}
 	
 	public void Run() {
 		for(Plane i : this.planeList) {
-			i.
+//			i.
 		}
 	}
 	public void Start() {
 		
 	}
 	public void Stop() {
+		
 		
 	}
 	
