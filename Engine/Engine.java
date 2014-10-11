@@ -1,25 +1,19 @@
 package Engine;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
 
 public class Engine {
 
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
+	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 
 	String testText = "a";
+
 	/*boolean firstInit = false;
 	
 	public Engine() {
@@ -93,30 +87,6 @@ public class Engine {
 		typeName.add("A330");
 		typeName.add("MIG-29");
 		
-		for (Iterator<String> i = portName.iterator(); i.hasNext();){
-			Airport medium = new Airport();
-			
-			String item = i.next();
-			
-			JSONObject airportObject = (JSONObject) data.get("Airports");
-			JSONObject airportName = (JSONObject) airportObject.get(item);
-			JSONObject airportPosition = (JSONObject) airportName.get("position");
-			JSONArray airportRunways = (JSONArray) airportName.get("runways");
-			
-			medium.setName(airportName.get("name").toString());
-			medium.setPositionX( (long) airportPosition.get("latitude") );
-			medium.setPositionY( (long) airportPosition.get("longtitude"));
-			while(indexi<airportRunways.size() ){
-				medium.setRunwyas( (long)( (JSONObject)airportRunways.get(0)).get("num"), (long)( (JSONObject)airportRunways.get(0)).get("length") );
-				indexi+=1;
-			}
-			medium.setMaxAirplane( (long)airportName.get("maximum_airplane") );
-					
-			airportList.add(medium);
-			
-			System.out.println("i : "+item);
-		}
-		
 		for(Iterator<String> i= typeName.iterator(); i.hasNext();){
 			Plane medium = new Plane();
 			
@@ -131,9 +101,22 @@ public class Engine {
 			
 			planeTypeList.add(medium);
 		}
-		
 		System.out.println(" "+airportList.get(0).getName() + " " +airportList.get(1).getName());
 		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
+
+	}
+	
+	public void Run() {
+		for(Plane i : this.planeList) {
+//			i.
+		}
+	}
+	public void Start() {
+		
+	}
+	public void Stop() {
+		
+		
 	}
 	
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성

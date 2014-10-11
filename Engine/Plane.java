@@ -2,7 +2,8 @@ package Engine;
 
 public class Plane {
 	double weight, length; // 무게, 길이
-	int fuelTank, fuel; // 연료, 연료최대량, 연료량(%)
+
+	int fuelTank, fuel; // 연료최대량, 연료량(%)
 	double Maxspeed, altitude, speed; // 최고속도, 고도,속도
 	double x,y; // 좌표  
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
@@ -23,7 +24,7 @@ public class Plane {
 	public Plane(Plane type){
 		
 	}
-	
+
 	public long getPositionX(){ // 비행기 위도
 		return latitude;
 	}
@@ -52,7 +53,11 @@ public class Plane {
 	public double getSpeed(){
 		return speed;
 	}
-	
+
+	public String getCompany(){
+		return company;
+	}
+
 	//setter
 	public void setPositionX(long x){
 		latitude=x;
@@ -69,8 +74,8 @@ public class Plane {
 		altitude=x;
 	}
 	
-	public void setfuel(int t,int usefuel){//t는 시간 usefuel은 사용연료
-		fuel=100-t*usefuel;
+	public void setfuel(int t){//1초에 4리터
+		fuel=100;
 	}
 	
 	public void setfuelTank(long f){
@@ -84,33 +89,50 @@ public class Plane {
 	public void setSpeed(double x){
 		speed=x;
 	}
-	public void TMove(){ // 비행기 좌표 이동
-		
-		x=x+(Maxspeed-Maxspeed*Math.acos(angleX));
-		y=y+(Maxspeed-Maxspeed*Math.asin(angleX));
-	//	비행중 이륙 착륙
+	public void setSCompany(String s){
+		company=s;
 	}
-	public void SMove(){
+
+	public void Move(){
 		if (status==0){ //이륙 
-			x=x+speed/2;
-			y=y+speed/2;
+
+			x=x+(speed-speed*Math.acos(angleX)/2);
+			y=y+(speed-speed*Math.acos(angleX)/2);;
 			altitude+=speed/2;
 			if(altitude>=1300)status=2;
 		}
-		else if(status==2){ //착륙
+		else if(status==2){ // 착륙
 			status=1;
-			x=x+speed/2;
-			y=y+speed/2;
+			x=x+(speed-speed*Math.acos(angleX)/2);
+			y=y+(speed-speed*Math.acos(angleX)/2);
+		}
+		else { // 비행중
+			x=x+(Maxspeed-Maxspeed*Math.acos(angleX));
+			y=y+(Maxspeed-Maxspeed*Math.asin(angleX));
+
 		}
 	}
 
-/*	public void Search(){ // 주변 비행기 탐색
+/*	public void Search(){ // 주변 비행기 탐색(주변그래프를 탐색한다)
 		
 	}*/
 	
-	
+
 	public void Data(){ // 비행기 정보 출력
-		
+		System.out.println("Airplane name: "+name);
+		System.out.println("Airplane company: "+company);
+		System.out.println("Airplane weight : "+weight);
+		System.out.println("Airplane length : "+length);
+		System.out.println("Airplane fuelTank : "+fuelTank);
+		System.out.println("Airplane fuel: "+fuel);
+		System.out.println("Airplane Maxspeed: "+Maxspeed);
+		System.out.println("Airplane speed: "+speed);
+		System.out.println("Airplane altitude: "+altitude);
+		System.out.println("Airplane latitude: "+latitude);
+		System.out.println("Airplane longtitude: "+longtitude);
+		if(status==0)System.out.println("이륙");
+		else if(status==1)System.out.println("착륙");
+		else System.out.println("비행중");
 	}
 	
 	
