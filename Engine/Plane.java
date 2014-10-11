@@ -1,13 +1,13 @@
 package Engine;
 
 public class Plane {
-	public int code; double weight, length; // 비행기 기종, 무게, 길이
+	double weight, length; // 무게, 길이
 	int fuelTank, fuel; // 연료, 연료최대량, 연료량(%)
 	double Maxspeed, altitude, speed; // 최고속도, 고도,속도
 	double x,y; // 좌표  
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
 	long latitude, longtitude; // 위도(가로선), 경도(세로선)
-	String name;//비행기이름
+	String name, company;//비행기이름, 회사명
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
@@ -65,11 +65,13 @@ public class Plane {
 		fuel=100-t*usefuel;
 	}
 	
-	public void setfuelTank(int f){
-		fuelTank=f;
+	public void setfuelTank(long f){
+		int number = (int)f;
+		fuelTank=number;
 	}
-	public void setMaxSpeed(int s){
-		Maxspeed=s;
+	public void setMaxSpeed(long s){
+		int number = (int)s;
+		Maxspeed=number;
 	}
 	public void setSpeed(double x){
 		speed=x;
