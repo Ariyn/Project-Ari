@@ -1,18 +1,10 @@
 package Engine;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
 
 public class Engine {
 
@@ -20,6 +12,7 @@ public class Engine {
 	ArrayList <Plane> planeList = new ArrayList<Plane>();
 
 	String testText = "a";
+
 	/*boolean firstInit = false;
 	
 	public Engine() {
@@ -110,7 +103,18 @@ public class Engine {
 			System.out.println("i : "+item);
 		}
 		
-		System.out.println(" "+airportTypeList.get(0).getName() + " " +airportTypeList.get(1).getName());
+		System.out.println(" "+airportTypeList.get(0).getName() + " " +airportTypeList.get(1).getName());	
+	}
+	
+	public void Run() {
+		for(Plane i : this.planeList) {
+			i.
+		}
+	}
+	public void Start() {
+		
+	}
+	public void Stop() {
 		
 	}
 	
