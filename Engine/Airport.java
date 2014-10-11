@@ -36,7 +36,7 @@ public class Airport {
 			break;
 		}
 	}
-	public void set2(String s, String str){
+	public void set(String s, String str){
 		switch(s){
 		case "Name":
 			name=str;
