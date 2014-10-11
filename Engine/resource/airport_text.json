@@ -28,7 +28,7 @@
 			],
 			"maximum_airplane":20
 		}
-	}
+	},
 	
 	"PlaneType" :
 	{
@@ -54,7 +54,7 @@
 				"Anti Ship Missile":6
 			}
 		}
-	}
+	},
 	
 	"Flying_Planes":
 	[

@@ -44,6 +44,7 @@ class GNode implements Cloneable
 		
 		this._vertex.add(g);
 		this._edge.add(new Double(distance));
+
 	}
 	
 	public int altitude() {
