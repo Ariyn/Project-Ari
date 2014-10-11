@@ -2,17 +2,16 @@ package Engine;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Engine {
+public class Engine implements Runnable{
 
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();	
-
-	String testText = "a";
 
 	/*boolean firstInit = false;
 	
@@ -76,47 +75,80 @@ public class Engine {
 		return instance;
 	}
 	
-	public void setData(JSONObject data){
-		int indexi = 0;
-		ArrayList portName = new ArrayList();
-		ArrayList typeName = new ArrayList();
+	private void _addDataAirport(JSONObject data) {		
+		@SuppressWarnings("unchecked")
+		Set<String> keys = (Set<String>)data.keySet();
 		
-		portName.add("Dalars");
-		portName.add("Narita");
-		
-		typeName.add("A330");
-		typeName.add("MIG-29");
-		
-		for(Iterator<String> i= typeName.iterator(); i.hasNext();){
-			Plane medium = new Plane();
+		for(String i:keys){
+			Airport newAirport = new Airport();
 			
-			String item = i.next();
+			@SuppressWarnings("unchecked")
+			JSONObject _data = (JSONObject)data.get(i);
+			Set<String> _keys = (Set<String>)_data.keySet();
 			
-			JSONObject planeObject = (JSONObject) data.get("PlaneType");
-			JSONObject planeType = (JSONObject) planeObject.get(item);
-			
-			medium.setName(planeType.get("code").toString());
-			medium.setfuelTank((long) planeType.get("fuleTank"));
-			medium.setMaxSpeed((long)planeType.get("maxSpeed"));
-			
-			planeTypeList.add(medium);
+			for(String e:_keys){
+				System.out.println(e+" "+_data.get(e));
+				
+			}
 		}
-		System.out.println(" "+airportList.get(0).getName() + " " +airportList.get(1).getName());
-		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
-
 	}
 	
-	public void Run() {
+	public void setData(JSONObject data){
+		@SuppressWarnings("unchecked")
+		Set<String> keys = (Set<String>)data.keySet();
+		for(String i : keys){
+			if(i.equals("Airports")) {
+				this._addDataAirport((JSONObject) data.get(i));
+			} else if(i.equals("Planes")) {
+				
+			}
+		}
+		
+//		int indexi = 0;
+//		ArrayList portName = new ArrayList();
+//		ArrayList typeName = new ArrayList();
+//		
+//		System.out.println("keys  "+ data.keySet());
+//		
+//		portName.add("Dalars");
+//		portName.add("Narita");
+//		
+//		typeName.add("A330");
+//		typeName.add("MIG-29");
+//		
+//		for(Iterator<String> i= typeName.iterator(); i.hasNext();){
+//			Plane medium = new Plane();
+//			
+//			String item = i.next();
+//			
+//			JSONObject planeObject = (JSONObject) data.get("PlaneType");
+//			JSONObject planeType = (JSONObject) planeObject.get(item);
+//			
+//			medium.setName(planeType.get("code").toString());
+//			medium.setfuelTank((long) planeType.get("fuleTank"));
+//			medium.setMaxSpeed((long)planeType.get("maxSpeed"));
+//			
+//			planeTypeList.add(medium);
+//		}
+//		System.out.println(" "+airportList.get(0).getName() + " " +airportList.get(1).getName());
+//		System.out.println(""+planeTypeList.get(0).getName()+ " " +planeTypeList.get(1).getName());
+	}
+	
+	public void run() {
 		for(Plane i : this.planeList) {
-//			i.
+			i.Move();
+		}
+		
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
-	public void Start() {
-		
-	}
-	public void Stop() {
-		
-		
+	
+	public void TestSet() {
+		Plane p = new Plane();
 	}
 	
 }

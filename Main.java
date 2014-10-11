@@ -23,7 +23,9 @@ public class Main {
 		JSONParser parser = new JSONParser();
 		
 		try{
-			Object obj = parser.parse(new FileReader("Engine\\resource\\airport_text.json"));
+			Object obj = parser.parse(new FileReader("src\\Engine\\resource\\airport_text.json"));
+			
+//			Object obj = parser.parse(new FileReader("Engine\\resource\\airport_text.json"));
 
 
 			JSONObject jsonObject = (JSONObject) obj;
