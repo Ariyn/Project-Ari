@@ -85,7 +85,7 @@ public class Engine implements Runnable{
 			@SuppressWarnings("unchecked")
 			JSONObject _data = (JSONObject)data.get(i);
 			Set<String> _keys = (Set<String>)_data.keySet();
-			
+
 			for(String e:_keys){
 				System.out.println(e+" "+_data.get(e));
 				
@@ -151,4 +151,12 @@ public class Engine implements Runnable{
 		Plane p = new Plane();
 	}
 	
+	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
+		
+		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
+		
+		for(Object i : flyingPlane){
+			
+		}
+	}
 }
