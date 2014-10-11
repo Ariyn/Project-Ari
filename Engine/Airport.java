@@ -18,39 +18,50 @@ public class Airport {
 	PlaneQueue q = new PlaneQueue();
 	//Plane p = new Plane();
 
-	public void setName(String text){
-		name = text;
-	}
-	
-	public void setPositionX(long x){
-		latitude = x;
-	}
-	
-	public void setPositionY(long y){
-		longtitude = y;
-	}
-	
 	public void setRunwyas(long num, long length){
 		int number = (int)num;
 		runways[number] = length;
 	}
-	
-	public void setMaxAirplane(long x){
-		maximum_airplane = (int)x;
+
+	public void set(String s, long l){
+		switch(s){
+		case "Latitude":
+			latitude=l;
+			break;
+		case "Longtitude":
+			longtitude=l;
+			break;
+		case"MaxAirplane":
+			maximum_airplane=(int)l;
+			break;
+		}
+	}
+	public void set2(String s, String str){
+		switch(s){
+		case "Name":
+			name=str;
+			break;
+		}
 	}
 	
-	public String getName(){
-		return name;
+	public long get(String s){
+		switch(s){
+		case "Latitude":
+			return latitude;
+		case "Longtitude":
+			return longtitude;
+		default:
+			return 0;
+		}
 	}
-	
-	public double getPositionX(){ // 공항 위치 보여주는 메소드
-		return latitude;
+	public String get2(String s){
+		switch(s){
+		case "Name":
+			return name;
+		default:
+			return " ";
+		}
 	}
-	
-	public double getPositionY(){
-		return longtitude;
-	}
-	
 	public long getRunwayLength(int num){
 		return runways[num];
 	}
@@ -82,8 +93,9 @@ public class Airport {
 	}
 	
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
-		pl.setPositionX(this.longtitude);
-		pl.setPositionY(this.latitude);
+		pl.set("Longtitude",this.longtitude);
+		pl.set("Latitude",this.latitude);
+		nowPlane.addLast(pl);
 	}
 
 }
