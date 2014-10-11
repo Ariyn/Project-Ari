@@ -1,0 +1,37 @@
+{
+	"Flying_Planes":
+	[
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"codeName":"aa012",
+			"coordinate":{
+				"x":"0",
+				"y":"0",
+				"longtitude":0,
+				"latitude":0
+			}
+			"graph":{
+				"start":"Dalras",
+				"end":"Narita"
+			}
+		},
+		
+		{
+			"modelNumber":"MiG-29",
+			"company":"RA",
+			"codeName":"RA-0024",
+			"coordinate":{
+				"x":"0",
+				"y":"0",
+				"longtitude":0,
+				"latitude":0
+			}
+			"graph":{
+				"start":"Narita",
+				"end":"Dalras"
+			}
+		}
+		
+	]
+}

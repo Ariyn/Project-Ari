@@ -6,7 +6,7 @@ public class Plane {
 	double Maxspeed, height, speed; // 최고속도, 고도,속도
 	double x,y; // 좌표  
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
-	long latitude, altitude; // 위도(가로선), 경도(세로선)
+	long latitude, longtitude; // 위도(가로선), 경도(세로선)
 	String name;//비행기이름
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
@@ -22,7 +22,7 @@ public class Plane {
 	}
 	
 	public long getPostionY(){ // 비행기 경도
-		return altitude;
+		return longtitude;
 	}
 	
 	public String getName(){//비행기 이름 
@@ -51,7 +51,7 @@ public class Plane {
 	}
 	
 	public void setPositionY(long y){
-		altitude=y;
+		longtitude=y;
 	}
 	
 	public void setName(String text){
