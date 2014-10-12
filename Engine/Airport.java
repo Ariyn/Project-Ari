@@ -95,10 +95,10 @@ public class Airport {
 		q.<Plane>Pop();
 		nowPlane.removeFirst();
 	}
-	public void Data(){ // 비행기 정보 출력
-		System.out.println("Airplane name: "+name);
-		System.out.println("Airplane latitude: "+latitude+" x:"+x);
-		System.out.println("Airplane Longitude: "+Longitude+" y:"+y);
+	public void Data(){ // 공항 정보 출력
+		System.out.println("Airport name: "+name);
+		System.out.println("Airport latitude: "+latitude+" x:"+x);
+		System.out.println("Airport Longitude: "+Longitude+" y:"+y);
 		
 	}
 	

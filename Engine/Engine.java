@@ -90,6 +90,10 @@ public class Engine extends Thread{
 			for(String e:_keys){
 				System.out.println(e+" "+_data.get(e));
 				switch(e) {
+				case "name":
+					newAirport.set("Name", _data.get("name").toString());
+					break;
+					
 				case "position":
 					JSONObject a = (JSONObject)_data.get("position");
 					double lat = (double)a.get("Latitude");
@@ -105,6 +109,7 @@ public class Engine extends Thread{
 			}
 			
 			newAirport.Data();
+			this.airportList.add(newAirport);
 		}
 	}
 	
