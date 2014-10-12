@@ -1,12 +1,14 @@
 package Engine;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class Graph {
 	private GNode head;
 	private ArrayList<GNode> vertex;
 	
-	public void AddVertex(int x, int y, int lat, int lon, int alt) {
+	public void AddVertex(double x, double y, int lat, int lon, int alt) {
 		//Longitude
 		GNode g = new GNode(x,y, lat,lon,alt);
 		
@@ -29,6 +31,22 @@ public class Graph {
 //			alg.addElement(g, small);
 //			g.addElement(alg, small);
 //		}	
+	}
+	
+	public Dictionary<String, Object> getNextNode() {
+		Dictionary<String, Object> retVal = new Hashtable();
+		retVal.put("Latitude", this.vertex.get(1).latitude());
+		retVal.put("x", this.vertex.get(1).x());
+		
+		retVal.put("Longitude", this.vertex.get(1).longitude());
+		retVal.put("y", this.vertex.get(1).y());
+		
+		return retVal;
+	}
+	
+	public void nextNode(){
+		this.head = this.vertex.get(1);
+		this.vertex.remove(0);
 	}
 	
 	public void VertexSetEdges(GNode fromN, GNode to) {

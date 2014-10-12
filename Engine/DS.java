@@ -20,10 +20,10 @@ class GNode implements Cloneable
 	private ArrayList<GNode> _vertex;
 	private ArrayList<Double> _edge;
 	
-	private int x, y;
+	private double x, y;
 	private int altitude, latitude, longitude;
 	
-	public GNode(int x, int y, int lat, int lon, int alt) {
+	public GNode(double x, double y, int lat, int lon, int alt) {
 		this.x = x;
 		this.y = y;
 		
@@ -55,6 +55,12 @@ class GNode implements Cloneable
 	}
 	public int longitude() {
 		return this.longitude;
+	}
+	public double x() {
+		return this.x;
+	}
+	public double y() {
+		return this.y;
 	}
 }
 
