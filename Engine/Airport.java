@@ -18,6 +18,7 @@ public class Airport {
 	LinkedList2 nowPlane = new LinkedList2();
 	
 	PlaneQueue q = new PlaneQueue();
+	PlaneQueue q1 = new PlaneQueue();
 	//Plane p = new Plane();
 
 	public void setRunwyas(long num, long length){
@@ -79,21 +80,25 @@ public class Airport {
 	}
 	
 	public void LandingPermitSign(Plane pl){ // 비행기 착륙 허가
-		q.Push(pl);
+
+			q1.<Plane>Push(pl);
+	
 	}
 	
 	public void PlaneLanding(Plane pl){ // 비행기 착륙
 		nowPlane.addLast(pl);
-		System.out.println("PlaneLanding : "+q.Push(pl));
+		System.out.println("PlaneLanding : "+q1.Push(pl));
 	}
 	
 	public void TakeOffPermitSign(){ // 비행기 이륙 허가
-		
+			
+		q.<Plane>Pop();
 	}
 	
 	public void PlaneTakeOff(){ // 비행기 이륙
-		q.<Plane>Pop();
-		nowPlane.removeFirst();
+		if(q.equals(nowPlane))
+			nowPlane.remove(q);
+		System.out.println("PlaneTakeOff : " +q.Pop());
 	}
 	public void Data(){ // 공항 정보 출력
 		System.out.println("Airport name: "+name);
