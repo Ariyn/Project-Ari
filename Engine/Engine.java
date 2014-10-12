@@ -1,13 +1,14 @@
 package Engine;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Engine implements Runnable{
+public class Engine extends Thread{
 
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
@@ -88,8 +89,57 @@ public class Engine implements Runnable{
 
 			for(String e:_keys){
 				System.out.println(e+" "+_data.get(e));
-				
+				switch(e) {
+				case "position":
+					JSONObject a = (JSONObject)_data.get("position");
+					double lat = (double)a.get("Latitude");
+					double lon = (double)a.get("Longitude");
+					
+					newAirport.set("Latitude", (long) Math.floor(lat));
+					newAirport.set("x", Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
+					newAirport.set("Longitude", (long) Math.floor(lon));
+					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
+//					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
+					break;
+				}
 			}
+			
+			newAirport.Data();
+		}
+	}
+	
+	private void _addDataAirplane(JSONObject data) {		
+		@SuppressWarnings("unchecked")
+		Set<String> keys = (Set<String>)data.keySet();
+		List<String> lonList = Arrays.asList("FuelTank", "BodyWeight", "MTOW", "MTOW_MaxDistance", "MaxSpeed", "CrusingSpeed");
+		List<String> strList = Arrays.asList("Company", "Name");
+		List<String> douList = Arrays.asList("WingLength", "Length", "Height", "WingAngle",
+											 "BodyWidth");
+		
+		for(String i:keys){
+			Plane newPlane = new Plane();
+			
+			@SuppressWarnings("unchecked")
+			JSONObject _data = (JSONObject)data.get(i);
+			Set<String> _keys = (Set<String>)_data.keySet();
+
+			for(String e:_keys){
+//				System.out.println(e+" "+_data.get(e));
+				if(lonList.contains(e)) {
+					newPlane.set(e, (long)_data.get(e));
+//					System.out.println(e+" "+(long)_data.get(e));
+				} else if(strList.contains(e)) {
+					newPlane.set(e, (String)_data.get(e));
+//					System.out.println(e+" "+_data.get(e));
+				} else if(douList.contains(e)) {
+//					System.out.println(e+" "+_data.get(e));
+					newPlane.set(e, (double)_data.get(e));
+				}
+			}
+			
+			newPlane.Data();
+			this.planeTypeList.add(newPlane);
+//			System.out.println(newPlane);
 		}
 	}
 	
@@ -100,7 +150,7 @@ public class Engine implements Runnable{
 			if(i.equals("Airports")) {
 				this._addDataAirport((JSONObject) data.get(i));
 			} else if(i.equals("Planes")) {
-				
+				this._addDataAirplane((JSONObject) data.get(i));
 			}
 		}
 		
@@ -135,17 +185,20 @@ public class Engine implements Runnable{
 	}
 	
 	public void run() {
-		for(Plane i : this.planeList) {
-			i.Move();
+//		while(){
+			for(Plane i : this.planeList) {
+				i.Move();
+				System.out.println("running");
+			}
+			
+			try {
+				Thread.sleep(17);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	}
 	
 	public void TestSet() {
 		Plane p = new Plane();

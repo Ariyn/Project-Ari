@@ -6,7 +6,9 @@ import java.util.LinkedList;
 public class Airport {
 	
 	String name; // 공항명
-	long latitude, longtitude; // 공항의 위도, 경도
+	long latitude, Longitude, altitude = 0; // 공항의 위도, 경도
+	double x, y, z=0.0;
+	
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	long[] runways = new long[1];// 활주로 길이
 	
@@ -28,15 +30,25 @@ public class Airport {
 		case "Latitude":
 			latitude=l;
 			break;
-		case "Longtitude":
-			longtitude=l;
+		case "Longitude":
+			Longitude=l;
 			break;
 		case"MaxAirplane":
 			maximum_airplane=(int)l;
 			break;
 		}
 	}
-	public void set2(String s, String str){
+	public void set(String s, double l){
+		switch(s){
+		case "x":
+			x=l;
+			break;
+		case "y":
+			y=l;
+			break;
+		}
+	}
+	public void set(String s, String str){
 		switch(s){
 		case "Name":
 			name=str;
@@ -48,8 +60,8 @@ public class Airport {
 		switch(s){
 		case "Latitude":
 			return latitude;
-		case "Longtitude":
-			return longtitude;
+		case "Longitude":
+			return Longitude;
 		default:
 			return 0;
 		}
@@ -83,6 +95,12 @@ public class Airport {
 		q.<Plane>Pop();
 		nowPlane.removeFirst();
 	}
+	public void Data(){ // 비행기 정보 출력
+		System.out.println("Airplane name: "+name);
+		System.out.println("Airplane latitude: "+latitude+" x:"+x);
+		System.out.println("Airplane Longitude: "+Longitude+" y:"+y);
+		
+	}
 	
 	/*public void PlaneSignReceive(){ // 목적 공항에 비행기 탐색 신청
 		
@@ -93,7 +111,7 @@ public class Airport {
 	}
 	
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
-		pl.set("Longtitude",this.longtitude);
+		pl.set("Longitude",this.Longitude);
 		pl.set("Latitude",this.latitude);
 		nowPlane.addLast(pl);
 	}

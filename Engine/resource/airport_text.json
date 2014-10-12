@@ -5,7 +5,7 @@
 		{
 			"name":"Dalars",
 			"companies":{"KAL":10, "AA":50},
-			"position":{"latitude":10, "longtitude":15},
+			"position":{"Latitude":357.63889, "Longitude":1403.91667},
 			"runways":
 			[
 				{
@@ -51,12 +51,45 @@
 		"Narita":
 		{
 			"name":"Narita",
-			"position":{"latitude":189, "longtitude":37},
+			"position":{"Latitude":1403.91667, "Longitude":357.63889},
 			"runways":
 			[
 				{
 					"num":0,
-					"length":25
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":0,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":300,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":600,
+							"y":0,
+							"z":50
+						},
+						{
+							"x":1200,
+							"y":0,
+							"z":300
+						},
+						{
+							"x":2500,
+							"y":0,
+							"z":1200
+						},
+						{
+							"x":3500,
+							"y":0,
+							"z":300
+						}
+					]
 				}
 			],
 			"maximum_airplane":20
@@ -67,22 +100,39 @@
 	{
 		"A330":
 		{
-			"company":"airbus"
-			"code":"A330",
-			"fuleTank":500,
-			"maxSpeed":30
-			"engine":3
+			"Company":"airbus",
+			"Name":"A330",
+			
+			"FuelTank":139090,
+			
+			"MaxSpeed":91300,
+			"CrusingSpeed":87100,
+			
+			"Length":58.80,
+			"WingLength":60.3,
+			"WingAngle":30.0,
+			"BodyWidth":5.28,
+			"Height":17.40,
+			
+			"startSpot":"Dalars",
+			"endSpot":"Narita",
+			
+			"BodyWeight":119600,
+			"MTOW":230000,
+			"MTOW_MaxDistance":13430,
+			
+			"Engine":2
 			
 		},
 		
 		"MIG-29":
 		{
-			"company":"russia"
-			"code":"MIG-29",
-			"fuleTank":300,
-			"maxSpeed":70
-			"engine":2,
-			"weapons":
+			"Company":"russia",
+			"Name":"MIG-29",
+			"FuelTank":300,
+			"MaxSpeed":70,
+			"Engine":2,
+			"Weapons":
 			{
 				"ARM":3,
 				"Anti Ship Missile":6
