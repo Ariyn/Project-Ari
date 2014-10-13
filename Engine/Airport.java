@@ -1,5 +1,6 @@
 package Engine;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -16,6 +17,7 @@ public class Airport {
 	// 비행기 객체는 리스트에 저장
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
+	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 	
 	PlaneQueue q = new PlaneQueue();
 	PlaneQueue q1 = new PlaneQueue();
@@ -39,6 +41,7 @@ public class Airport {
 			break;
 		}
 	}
+	
 	public void set(String s, double l){
 		switch(s){
 		case "x":
@@ -49,6 +52,7 @@ public class Airport {
 			break;
 		}
 	}
+	
 	public void set(String s, String str){
 		switch(s){
 		case "Name":
@@ -67,6 +71,7 @@ public class Airport {
 			return 0;
 		}
 	}
+	
 	public String getString(String s){
 		switch(s){
 		case "Name":
@@ -75,31 +80,23 @@ public class Airport {
 			return " ";
 		}
 	}
+	
 	public long getRunwayLength(int num){
 		return runways[num];
 	}
 	
-	public void LandingPermitSign(Plane pl){ // 비행기 착륙 허가
+	public void PlaneLanding(Plane pl){ // 비행기 이착륙
 
-			q1.<Plane>Push(pl);
-	
+		if(q1.<Plane>Push(pl)==true){
+			System.out.println("PlaneLanding : "+pl);
+			planeList.remove(pl);
+		}
+
+		if(q.<Plane>Pop()!=null){
+			System.out.println("PlaneTakeOff : " +q.Pop());
+		}
 	}
-	
-	public void PlaneLanding(Plane pl){ // 비행기 착륙
-		nowPlane.addLast(pl);
-		System.out.println("PlaneLanding : "+q1.Push(pl));
-	}
-	
-	public void TakeOffPermitSign(){ // 비행기 이륙 허가
-			
-		q.<Plane>Pop();
-	}
-	
-	public void PlaneTakeOff(){ // 비행기 이륙
-		if(q.equals(nowPlane))
-			nowPlane.remove(q);
-		System.out.println("PlaneTakeOff : " +q.Pop());
-	}
+
 	public void Data(){ // 공항 정보 출력
 		System.out.println("Airport name: "+name);
 		System.out.println("Airport latitude: "+latitude+" x:"+x);
@@ -111,14 +108,14 @@ public class Airport {
 		
 	}*/
 	
-	public void OnPlane(){ // 현재 공항에 체류중인 비행기 보여주는 메소드
+/*	public void OnPlane(){ // 현재 공항에 체류중인 비행기 보여주는 메소드
 		System.out.println("PlaneStay : "+nowPlane);
 	}
-	
+*/
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
 		pl.set("Longitude",this.Longitude);
 		pl.set("Latitude",this.latitude);
-		nowPlane.addLast(pl);
+//		nowPlane.addLast(pl);
 	}
 
 }
