@@ -3,7 +3,6 @@ package Engine;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-
 public class Airport {
 	
 	String name; // 공항명
@@ -17,7 +16,7 @@ public class Airport {
 	// 비행기 객체는 리스트에 저장
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
-	ArrayList <Plane> planeList = new ArrayList<Plane>();	
+	ArrayList <Plane> planeList;
 	
 	PlaneQueue q = new PlaneQueue();
 	PlaneQueue q1 = new PlaneQueue();
@@ -85,15 +84,18 @@ public class Airport {
 		return runways[num];
 	}
 	
-	public void PlaneLanding(Plane pl){ // 비행기 이착륙
+	public void PlaneLanding(Plane pl, String type){ // 비행기 이착륙
 
-		if(q1.<Plane>Push(pl)==true){
-			System.out.println("PlaneLanding : "+pl);
-			planeList.remove(pl);
-		}
-
-		if(q.<Plane>Pop()!=null){
-			System.out.println("PlaneTakeOff : " +q.Pop());
+		if(type.equals("landing")){
+			if(q1.<Plane>Push(pl)==true){
+				System.out.println("PlaneLanding : "+pl);
+				planeList.remove(pl);
+			}
+		} else {
+			Plane _p = (Plane)q.<Plane>Pop().Get();
+			if(_p!=null){
+				System.out.println("PlaneTakeOff : " +_p);
+			}
 		}
 	}
 
@@ -115,7 +117,7 @@ public class Airport {
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
 		pl.set("Longitude",this.Longitude);
 		pl.set("Latitude",this.latitude);
-//		nowPlane.addLast(pl);
+		planeList.add(pl);
 	}
 
 }

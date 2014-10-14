@@ -114,9 +114,6 @@
 			"BodyWidth":5.28,
 			"Height":17.40,
 			
-			"startSpot":"Dalars",
-			"endSpot":"Narita",
-			
 			"BodyWeight":119600,
 			"MTOW":230000,
 			"MTOW_MaxDistance":13430,
@@ -127,7 +124,7 @@
 		
 		"MIG-29":
 		{
-			"Company":"russia",
+			"Company":"MIG",
 			"Name":"MIG-29",
 			"FuelTank":300,
 			"MaxSpeed":70,
