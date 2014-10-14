@@ -114,8 +114,8 @@
 			"BodyWidth":5.28,
 			"Height":17.40,
 			
-			"startSpot":"Dalars",
-			"endSpot":"Narita",
+			"StartSpot":"Dalars",
+			"EndSpot":"Narita",
 			
 			"BodyWeight":119600,
 			"MTOW":230000,

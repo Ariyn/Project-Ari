@@ -185,7 +185,7 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-//		while(){
+//		while(true){
 			for(Plane i : this.planeList) {
 				i.Move();
 				System.out.println("running");
