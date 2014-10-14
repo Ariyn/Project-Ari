@@ -12,6 +12,7 @@ public class Airport {
 	
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	long[] runways = new long[1];// 활주로 길이
+	ArrayList runwaysNode = new ArrayList(); // 활주로 노드
 	
 	// 비행기 이착륙은 허가 후 이착륙 가능 허가 메소드에서는 큐에 비행기 객체들을 집어넣어 순차적으로 허가시킨다.
 	// 비행기 객체는 리스트에 저장
@@ -23,9 +24,10 @@ public class Airport {
 	PlaneQueue q1 = new PlaneQueue();
 	//Plane p = new Plane();
 
-	public void setRunwyas(long num, long length){
+	public void setRunwyas(long num, long length, ArrayList nodes){
 		int number = (int)num;
 		runways[number] = length;
+		runwaysNode = nodes;
 	}
 
 	public void set(String s, long l){
