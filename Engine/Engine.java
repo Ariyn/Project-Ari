@@ -90,6 +90,10 @@ public class Engine extends Thread{
 			for(String e:_keys){
 				System.out.println(e+" "+_data.get(e));
 				switch(e) {
+				case "name":
+					newAirport.set("Name", _data.get("name").toString());
+					break;
+					
 				case "position":
 					JSONObject a = (JSONObject)_data.get("position");
 					double lat = (double)a.get("Latitude");
@@ -101,14 +105,55 @@ public class Engine extends Thread{
 					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
+				case "runwyas":
+					JSONArray adata = (JSONArray)_data.get(e);
+					
+					for(int bb=0; bb<adata.size(); bb++){
+						long num=0, length = 0;
+						ArrayList<rNode> rNodeList = new ArrayList<rNode>();
+						
+						JSONObject __data = (JSONObject) (adata).get(bb);
+						Set<String> rkey = __data.keySet();
+						for(String re : rkey){
+							switch(re){
+							case "nodes":
+								JSONArray rNodeArray = (JSONArray)__data.get(re);
+								
+								for(int cc = 0; cc<rNodeArray.size(); cc++){
+									rNode rnodes1 = new rNode();
+									JSONObject testNode = (JSONObject) rNodeArray.get(cc);
+									
+									rnodes1.x = (long)testNode.get("x");
+									rnodes1.y = (long)testNode.get("y");
+									rnodes1.z = (long)testNode.get("z");
+									
+									rNodeList.add(rnodes1);
+								}
+								
+								break;
+								
+							case "num":
+								num = (long)__data.get(re);
+								break;
+								
+							case "length":
+								length = (long)__data.get(re);
+								break;
+							}
+						}
+						newAirport.setRunwyas(num, length, rNodeList);
+					}
+					
+					break;
 				}
 			}
 			
 			newAirport.Data();
+			this.airportList.add(newAirport);
 		}
 	}
 	
-	private void _addDataAirplane(JSONObject data) {		
+	private void _addDataAirplane(JSONObject data) {
 		@SuppressWarnings("unchecked")
 		Set<String> keys = (Set<String>)data.keySet();
 		List<String> lonList = Arrays.asList("FuelTank", "BodyWeight", "MTOW", "MTOW_MaxDistance", "MaxSpeed", "CrusingSpeed");
