@@ -7,7 +7,7 @@ public class Plane {
 	double weight, length, height, wingAngle; // 무게, 길이
 	double wingLength, bodyWidth;
 
-	int fuelTank, fuel, fuelPercent; // 연료최대량, 연료량(%)
+	long fuelTank, fuel, fuelPercent; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed, speed; // 최고속도, 고도,속도
 	
@@ -32,7 +32,10 @@ public class Plane {
 	}
 	
 	public Plane(Plane type){
-		
+		this.maxspeed = type.maxspeed;
+		this.speed = type.speed;
+		this.fuelTank = type.fuelTank;
+		this.company = type.company;
 	}
 
 
@@ -44,6 +47,8 @@ public class Plane {
 			return Longitude;
 		case "Altitude":
 			return altitude;
+		case "FuelTank":
+			return fuelTank;
 		default:
 			return 0;
 		}
@@ -62,8 +67,7 @@ public class Plane {
 	}
 	public int getInt(String s){
 		switch(s){
-		case "FuelTank":
-			return fuelTank;
+	
 		default:
 			return 0;
 		}

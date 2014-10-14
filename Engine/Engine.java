@@ -110,12 +110,26 @@ public class Engine extends Thread{
 					
 					for(int bb=0; bb<adata.size(); bb++){
 						long num=0, length = 0;
+						ArrayList<rNode> rNodeList = new ArrayList<rNode>();
 						
 						JSONObject __data = (JSONObject) (adata).get(bb);
 						Set<String> rkey = __data.keySet();
 						for(String re : rkey){
 							switch(re){
 							case "nodes":
+								JSONArray rNodeArray = (JSONArray)__data.get(re);
+								
+								for(int cc = 0; cc<rNodeArray.size(); cc++){
+									rNode rnodes1 = new rNode();
+									JSONObject testNode = (JSONObject) rNodeArray.get(cc);
+									
+									rnodes1.x = (long)testNode.get("x");
+									rnodes1.y = (long)testNode.get("y");
+									rnodes1.z = (long)testNode.get("z");
+									
+									rNodeList.add(rnodes1);
+								}
+								
 								break;
 								
 							case "num":
@@ -127,7 +141,7 @@ public class Engine extends Thread{
 								break;
 							}
 						}
-						newAirport.setRunwyas(num, length);
+						newAirport.setRunwyas(num, length, rNodeList);
 					}
 					
 					break;

@@ -411,3 +411,23 @@ class LinkedList2 {
     }
 
 }
+
+class rNode{
+	public long x, y ,z;
+	
+	public rNode(){
+		x=0;
+		y=0;
+		z=0;
+	}
+}
+
+class runwayNode{
+	long length;
+	ArrayList<rNode> runwaysNode;
+	
+	public runwayNode(){
+		length = 0;
+		runwaysNode = null;
+	}
+}
