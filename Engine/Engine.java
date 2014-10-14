@@ -252,9 +252,48 @@ public class Engine extends Thread{
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
+		Plane testP = null;
 		
 		for(Object i : flyingPlane){
+			JSONObject cpl = (JSONObject)i;
+			Set<String> keys = (Set<String>)cpl.keySet();
 			
+			for(Plane p : planeTypeList){
+				
+				if(p.getString("Name").equals(cpl.get("modelNumber"))){
+					testP = p;
+				}
+			}
+
+			for(String k : keys){
+				switch(k){
+				case "modelNumber":
+					testP.set(k, cpl.get(k).toString());
+					break;
+					
+				case "company":
+					testP.set(k, cpl.get(k).toString());
+					break;
+					
+				case "coordinate":
+					JSONObject coordinateObject = (JSONObject) cpl.get(k);
+					Set<String> ckeys = (Set<String>)coordinateObject.keySet();
+					for(String ccdi : ckeys){
+						//System.out.println(ccdi+" "+coordinateObject.get(ccdi));
+						long abc = (long)coordinateObject.get(ccdi);
+						testP.set(ccdi, (double)abc);
+					}
+					break;
+					
+				case "graph":
+					JSONObject graphObject = (JSONObject)cpl.get(k);
+					Set<String> gkeys = (Set<String>)graphObject.keySet();
+					for(String ggdi : gkeys){
+						testP.set(ggdi, graphObject.get(ggdi).toString());
+					}
+					break;
+				}
+			}
 		}
 	}
 }

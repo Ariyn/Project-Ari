@@ -6,14 +6,14 @@
 			"company":"aa",
 			"codeName":"aa012",
 			"coordinate":{
-				"x":"0",
-				"y":"0",
+				"x":0,
+				"y":0,
 				"longitude":0,
 				"latitude":0
 			}
 			"graph":{
-				"start":"Dalras",
-				"end":"Narita"
+				"startSpot":"Dalras",
+				"endSpot":"Narita"
 			}
 		},
 		
@@ -22,14 +22,14 @@
 			"company":"RA",
 			"codeName":"RA-0024",
 			"coordinate":{
-				"x":"0",
-				"y":"0",
+				"x":0,
+				"y":0,
 				"longitude":0,
 				"latitude":0
 			}
 			"graph":{
-				"start":"Narita",
-				"end":"Dalras"
+				"startSpot":"Narita",
+				"endSpot":"Dalras"
 			}
 		}
 		

@@ -13,7 +13,7 @@ public class Plane {
 	
 	double x,y, z; // 좌표  
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
-	long latitude, Longitude, altitude; // 위도(가로선), 경도(세로선)
+	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선)
 	
 	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
 	String startSpot, endSpot; // 출발공항, 도착공항
@@ -44,7 +44,7 @@ public class Plane {
 		case "Latitude":
 			return latitude;
 		case "Longitude":
-			return Longitude;
+			return longitude;
 		case "Altitude":
 			return altitude;
 		case "FuelTank":
@@ -79,6 +79,8 @@ public class Plane {
 			return name;
 		case "Company":
 			return company;
+		case "CodeName":
+			return codeName;
 		default:
 			return " ";
 		}
@@ -93,7 +95,7 @@ public class Plane {
 			latitude=l;
 			break;
 		case "Longitude":
-			Longitude=l;
+			longitude=l;
 			break;
 		case "Altitude":
 			altitude=l;
@@ -164,6 +166,8 @@ public class Plane {
 		case "endSpot":
 			endSpot = str;
 			break;
+		case "CodeName":
+			codeName = str;
 		}
 	}
 	
@@ -212,7 +216,7 @@ public class Plane {
 		System.out.println("Airplane speed: "+speed*10+"m/s");
 		System.out.println("Airplane altitude: "+altitude+"m");
 		System.out.println("Airplane latitude: "+latitude);
-		System.out.println("Airplane Longitude: "+Longitude);
+		System.out.println("Airplane Longitude: "+longitude);
 		if(status==0)System.out.println("이륙");
 		else if(status==1)System.out.println("착륙");
 		else System.out.println("비행중");
