@@ -16,16 +16,18 @@ public class Main {
 		
 		try{
 
-			Object obj = parser.parse(new FileReader("Engine\\resource\\airport_text.json"));
+//			Object obj = parser.parse(new FileReader("Engine\\resource\\airport_text.json"));
 
-//			Object obj = parser.parse(new FileReader("src\\Engine\\resource\\airport_text.json"));
+			Object obj = parser.parse(new FileReader("src\\Engine\\resource\\airport_text.json"));
 //			Object fpText = parser.parse(new FileReader("Engine\\resource\\FlyingPlane_text.json"));
 			
+			Object fpText = parser.parse(new FileReader("src\\Engine\\resource\\FlyingPlane_text.json"));
+			
 			JSONObject jsonObject = (JSONObject) obj;
-//			JSONObject jsonObject2 = (JSONObject) fpText;
+			JSONObject jsonObject2 = (JSONObject) fpText;
 			
 			eng.setData(jsonObject);
-//			eng.createPlane(jsonObject2);
+			eng.createPlane(jsonObject2);
 			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();

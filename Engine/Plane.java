@@ -15,7 +15,7 @@ public class Plane {
 	double dx, dy, dz, angleX=0, angleY=0; //기울기
 	long latitude, Longitude, altitude; // 위도(가로선), 경도(세로선)
 	
-	String name, company;//비행기이름, 회사명
+	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
 	String startSpot, endSpot; // 출발공항, 도착공항
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중

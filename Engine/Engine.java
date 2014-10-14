@@ -105,6 +105,32 @@ public class Engine extends Thread{
 					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
+				case "runwyas":
+					JSONArray adata = (JSONArray)_data.get(e);
+					
+					for(int bb=0; bb<adata.size(); bb++){
+						long num=0, length = 0;
+						
+						JSONObject __data = (JSONObject) (adata).get(bb);
+						Set<String> rkey = __data.keySet();
+						for(String re : rkey){
+							switch(re){
+							case "nodes":
+								break;
+								
+							case "num":
+								num = (long)__data.get(re);
+								break;
+								
+							case "length":
+								length = (long)__data.get(re);
+								break;
+							}
+						}
+						newAirport.setRunwyas(num, length);
+					}
+					
+					break;
 				}
 			}
 			
@@ -113,7 +139,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	private void _addDataAirplane(JSONObject data) {		
+	private void _addDataAirplane(JSONObject data) {
 		@SuppressWarnings("unchecked")
 		Set<String> keys = (Set<String>)data.keySet();
 		List<String> lonList = Arrays.asList("FuelTank", "BodyWeight", "MTOW", "MTOW_MaxDistance", "MaxSpeed", "CrusingSpeed");
