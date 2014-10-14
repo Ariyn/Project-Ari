@@ -41,7 +41,7 @@
 						{
 							"x":3500,
 							"y":0,
-							"z":300
+							"z":3000
 						}
 					]
 				}
@@ -114,6 +114,14 @@
 			"BodyWidth":5.28,
 			"Height":17.40,
 			
+<<<<<<< HEAD
+=======
+
+			"StartSpot":"Dalars",
+			"EndSpot":"Narita",
+			
+
+>>>>>>> 0bc6e23352199362b6f0575caf0c61f8b6c4f317
 			"BodyWeight":119600,
 			"MTOW":230000,
 			"MTOW_MaxDistance":13430,

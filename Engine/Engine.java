@@ -106,6 +106,46 @@ public class Engine extends Thread{
 					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
+				case "runwyas":
+					JSONArray adata = (JSONArray)_data.get(e);
+					
+					for(int bb=0; bb<adata.size(); bb++){
+						long num=0, length = 0;
+						ArrayList<rNode> rNodeList = new ArrayList<rNode>();
+						
+						JSONObject __data = (JSONObject) (adata).get(bb);
+						Set<String> rkey = __data.keySet();
+						for(String re : rkey){
+							switch(re){
+							case "nodes":
+								JSONArray rNodeArray = (JSONArray)__data.get(re);
+								
+								for(int cc = 0; cc<rNodeArray.size(); cc++){
+									rNode rnodes1 = new rNode();
+									JSONObject testNode = (JSONObject) rNodeArray.get(cc);
+									
+									rnodes1.x = (long)testNode.get("x");
+									rnodes1.y = (long)testNode.get("y");
+									rnodes1.z = (long)testNode.get("z");
+									
+									rNodeList.add(rnodes1);
+								}
+								
+								break;
+								
+							case "num":
+								num = (long)__data.get(re);
+								break;
+								
+							case "length":
+								length = (long)__data.get(re);
+								break;
+							}
+						}
+						newAirport.setRunwyas(num, length, rNodeList);
+					}
+					
+					break;
 				}
 			}
 			
@@ -114,7 +154,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	private void _addDataAirplane(JSONObject data) {		
+	private void _addDataAirplane(JSONObject data) {
 		@SuppressWarnings("unchecked")
 		Set<String> keys = (Set<String>)data.keySet();
 		List<String> lonList = Arrays.asList("FuelTank", "BodyWeight", "MTOW", "MTOW_MaxDistance", "MaxSpeed", "CrusingSpeed");
@@ -191,7 +231,7 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-//		while(){
+//		while(true){
 			for(Plane i : this.planeList) {
 				i.Move();
 				System.out.println("running");
@@ -213,9 +253,48 @@ public class Engine extends Thread{
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
+		Plane testP = null;
 		
 		for(Object i : flyingPlane){
+			JSONObject cpl = (JSONObject)i;
+			Set<String> keys = (Set<String>)cpl.keySet();
 			
+			for(Plane p : planeTypeList){
+				
+				if(p.getString("Name").equals(cpl.get("modelNumber"))){
+					testP = p;
+				}
+			}
+
+			for(String k : keys){
+				switch(k){
+				case "modelNumber":
+					testP.set(k, cpl.get(k).toString());
+					break;
+					
+				case "company":
+					testP.set(k, cpl.get(k).toString());
+					break;
+					
+				case "coordinate":
+					JSONObject coordinateObject = (JSONObject) cpl.get(k);
+					Set<String> ckeys = (Set<String>)coordinateObject.keySet();
+					for(String ccdi : ckeys){
+						//System.out.println(ccdi+" "+coordinateObject.get(ccdi));
+						long abc = (long)coordinateObject.get(ccdi);
+						testP.set(ccdi, (double)abc);
+					}
+					break;
+					
+				case "graph":
+					JSONObject graphObject = (JSONObject)cpl.get(k);
+					Set<String> gkeys = (Set<String>)graphObject.keySet();
+					for(String ggdi : gkeys){
+						testP.set(ggdi, graphObject.get(ggdi).toString());
+					}
+					break;
+				}
+			}
 		}
 	}
 }
