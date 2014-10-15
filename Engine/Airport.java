@@ -13,7 +13,7 @@ public class Airport {
 	//long[] runways = new long[1];// 활주로 길이
 	
 	runwayNode[] runways = new runwayNode[1];
-	
+	ArrayList<GNode> vertex;
 	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활주로 노드
 	
 	// 비행기 이착륙은 허가 후 이착륙 가능 허가 메소드에서는 큐에 비행기 객체들을 집어넣어 순차적으로 허가시킨다.
@@ -125,5 +125,19 @@ public class Airport {
 		pl.set("Latitude",this.latitude);
 		planeList.add(pl);
 	}
-
+	public void CreatGraph(Graph g){
+		g.AddVertex(0,0,357,1403,1300);
+		g.AddVertex(0,0,618,1141,1300);
+		g.AddVertex(0,0,880,880,1300);
+		g.AddVertex(0,0,1141,618,1300);
+		g.AddVertex(0,0,1403,357,1300);
+	}
+	
+	public void CreatLine(Graph g){
+		g.VertexSetEdges(vertex.get(0), vertex.get(1));
+		g.VertexSetEdges(vertex.get(1), vertex.get(2));
+		g.VertexSetEdges(vertex.get(2), vertex.get(3));
+		g.VertexSetEdges(vertex.get(3), vertex.get(4));
+	}
+	
 }

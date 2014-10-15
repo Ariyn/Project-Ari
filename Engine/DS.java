@@ -46,10 +46,11 @@ class GNode implements Cloneable
 		this._edge.add(new Double(distance));
 
 	}
-	
+		
 	public int altitude() {
 		return this.altitude;
 	}
+	
 	public int latitude() {
 		return this.latitude;
 	}

@@ -8,7 +8,7 @@ public class Graph {
 	private GNode head;
 	private ArrayList<GNode> vertex;
 	
-	public void AddVertex(double x, double y, int lat, int lon, int alt) {
+	public GNode AddVertex(double x, double y, int lat, int lon, int alt) {
 		//Longitude
 		GNode g = new GNode(x,y, lat,lon,alt);
 		
@@ -31,6 +31,17 @@ public class Graph {
 //			alg.addElement(g, small);
 //			g.addElement(alg, small);
 //		}	
+		return g;
+	
+	}
+	
+	public void CreatGraph(Graph g){
+		GNode _g = g.AddVertex(0,0,357,1403,1300);
+		System.out.println("aisuetijalsjdtlkanslktal"+_g);
+		g.AddVertex(0,0,618,1141,1300);
+		g.AddVertex(0,0,880,880,1300);
+		g.AddVertex(0,0,1141,618,1300);
+		g.AddVertex(0,0,1403,357,1300);
 	}
 	
 	public Dictionary<String, Object> getNextNode() {
