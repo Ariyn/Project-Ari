@@ -82,7 +82,6 @@ public class Engine extends Thread{
 		
 		for(String i:keys){
 			Airport newAirport = new Airport();
-			newAirport.planeList = this.planeList;
 			
 			@SuppressWarnings("unchecked")
 			JSONObject _data = (JSONObject)data.get(i);
