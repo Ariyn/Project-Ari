@@ -1,5 +1,6 @@
 package Engine;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class Plane {
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
 	Graph root;
-	
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
@@ -209,6 +209,7 @@ public class Plane {
 		System.out.println("Airplane weight : "+bodyWeight/1000+"T");
 		System.out.println("Airplane length : "+length+"m");
 		System.out.println("Airplane fuelTank : "+fuelTank+"L");
+		root.CreatGraph(root);
 	}
 	public void Data2(){ //실시간으로 바뀌는 비행기 데이터
 		System.out.println("Airplane fuel: "+fuel+"%");
