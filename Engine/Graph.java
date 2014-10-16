@@ -5,8 +5,8 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class Graph {
-	private GNode head;
-	private ArrayList<GNode> vertex;
+	public GNode head;
+	public ArrayList<GNode> vertex;
 	
 	public void AddVertex(double x, double y, int lat, int lon, int alt) {
 		//Longitude

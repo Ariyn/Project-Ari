@@ -14,7 +14,7 @@ public class Airport {
 	//long[] runways = new long[1];// 활주로 길이
 	
 	runwayNode[] runways = new runwayNode[1];
-	ArrayList<GNode> vertex;
+	Graph aa = new Graph();
 	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활주로 노드
 	
 	// 비행기 이착륙은 허가 후 이착륙 가능 허가 메소드에서는 큐에 비행기 객체들을 집어넣어 순차적으로 허가시킨다.
@@ -138,10 +138,10 @@ public class Airport {
 	}
 	
 	public void runwayLine(Graph g){
-		g.VertexSetEdges(vertex.get(0), vertex.get(1));
-		g.VertexSetEdges(vertex.get(1), vertex.get(2));
-		g.VertexSetEdges(vertex.get(2), vertex.get(3));
-		g.VertexSetEdges(vertex.get(3), vertex.get(4));
+		g.VertexSetEdges(aa.vertex.get(0), aa.vertex.get(1));
+		g.VertexSetEdges(aa.vertex.get(1), aa.vertex.get(2));
+		g.VertexSetEdges(aa.vertex.get(2), aa.vertex.get(3));
+		g.VertexSetEdges(aa.vertex.get(3), aa.vertex.get(4));
 	}
 	
 	public void CreatGraph(Graph g){
@@ -153,10 +153,10 @@ public class Airport {
 	}
 	
 	public void CreatLine(Graph g){
-		g.VertexSetEdges(vertex.get(0), vertex.get(1));
-		g.VertexSetEdges(vertex.get(1), vertex.get(2));
-		g.VertexSetEdges(vertex.get(2), vertex.get(3));
-		g.VertexSetEdges(vertex.get(3), vertex.get(4));
+		g.VertexSetEdges(aa.vertex.get(0), aa.vertex.get(1));
+		g.VertexSetEdges(aa.vertex.get(1), aa.vertex.get(2));
+		g.VertexSetEdges(aa.vertex.get(2), aa.vertex.get(3));
+		g.VertexSetEdges(aa.vertex.get(3), aa.vertex.get(4));
 	}
 	
 }
