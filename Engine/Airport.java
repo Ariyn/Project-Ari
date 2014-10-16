@@ -14,7 +14,7 @@ public class Airport {
 	//long[] runways = new long[1];// 활주로 길이
 	
 	runwayNode[] runways = new runwayNode[1];
-	ArrayList<GNode> vertex;
+	Graph aa = new Graph();
 	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활주로 노드
 	
 	// 비행기 이착륙은 허가 후 이착륙 가능 허가 메소드에서는 큐에 비행기 객체들을 집어넣어 순차적으로 허가시킨다.
@@ -121,8 +121,29 @@ public class Airport {
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
+
+//		planeList.add(pl);
+
 //		nowPlane.addLast(pl);
+
 	}
+	
+	public void runwaygraph(Graph g){
+		g.AddVertex(0,0,0,0,0);
+		g.AddVertex(300,0,0,0,0);
+		g.AddVertex(600,0,0,0,50);
+		g.AddVertex(1200,0,0,0,300);
+		g.AddVertex(2500,0,0,0,1200);
+		g.AddVertex(3500,0,0,0,1300);
+	}
+	
+	public void runwayLine(Graph g){
+		g.VertexSetEdges(aa.vertex.get(0), aa.vertex.get(1));
+		g.VertexSetEdges(aa.vertex.get(1), aa.vertex.get(2));
+		g.VertexSetEdges(aa.vertex.get(2), aa.vertex.get(3));
+		g.VertexSetEdges(aa.vertex.get(3), aa.vertex.get(4));
+	}
+	
 	public void CreatGraph(Graph g){
 		g.AddVertex(0,0,357,1403,1300);
 		g.AddVertex(0,0,618,1141,1300);
@@ -132,10 +153,10 @@ public class Airport {
 	}
 	
 	public void CreatLine(Graph g){
-		g.VertexSetEdges(vertex.get(0), vertex.get(1));
-		g.VertexSetEdges(vertex.get(1), vertex.get(2));
-		g.VertexSetEdges(vertex.get(2), vertex.get(3));
-		g.VertexSetEdges(vertex.get(3), vertex.get(4));
+		g.VertexSetEdges(aa.vertex.get(0), aa.vertex.get(1));
+		g.VertexSetEdges(aa.vertex.get(1), aa.vertex.get(2));
+		g.VertexSetEdges(aa.vertex.get(2), aa.vertex.get(3));
+		g.VertexSetEdges(aa.vertex.get(3), aa.vertex.get(4));
 	}
 	
 }

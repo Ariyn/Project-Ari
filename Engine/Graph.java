@@ -5,10 +5,14 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class Graph {
-	private GNode head;
-	private ArrayList<GNode> vertex;
+	public GNode head;
+	public ArrayList<GNode> vertex;
 	
+<<<<<<< HEAD
 	public GNode AddVertex(double x, double y, long lat, long lon, long alt) {
+=======
+	public void AddVertex(double x, double y, int lat, int lon, int alt) {
+>>>>>>> 08a0a49909c9d5cb941092f1d737a23268316328
 		//Longitude
 		GNode g = new GNode(x,y, lat,lon,alt);
 		
@@ -31,19 +35,24 @@ public class Graph {
 //			alg.addElement(g, small);
 //			g.addElement(alg, small);
 //		}	
-		return g;
-	
+		this.vertex.add(g);
 	}
-	
+/*
 	public void CreatGraph(Graph g){
-		GNode _g = g.AddVertex(0,0,357,1403,1300);
-		System.out.println("aisuetijalsjdtlkanslktal"+_g);
+		g.AddVertex(0,0,357,1403,1300);
 		g.AddVertex(0,0,618,1141,1300);
 		g.AddVertex(0,0,880,880,1300);
 		g.AddVertex(0,0,1141,618,1300);
 		g.AddVertex(0,0,1403,357,1300);
 	}
 	
+	public void CreatLine(Graph g){
+		g.VertexSetEdges(vertex.get(0), vertex.get(1));
+		g.VertexSetEdges(vertex.get(1), vertex.get(2));
+		g.VertexSetEdges(vertex.get(2), vertex.get(3));
+		g.VertexSetEdges(vertex.get(3), vertex.get(4));
+	}
+	*/
 	public Dictionary<String, Object> getNextNode() {
 		Dictionary<String, Object> retVal = new Hashtable();
 		retVal.put("Latitude", this.vertex.get(1).latitude());
