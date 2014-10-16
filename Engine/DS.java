@@ -21,9 +21,9 @@ class GNode implements Cloneable
 	private ArrayList<Double> _edge;
 	
 	private double x, y;
-	private int altitude, latitude, longitude;
+	private long altitude, latitude, longitude;
 	
-	public GNode(double x, double y, int lat, int lon, int alt) {
+	public GNode(double x, double y, long lat, long lon, long alt) {
 		this.x = x;
 		this.y = y;
 		
@@ -47,14 +47,14 @@ class GNode implements Cloneable
 
 	}
 		
-	public int altitude() {
+	public long altitude() {
 		return this.altitude;
 	}
 	
-	public int latitude() {
+	public long latitude() {
 		return this.latitude;
 	}
-	public int longitude() {
+	public long longitude() {
 		return this.longitude;
 	}
 	public double x() {

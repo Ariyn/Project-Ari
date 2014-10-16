@@ -141,7 +141,7 @@ public class Engine extends Thread{
 								break;
 							}
 						}
-						newAirport.setRunwyas(num, length, rNodeList);
+						newAirport.setRunways(num, length, rNodeList);
 					}
 					
 					break;

@@ -28,7 +28,7 @@ public class Airport {
 	PlaneQueue q1 = new PlaneQueue();
 	//Plane p = new Plane();
 
-	public void setRunwyas(long num, long length, ArrayList nodes){
+	public void setRunways(long num, long length, ArrayList nodes){
 		int number = (int)num;
 		runways[number].length = length;
 		runways[number].runwaysNode = nodes;
