@@ -82,7 +82,7 @@ public class Engine extends Thread{
 		
 		for(String i:keys){
 			Airport newAirport = new Airport();
-			newAirport.planeList = this.planeList;
+			//newAirport.planeList = this.planeList;
 			
 			@SuppressWarnings("unchecked")
 			JSONObject _data = (JSONObject)data.get(i);
@@ -142,7 +142,7 @@ public class Engine extends Thread{
 								break;
 							}
 						}
-						newAirport.setRunwyas(num, length, rNodeList);
+						newAirport.setRunways(num, length, rNodeList);
 					}
 					
 					break;
@@ -295,6 +295,8 @@ public class Engine extends Thread{
 					break;
 				}
 			}
+			
+			planeList.add(testP);
 		}
 	}
 }

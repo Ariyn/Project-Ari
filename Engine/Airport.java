@@ -27,7 +27,7 @@ public class Airport {
 	PlaneQueue q1 = new PlaneQueue();
 	//Plane p = new Plane();
 
-	public void setRunwyas(long num, long length, ArrayList nodes){
+	public void setRunways(long num, long length, ArrayList nodes){
 		int number = (int)num;
 		runways[number].length = length;
 		runways[number].runwaysNode = nodes;
@@ -123,8 +123,25 @@ public class Airport {
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
-		planeList.add(pl);
+//		planeList.add(pl);
 	}
+	
+	public void runwaygraph(Graph g){
+		g.AddVertex(0,0,0,0,0);
+		g.AddVertex(300,0,0,0,0);
+		g.AddVertex(600,0,0,0,50);
+		g.AddVertex(1200,0,0,0,300);
+		g.AddVertex(2500,0,0,0,1200);
+		g.AddVertex(3500,0,0,0,1300);
+	}
+	
+	public void runwayLine(Graph g){
+		g.VertexSetEdges(vertex.get(0), vertex.get(1));
+		g.VertexSetEdges(vertex.get(1), vertex.get(2));
+		g.VertexSetEdges(vertex.get(2), vertex.get(3));
+		g.VertexSetEdges(vertex.get(3), vertex.get(4));
+	}
+	
 	public void CreatGraph(Graph g){
 		g.AddVertex(0,0,357,1403,1300);
 		g.AddVertex(0,0,618,1141,1300);

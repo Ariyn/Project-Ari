@@ -8,12 +8,12 @@ public class Plane {
 	double weight, length, height, wingAngle; // 무게, 길이
 	double wingLength, bodyWidth;
 
-	long fuelTank, fuel, fuelPercent; // 연료최대량, 연료량(%)
+	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed, speed; // 최고속도, 고도,속도
 	
-	double x,y, z; // 좌표  
-	double dx, dy, dz, angleX=0, angleY=0; //기울기
+	double x,y; // 좌표  
+	double angleX=0; //기울기
 	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선)
 	
 	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
@@ -196,7 +196,7 @@ public class Plane {
 	}
 
 	public void Fuel(){
-		fuel=100-(4/fuelTank)*100;
+		fuel-=(4/fuelTank)*100;
 	}
 /*	public void Search(){ // 주변 비행기 탐색(주변그래프를 탐색한다)
 		
@@ -209,7 +209,7 @@ public class Plane {
 		System.out.println("Airplane weight : "+bodyWeight/1000+"T");
 		System.out.println("Airplane length : "+length+"m");
 		System.out.println("Airplane fuelTank : "+fuelTank+"L");
-		root.CreatGraph(root);
+
 	}
 	public void Data2(){ //실시간으로 바뀌는 비행기 데이터
 		System.out.println("Airplane fuel: "+fuel+"%");
