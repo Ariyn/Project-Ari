@@ -13,11 +13,13 @@ public class Plane {
 	long maxspeed, crusingSpeed, speed; // 최고속도, 고도,속도
 	
 	double x,y; // 좌표  
+
 	double angleX=0; //기울기
 	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선)
 	
 	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
 	String startSpot, endSpot; // 출발공항, 도착공항
+
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
@@ -27,8 +29,10 @@ public class Plane {
 	
 	//getter
 	
+
 	public Plane(){
 		
+
 	}
 	
 	public Plane(Plane type){
@@ -60,7 +64,10 @@ public class Plane {
 			return maxspeed;
 		case "speed":
 			return speed;
-			
+		case "x" :
+			return x;
+		case "y" :
+			return y;
 		default:
 			return 0;
 		}
@@ -88,6 +95,7 @@ public class Plane {
 	}
 
 	//setter
+
 	public void set(String s, long l){
 		switch(s)
 		{
@@ -122,6 +130,7 @@ public class Plane {
 			crusingSpeed = l;
 			break;
 		}
+
 	}
 	public void set(String s, double l){
 		switch(s)

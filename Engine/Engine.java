@@ -234,10 +234,11 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-//		while(true){
+		while(true){
 			for(Plane i : this.planeList) {
 				i.Move();
 				System.out.println("running");
+				System.out.println(i.getString("Name")+" : "+i.getDouble("x"));
 			}
 			
 			try {
@@ -247,7 +248,7 @@ public class Engine extends Thread{
 				e.printStackTrace();
 			}
 		}
-//	}
+	}
 	
 	public void TestSet() {
 		Plane p = new Plane();
