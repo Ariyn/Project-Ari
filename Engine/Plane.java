@@ -209,6 +209,7 @@ public class Plane {
 		else if(status==2){ // Âø·ú
 			status=1;
 			x=x+dx;
+			altitude-=speed/2;
 			
 		}
 		else { // ºñÇàÁß

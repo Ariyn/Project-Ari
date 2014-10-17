@@ -257,9 +257,6 @@ public class Engine extends Thread{
 		}
 	}
 	
-	public void TestSet() {
-		Plane p = new Plane();
-	}
 	
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
 		
@@ -308,14 +305,15 @@ public class Engine extends Thread{
 					break;
 				}
 			}
-			
 			FlyingplaneList.add(testP);
+			
 		}
 		for(Plane pn : FlyingplaneList){
 			
 			for(Airport ap : airportList){
 				if(ap.getString("Name").equals(pn.startSpot) ){
 					System.out.println("lksdmcl;sdjc; : "+ap.getString("Name"));
+					
 					ap.SetPlane(pn);
 					ap.setGraph();
 					pn.setRoot(ap.getGraph());
