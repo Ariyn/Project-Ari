@@ -190,6 +190,9 @@ public class Plane {
 	}
 	
 	public void setRoot(Graph g){
+		for(GNode gn : g.vertex){
+			GN.add(gn);
+		}
 		this.root = g;
 	}
 	
@@ -198,7 +201,8 @@ public class Plane {
 			System.out.println("Flying!!!"+speed);
 			
 			x=x+dx;
-			System.out.println("Plane in class : "+x);
+			System.out.println("Plane in class dx: "+dx);
+			System.out.println("Plane in class x: "+x);
 			altitude+=speed/2;
 			if(altitude>=1300)status=2;
 		}
@@ -269,7 +273,7 @@ public class Plane {
 				angleX=Math.acos((GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
 				dx = speed/Math.cos(angleX);
 				dy = speed/Math.cos(angleX);
-				//System.out.println("Spin Method!@@@");
+				System.out.println("Spin Method!@@@");
 			}
 		}
 	}

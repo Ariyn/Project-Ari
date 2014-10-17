@@ -13,7 +13,11 @@ public class Airport {
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	//long[] runways = new long[1];// 활주로 길이
 	
+	
+	
 	runwayNode[] runways = new runwayNode[1]; //활주로
+	
+	
 	Graph aa = new Graph();
 	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활주로 노드
 	
@@ -29,7 +33,10 @@ public class Airport {
 	//Plane p = new Plane();
 
 	public void setRunways(long num, long length, ArrayList nodes){
+		runways[0] = new runwayNode();
+		
 		int number = (int)num;
+		
 		runways[number].length = length;
 		runways[number].runwaysNode = nodes;
 	}
@@ -91,6 +98,11 @@ public class Airport {
 		return runways[num].length;
 	}
 	
+	public Graph getGraph(){
+		
+		return aa;
+	}
+	
 	public void PlaneLanding(Plane pl){ // 비행기 이착륙
 
 		if(q1.<Plane>Push(pl)==true){
@@ -124,6 +136,7 @@ public class Airport {
 	public void CreatGraph(Graph g){
 		long t = 0;
 		long r = 0;
+		
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
@@ -138,8 +151,9 @@ public class Airport {
 	}
 	
 	public void CreatLine(Graph g){
-		for(int i =0; i<g.vertex.size();i++){
+		for(int i =0; i<g.vertex.size()-1;i++){
 			g.VertexSetEdges(g.vertex.get(i), g.vertex.get(i+1));
-		}}
+		}
+	}
 	
 }

@@ -6,7 +6,7 @@ import java.util.Hashtable;
 
 public class Graph {
 	public GNode head;
-	public ArrayList<GNode> vertex;
+	public ArrayList<GNode> vertex = new ArrayList<GNode>();
 
 	public void AddVertex(double x, double y, long lat, long lon, long alt) {
 
