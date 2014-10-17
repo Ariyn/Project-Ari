@@ -236,6 +236,7 @@ public class Engine extends Thread{
 	public void run() {
 		while(true){
 			for(Plane i : this.planeList) {
+				i.Spin();
 				i.Move();
 				System.out.println("running");
 				System.out.println(i.getString("Name")+" : "+i.getDouble("x"));
@@ -257,7 +258,7 @@ public class Engine extends Thread{
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
-		Plane testP = null;
+		Plane testP = new Plane();
 		
 		for(Object i : flyingPlane){
 			JSONObject cpl = (JSONObject)i;
@@ -266,7 +267,7 @@ public class Engine extends Thread{
 			for(Plane p : planeTypeList){
 				
 				if(p.getString("Name").equals(cpl.get("modelNumber"))){
-					testP = p;
+					testP.makerPlane(p);
 				}
 			}
 

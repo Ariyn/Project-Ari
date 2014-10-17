@@ -22,8 +22,8 @@ public class Plane {
 
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
-	
 	Graph root;
+	ArrayList<GNode> GN=new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
@@ -42,6 +42,12 @@ public class Plane {
 		this.company = type.company;
 	}
 
+	public void makerPlane(Plane type){
+		this.maxspeed = type.maxspeed;
+		this.speed = type.speed;
+		this.fuelTank = type.fuelTank;
+		this.company = type.company;
+	}
 
 	public long getLong(String s){
 		switch(s){
@@ -237,12 +243,12 @@ public class Plane {
 		
 		return sign;
 	}
-	public void Spin(double x){
-		//for(int i=0; i<vertex.length-1; i++)
-		if(latitude==root.vertex.get(0/*i*/).latitude()&&longitude==root.vertex.get(0/*i*/).longitude()){
-		angleX=Math.acos((root.vertex.get(1/*i+1*/).latitude()-root.vertex.get(0/*i*/).latitude())/(root.vertex.get(1/*i+1*/).longitude()-root.vertex.get(0/*i*/).longitude()));
+	public void Spin(){
+		for(int i=0; i<GN.size()-1; i++){
+			if(latitude==GN.get(i).latitude()&&longitude==GN.get(i).longitude()){
+				angleX=Math.acos((GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
+			}
 		}
-		this.angleX=x;
 	}
 }
 
