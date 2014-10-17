@@ -20,7 +20,7 @@ public class Airport {
 	// 비행기 이착륙은 허가 후 이착륙 가능 허가 메소드에서는 큐에 비행기 객체들을 집어넣어 순차적으로 허가시킨다.
 	// 비행기 객체는 리스트에 저장
 	
-	Plane p=new Plane();
+	Plane p = new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 	
@@ -122,7 +122,7 @@ public class Airport {
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
 
-//		planeList.add(pl);
+		planeList.add(pl);
 
 //		nowPlane.addLast(pl);
 

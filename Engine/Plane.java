@@ -10,10 +10,11 @@ public class Plane {
 
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
-	long maxspeed, crusingSpeed, speed; // 최고속도, 고도,속도
+	long maxspeed, crusingSpeed, speed=100; // 최고속도, 고도,속도
 	
 	double x,y; // 좌표  
-
+	double dx,dy;
+	
 	double angleX=0; //기울기
 	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선)
 	
@@ -23,7 +24,7 @@ public class Plane {
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	Graph root;
-	ArrayList<GNode> GN=new ArrayList<GNode>();
+	ArrayList<GNode> GN = new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
@@ -43,10 +44,12 @@ public class Plane {
 	}
 
 	public void makerPlane(Plane type){
+		System.out.println("makerPlane in");
 		this.maxspeed = type.maxspeed;
 		this.speed = type.speed;
 		this.fuelTank = type.fuelTank;
 		this.company = type.company;
+		this.speed = this.maxspeed;
 	}
 
 	public long getLong(String s){
@@ -192,21 +195,37 @@ public class Plane {
 	
 	public void Move(){
 		if (status==0){ //이륙 
-
-			x=x+(speed-speed/Math.cos(angleX)/2);
-			y=y+(speed-speed/Math.cos(angleX)/2);;
+			System.out.println("Flying!!!"+speed);
+			
+			x=x+dx;
+			System.out.println("Plane in class : "+x);
 			altitude+=speed/2;
 			if(altitude>=1300)status=2;
 		}
 		else if(status==2){ // 착륙
 			status=1;
-			x=x+(speed-speed/Math.cos(angleX)/2);
-			y=y+(speed-speed/Math.cos(angleX)/2);
+			x=x+dx;
+			
 		}
 		else { // 비행중
-			x=x+(maxspeed-maxspeed/Math.cos(angleX));
-			y=y+(maxspeed-maxspeed/Math.cos(angleX));
+			x=x+dx;
+			y=y+dy;
 
+		}
+		if(x>=500){
+			latitude++;
+			x-=1000;
+		}else if(x<=-500){
+			latitude--;
+			x+=1000;
+		}
+		
+		if(y>=500){
+			longitude++;
+			y-=1000;
+		}else if(y<=-500){
+			longitude--;
+			y+=1000;
 		}
 	}
 
@@ -245,8 +264,12 @@ public class Plane {
 	}
 	public void Spin(){
 		for(int i=0; i<GN.size()-1; i++){
+			
 			if(latitude==GN.get(i).latitude()&&longitude==GN.get(i).longitude()){
 				angleX=Math.acos((GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
+				dx = speed/Math.cos(angleX);
+				dy = speed/Math.cos(angleX);
+				//System.out.println("Spin Method!@@@");
 			}
 		}
 	}
