@@ -13,7 +13,7 @@ public class Airport {
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	//long[] runways = new long[1];// 활주로 길이
 	
-	runwayNode[] runways = new runwayNode[1];
+	runwayNode[] runways = new runwayNode[1]; //활주로
 	Graph aa = new Graph();
 	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활주로 노드
 	
@@ -109,26 +109,20 @@ public class Airport {
 		System.out.println("Airport Longitude: "+longitude+" y:"+y);
 		
 	}
-	
-	/*public void PlaneSignReceive(){ // 목적 공항에 비행기 탐색 신청
-		
-	}*/
-	
-/*	public void OnPlane(){ // 현재 공항에 체류중인 비행기 보여주는 메소드
-		System.out.println("PlaneStay : "+nowPlane);
-	}
-*/
+
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
 
 		planeList.add(pl);
-
-//		nowPlane.addLast(pl);
-
 	}
 	
-	public void runwaygraph(Graph g){
+	public void setGraph(){
+		CreatGraph(aa);
+		CreatLine(aa);
+	}
+	
+	public void CreatGraph(Graph g){
 		long t = 0;
 		long r = 0;
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
@@ -136,15 +130,7 @@ public class Airport {
 			r=runways[0].runwaysNode.get(i).z;
 			g.AddVertex(t,0,0,0,r);
 		}
-	}
-	
-	public void runwayLine(Graph g){
-		for(int i =0; i<runways[0].runwaysNode.size();i++){
-			g.VertexSetEdges(aa.vertex.get(i), aa.vertex.get(i+1));
-		}
-	}
-	
-	public void CreatGraph(Graph g){
+		
 		g.AddVertex(0,0,357,1403,1300);
 		g.AddVertex(0,0,618,1141,1300);
 		g.AddVertex(0,0,880,880,1300);
@@ -153,10 +139,8 @@ public class Airport {
 	}
 	
 	public void CreatLine(Graph g){
-		g.VertexSetEdges(aa.vertex.get(0), aa.vertex.get(1));
-		g.VertexSetEdges(aa.vertex.get(1), aa.vertex.get(2));
-		g.VertexSetEdges(aa.vertex.get(2), aa.vertex.get(3));
-		g.VertexSetEdges(aa.vertex.get(3), aa.vertex.get(4));
-	}
+		for(int i =0; i<g.vertex.size();i++){
+			g.VertexSetEdges(g.vertex.get(i), g.vertex.get(i+1));
+		}}
 	
 }
