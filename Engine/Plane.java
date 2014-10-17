@@ -22,7 +22,6 @@ public class Plane {
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
 	Graph root;
-	Airport air=new Airport();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
@@ -232,8 +231,8 @@ public class Plane {
 	public void Spin(double x){
 		this.angleX=x;
 		//for(int i=0; i<vertex.length-1; i++)
-		if(latitude==air.vertex.get(0/*i*/).latitude()&&longitude==air.vertex.get(0/*i*/).longitude()){
-		angleX=Math.acos((air.vertex.get(1/*i+1*/).latitude()-air.vertex.get(0/*i*/).latitude())/(air.vertex.get(1/*i+1*/).longitude()-air.vertex.get(0/*i*/).longitude()));
+		if(latitude==root.vertex.get(0/*i*/).latitude()&&longitude==root.vertex.get(0/*i*/).longitude()){
+		angleX=Math.acos((root.vertex.get(1/*i+1*/).latitude()-root.vertex.get(0/*i*/).latitude())/(root.vertex.get(1/*i+1*/).longitude()-root.vertex.get(0/*i*/).longitude()));
 		}
 	}
 }

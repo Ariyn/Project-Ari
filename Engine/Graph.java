@@ -9,7 +9,7 @@ public class Graph {
 	public ArrayList<GNode> vertex;
 	
 
-	public void AddVertex(double x, double y, int lat, int lon, int alt) {
+	public void AddVertex(double x, double y, long lat, long lon, long alt) {
 		//Longitude
 		GNode g = new GNode(x,y, lat,lon,alt);
 		
