@@ -7,12 +7,9 @@ import java.util.Hashtable;
 public class Graph {
 	public GNode head;
 	public ArrayList<GNode> vertex;
-	
-<<<<<<< HEAD
-	public GNode AddVertex(double x, double y, long lat, long lon, long alt) {
-=======
-	public void AddVertex(double x, double y, int lat, int lon, int alt) {
->>>>>>> 08a0a49909c9d5cb941092f1d737a23268316328
+
+	public void AddVertex(double x, double y, long lat, long lon, long alt) {
+
 		//Longitude
 		GNode g = new GNode(x,y, lat,lon,alt);
 		
