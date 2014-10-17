@@ -140,7 +140,7 @@ public class Airport {
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
-			g.AddVertex(t,0,0,0,r);
+			g.AddVertex(t,0,latitude,longitude,r);
 		}
 		
 		g.AddVertex(0,0,357,1403,1300);

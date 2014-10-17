@@ -236,7 +236,7 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-		//while(true){
+		while(true){
 			for(Plane i : FlyingplaneList) {
 				i.Spin();
 				i.Move();
@@ -254,7 +254,7 @@ public class Engine extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		//}
+		}
 	}
 	
 	public void TestSet() {

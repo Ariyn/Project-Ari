@@ -217,18 +217,18 @@ public class Plane {
 
 		}
 		if(x>=500){
-			latitude++;
+			latitude+=1;
 			x-=1000;
 		}else if(x<=-500){
-			latitude--;
+			latitude-=1;
 			x+=1000;
 		}
 		
 		if(y>=500){
-			longitude++;
+			longitude+=1;
 			y-=1000;
 		}else if(y<=-500){
-			longitude--;
+			longitude-=1;
 			y+=1000;
 		}
 	}
@@ -268,12 +268,14 @@ public class Plane {
 	}
 	public void Spin(){
 		for(int i=0; i<GN.size()-1; i++){
-			
+		
 			if(latitude==GN.get(i).latitude()&&longitude==GN.get(i).longitude()){
+				if(GN.get(i+1).longitude()-GN.get(i).longitude()==0)angleX=0;
+				else
 				angleX=Math.acos((GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
 				dx = speed/Math.cos(angleX);
 				dy = speed/Math.cos(angleX);
-				System.out.println("Spin Method!@@@");
+				
 			}
 		}
 	}
