@@ -12,7 +12,7 @@ public class Engine extends Thread{
 
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
-	ArrayList <Plane> planeList = new ArrayList<Plane>();	
+	ArrayList <Plane> FlyingplaneList = new ArrayList<Plane>();	
 
 	/*boolean firstInit = false;
 	
@@ -234,11 +234,13 @@ public class Engine extends Thread{
 	
 	public void run() {
 		//while(true){
-			for(Plane i : this.planeList) {
+			for(Plane i : FlyingplaneList) {
 				i.Spin();
 				i.Move();
 				System.out.println("running");
-				System.out.println(i.getString("Name")+" : "+i.getDouble("x"));
+				System.out.println(i.getString("Name")+"-x : "+i.getDouble("x"));
+				System.out.println(i.getString("Name")+ "-longitude : "+i.getLong("Longitude"));
+				System.out.println();
 			}
 			
 			try {
@@ -257,16 +259,18 @@ public class Engine extends Thread{
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
-		Plane testP = new Plane();
+		Plane testP = null;
 		
 		for(Object i : flyingPlane){
+			
 			JSONObject cpl = (JSONObject)i;
 			Set<String> keys = (Set<String>)cpl.keySet();
 			
 			for(Plane p : planeTypeList){
 				
-				if(p.getString("Name").equals(cpl.get("modelNumber"))){
-					testP.makerPlane(p);
+				if(p.getString("Name").equals(cpl.get("modelNumber")) ){
+					System.out.println("alkajkl "+p.getString("Name"));
+					testP = p;
 				}
 			}
 
@@ -300,7 +304,16 @@ public class Engine extends Thread{
 				}
 			}
 			
-			planeList.add(testP);
+			FlyingplaneList.add(testP);
+		}
+		for(Plane pn : FlyingplaneList){
+			
+			for(Airport ap : airportList){
+				if(ap.getString("Name").equals(pn.startSpot) ){
+					System.out.println("lksdmcl;sdjc; : "+ap.getString("Name"));
+					ap.SetPlane(pn);
+				}
+			}
 		}
 	}
 }
