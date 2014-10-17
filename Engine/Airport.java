@@ -121,10 +121,7 @@ public class Airport {
 	public void SetPlane(Plane pl){ // 비행기 공항에 생성
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 		planeList.add(pl);
 
 //		nowPlane.addLast(pl);
