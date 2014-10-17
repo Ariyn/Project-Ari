@@ -41,7 +41,7 @@
 						{
 							"x":3500,
 							"y":0,
-							"z":3000
+							"z":1300
 						}
 					]
 				}
@@ -87,7 +87,7 @@
 						{
 							"x":3500,
 							"y":0,
-							"z":300
+							"z":1300
 						}
 					]
 				}
@@ -141,5 +141,40 @@
 				"Anti Ship Missile":6
 			}
 		}
-	}
+	},
+	"Flying_Planes":
+	[
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"codeName":"aa012",
+			"coordinate":{
+				"x":0,
+				"y":0,
+				"longitude":0,
+				"latitude":0
+			}
+			"graph":{
+				"startSpot":"Dalras",
+				"endSpot":"Narita"
+			}
+		},
+		
+		{
+			"modelNumber":"MIG-29",
+			"company":"RA",
+			"codeName":"RA-0024",
+			"coordinate":{
+				"x":0,
+				"y":0,
+				"longitude":0,
+				"latitude":0
+			}
+			"graph":{
+				"startSpot":"Narita",
+				"endSpot":"Dalras"
+			}
+		}
+		
+	]
 }

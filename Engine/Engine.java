@@ -84,8 +84,6 @@ public class Engine extends Thread{
 			Airport newAirport = new Airport();
 
 			//newAirport.planeList = this.planeList;
-
-
 			
 			@SuppressWarnings("unchecked")
 			JSONObject _data = (JSONObject)data.get(i);
@@ -109,7 +107,9 @@ public class Engine extends Thread{
 					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
+
 				case "runways":
+
 					JSONArray adata = (JSONArray)_data.get(e);
 					
 					for(int bb=0; bb<adata.size(); bb++){
@@ -145,7 +145,9 @@ public class Engine extends Thread{
 								break;
 							}
 						}
+						
 						newAirport.setRunways(num, length, rNodeList);
+						
 					}
 					
 					break;
@@ -240,7 +242,9 @@ public class Engine extends Thread{
 				i.Move();
 				System.out.println("running");
 				System.out.println(i.getString("Name")+"-x : "+i.getDouble("x"));
+				System.out.println(i.getString("Name")+ "-latitude : "+i.getLong("Latitude"));
 				System.out.println(i.getString("Name")+ "-longitude : "+i.getLong("Longitude"));
+				System.out.println(i.getString("Name")+ "-altitude : "+i.getLong("Altitude"));
 				System.out.println();
 			}
 			
@@ -270,7 +274,7 @@ public class Engine extends Thread{
 			for(Plane p : planeTypeList){
 				
 				if(p.getString("Name").equals(cpl.get("modelNumber")) ){
-					System.out.println("alkajkl "+p.getString("Name"));
+					
 					testP = p;
 				}
 			}
@@ -314,6 +318,8 @@ public class Engine extends Thread{
 					System.out.println("lksdmcl;sdjc; : "+ap.getString("Name"));
 					ap.SetPlane(pn);
 					ap.setGraph();
+					pn.setRoot(ap.getGraph());
+
 				}
 			}
 		}
