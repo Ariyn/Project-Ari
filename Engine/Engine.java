@@ -109,7 +109,7 @@ public class Engine extends Thread{
 					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
-				case "runwyas":
+				case "runways":
 					JSONArray adata = (JSONArray)_data.get(e);
 					
 					for(int bb=0; bb<adata.size(); bb++){
@@ -313,6 +313,7 @@ public class Engine extends Thread{
 				if(ap.getString("Name").equals(pn.startSpot) ){
 					System.out.println("lksdmcl;sdjc; : "+ap.getString("Name"));
 					ap.SetPlane(pn);
+					ap.setGraph();
 				}
 			}
 		}
