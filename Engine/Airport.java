@@ -104,14 +104,14 @@ public class Airport {
 	}
 	
 	public void PlaneLanding(Plane pl){ // ºñÇà±â ÀÌÂø·ú
-
+		Node<?> hp = q.<Plane>Pop();
 		if(q1.<Plane>Push(pl)==true){
 			System.out.println("PlaneLanding : "+pl);
 			planeList.remove(pl);
 		}
 
-		if(q.<Plane>Pop()!=null){
-			System.out.println("PlaneTakeOff : " +q.Pop());
+		if(hp !=null){
+			System.out.println("PlaneTakeOff : " +hp.toString());
 		}
 	}
 
@@ -143,11 +143,11 @@ public class Airport {
 			g.AddVertex(t,0,latitude,longitude,r);
 		}
 		
-		g.AddVertex(0,0,357,1403,1300);
-		g.AddVertex(0,0,618,1141,1300);
-		g.AddVertex(0,0,880,880,1300);
-		g.AddVertex(0,0,1141,618,1300);
-		g.AddVertex(0,0,1403,357,1300);
+		g.AddVertex(0,0,357,1403,1311);
+		g.AddVertex(0,0,618,1141,1311);
+		g.AddVertex(0,0,880,880,1311);
+		g.AddVertex(0,0,1141,618,1311);
+		g.AddVertex(0,0,1403,357,1311);
 	}
 	
 	public void CreatLine(Graph g){
