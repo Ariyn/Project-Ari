@@ -178,19 +178,19 @@ public class Plane {
 	public void Move(){
 		if (status==0){ //ÀÌ·ú 
 
-			x=x+(speed-speed*Math.acos(angleX)/2);
-			y=y+(speed-speed*Math.acos(angleX)/2);;
+			x=x+(speed-speed/Math.cos(angleX)/2);
+			y=y+(speed-speed/Math.cos(angleX)/2);;
 			altitude+=speed/2;
 			if(altitude>=1300)status=2;
 		}
 		else if(status==2){ // Âø·ú
 			status=1;
-			x=x+(speed-speed*Math.acos(angleX)/2);
-			y=y+(speed-speed*Math.acos(angleX)/2);
+			x=x+(speed-speed/Math.cos(angleX)/2);
+			y=y+(speed-speed/Math.cos(angleX)/2);
 		}
 		else { // ºñÇàÁß
-			x=x+(maxspeed-maxspeed*Math.acos(angleX));
-			y=y+(maxspeed-maxspeed*Math.asin(angleX));
+			x=x+(maxspeed-maxspeed/Math.cos(angleX));
+			y=y+(maxspeed-maxspeed/Math.cos(angleX));
 
 		}
 	}
@@ -229,11 +229,11 @@ public class Plane {
 		return sign;
 	}
 	public void Spin(double x){
-		this.angleX=x;
 		//for(int i=0; i<vertex.length-1; i++)
 		if(latitude==root.vertex.get(0/*i*/).latitude()&&longitude==root.vertex.get(0/*i*/).longitude()){
 		angleX=Math.acos((root.vertex.get(1/*i+1*/).latitude()-root.vertex.get(0/*i*/).latitude())/(root.vertex.get(1/*i+1*/).longitude()-root.vertex.get(0/*i*/).longitude()));
 		}
+		this.angleX=x;
 	}
 }
 
