@@ -129,19 +129,19 @@ public class Airport {
 	}
 	
 	public void runwaygraph(Graph g){
-		g.AddVertex(0,0,0,0,0);
-		g.AddVertex(300,0,0,0,0);
-		g.AddVertex(600,0,0,0,50);
-		g.AddVertex(1200,0,0,0,300);
-		g.AddVertex(2500,0,0,0,1200);
-		g.AddVertex(3500,0,0,0,1300);
+		long t = 0;
+		long r = 0;
+		for(int i=0; i<runways[0].runwaysNode.size();i++){
+			t=runways[0].runwaysNode.get(i).x;
+			r=runways[0].runwaysNode.get(i).z;
+			g.AddVertex(t,0,0,0,r);
+		}
 	}
 	
 	public void runwayLine(Graph g){
-		g.VertexSetEdges(aa.vertex.get(0), aa.vertex.get(1));
-		g.VertexSetEdges(aa.vertex.get(1), aa.vertex.get(2));
-		g.VertexSetEdges(aa.vertex.get(2), aa.vertex.get(3));
-		g.VertexSetEdges(aa.vertex.get(3), aa.vertex.get(4));
+		for(int i =0; i<runways[0].runwaysNode.size();i++){
+			g.VertexSetEdges(aa.vertex.get(i), aa.vertex.get(i+1));
+		}
 	}
 	
 	public void CreatGraph(Graph g){
