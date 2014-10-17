@@ -22,7 +22,6 @@ public class Plane {
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	
 	Graph root;
-	Airport air=new Airport();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
@@ -179,19 +178,19 @@ public class Plane {
 	public void Move(){
 		if (status==0){ //이륙 
 
-			x=x+(speed-speed*Math.acos(angleX)/2);
-			y=y+(speed-speed*Math.acos(angleX)/2);;
+			x=x+(speed-speed/Math.cos(angleX)/2);
+			y=y+(speed-speed/Math.cos(angleX)/2);;
 			altitude+=speed/2;
 			if(altitude>=1300)status=2;
 		}
 		else if(status==2){ // 착륙
 			status=1;
-			x=x+(speed-speed*Math.acos(angleX)/2);
-			y=y+(speed-speed*Math.acos(angleX)/2);
+			x=x+(speed-speed/Math.cos(angleX)/2);
+			y=y+(speed-speed/Math.cos(angleX)/2);
 		}
 		else { // 비행중
-			x=x+(maxspeed-maxspeed*Math.acos(angleX));
-			y=y+(maxspeed-maxspeed*Math.asin(angleX));
+			x=x+(maxspeed-maxspeed/Math.cos(angleX));
+			y=y+(maxspeed-maxspeed/Math.cos(angleX));
 
 		}
 	}
@@ -230,11 +229,11 @@ public class Plane {
 		return sign;
 	}
 	public void Spin(double x){
-		this.angleX=x;
 		//for(int i=0; i<vertex.length-1; i++)
-		if(latitude==air.vertex.get(0/*i*/).latitude()&&longitude==air.vertex.get(0/*i*/).longitude()){
-		angleX=Math.acos((air.vertex.get(1/*i+1*/).latitude()-air.vertex.get(0/*i*/).latitude())/(air.vertex.get(1/*i+1*/).longitude()-air.vertex.get(0/*i*/).longitude()));
+		if(latitude==root.vertex.get(0/*i*/).latitude()&&longitude==root.vertex.get(0/*i*/).longitude()){
+		angleX=Math.acos((root.vertex.get(1/*i+1*/).latitude()-root.vertex.get(0/*i*/).latitude())/(root.vertex.get(1/*i+1*/).longitude()-root.vertex.get(0/*i*/).longitude()));
 		}
+		this.angleX=x;
 	}
 }
 
