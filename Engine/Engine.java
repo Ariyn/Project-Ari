@@ -84,8 +84,6 @@ public class Engine extends Thread{
 			Airport newAirport = new Airport();
 
 			//newAirport.planeList = this.planeList;
-
-
 			
 			@SuppressWarnings("unchecked")
 			JSONObject _data = (JSONObject)data.get(i);
@@ -109,7 +107,9 @@ public class Engine extends Thread{
 					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
+
 				case "runways":
+
 					JSONArray adata = (JSONArray)_data.get(e);
 					
 					for(int bb=0; bb<adata.size(); bb++){
@@ -236,7 +236,7 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-		while(true){
+		//while(true){
 			for(Plane i : FlyingplaneList) {
 				i.Spin();
 				i.Move();
@@ -254,7 +254,7 @@ public class Engine extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		//}
 	}
 	
 	public void TestSet() {
