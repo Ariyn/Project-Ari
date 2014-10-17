@@ -129,7 +129,11 @@ public class Airport {
 	}
 	
 	public void setGraph(){
-		CreatGraph(aa);
+		if(name.equals("Dalars"))
+			CreatGraph(aa);
+		else
+			CreatGraph2(aa);
+		
 		CreatLine(aa);
 	}
 	
@@ -156,4 +160,18 @@ public class Airport {
 		}
 	}
 	
+	public void CreatGraph2(Graph g){
+		long t = 0;
+		long r = 0;
+		for(int i=0; i<runways[0].runwaysNode.size();i++){
+			t=runways[0].runwaysNode.get(i).x;
+			r=runways[0].runwaysNode.get(i).z;
+			g.AddVertex(t,0,latitude,longitude,r);
+		}
+		g.AddVertex(0,0,1403,357,1300);
+		g.AddVertex(0,0,1141,618,1300);
+		g.AddVertex(0,0,880,880,1300);
+		g.AddVertex(0,0,618,1141,1300);
+		g.AddVertex(0,0,357,1403,1300);		
+	}
 }
