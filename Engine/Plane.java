@@ -210,7 +210,7 @@ public class Plane {
 			x=x+dx;
 
 			y=y+dy;
-			 if(GN.get(4).latitude()==latitude && GN.get(4).longitude()==longitude)
+			 if(GN.get(GN.size()-1).latitude()==latitude && GN.get(GN.size()-1).longitude()==longitude)
 				 status=1;
 			 
 
@@ -271,19 +271,27 @@ public class Plane {
 	}
 	public void Spin(){
 		for(int i=0; i<GN.size()-1; i++){
-			if(startSpot.equals("Dalars")&&latitude==GN.get(i).latitude()&&longitude==GN.get(i).longitude()){
-				if(GN.get(i+1).longitude()-GN.get(i).longitude()==0)angleX=0;
-				else
-				angleX=Math.acos((GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
+			if(startSpot.equals("Dalars") && latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()){
+				if(GN.get(i+1).longitude() == GN.get(i).longitude())
+					angleX=0;
+				else{
+					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
+					System.out.println("여기의 angleX 값은 ????? "+angleX);
+				}
 			}
 		
 			else {
-				if(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()==0)angleX=0;
-				else
-				angleX=Math.acos((GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()));
+				if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
+					angleX=0;
+				else{
+					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
+					System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+				}
 			}
-				dx = speed/Math.cos(Math.toRadians(angleX));
-				dy = speed/Math.cos(Math.toRadians(angleX));
+				dx = speed/Math.cos(angleX);
+				dy = speed/Math.cos(angleX);
+				System.out.println("asddfasdf : "+angleX);
+				
 		}
 	}
 	
