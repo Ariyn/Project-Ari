@@ -319,6 +319,7 @@ public class Engine extends Thread{
 					ap.SetPlane(pn);
 					ap.setGraph();
 					pn.setRoot(ap.getGraph());
+
 				}
 			}
 		}
