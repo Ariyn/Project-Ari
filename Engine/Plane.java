@@ -15,12 +15,12 @@ public class Plane {
 	double x,y; // 좌표  
 	double dx,dy;
 	
-	double angleX=0; //기울기
+	double angleX=0,angleY=Math.toRadians(30); //기울기
 	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선)
 	
 	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
 	String startSpot, endSpot; // 출발공항, 도착공항
-
+	double dz = speed*Math.tan(angleY);
 	
 	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
 	Graph root;
@@ -199,23 +199,25 @@ public class Plane {
 	public void Move(){
 		if (status==0){ //이륙 
 			System.out.println("Flying!!!"+speed);
-			
 			x=x+dx;
 			System.out.println("Plane in class dx: "+dx);
 			System.out.println("Plane in class x: "+x);
-			altitude+=speed/2;
+			altitude=altitude+(long)dz;
 			if(altitude>=1300)status=2;
 		}
-		else if(status==2){ // 착륙
-			status=1;
+		else if(status==2){ // 비행중
+			System.out.println("HAHAHAHAHAHAH"+GN.size());
 			x=x+dx;
-			altitude-=speed/2;
-			
-		}
-		else { // 비행중
-			x=x+dx;
-			y=y+dy;
 
+			y=y+dy;
+			 if(GN.get(4).latitude()==latitude && GN.get(4).longitude()==longitude)
+				 status=1;
+			 
+
+		}
+		else { // 착륙
+			x=x+dx;
+			altitude=altitude-(long)dz;
 		}
 		if(x>=500){
 			latitude+=1;
@@ -269,17 +271,22 @@ public class Plane {
 	}
 	public void Spin(){
 		for(int i=0; i<GN.size()-1; i++){
-		
-			if(latitude==GN.get(i).latitude()&&longitude==GN.get(i).longitude()){
+			if(startSpot.equals("Dalars")&&latitude==GN.get(i).latitude()&&longitude==GN.get(i).longitude()){
 				if(GN.get(i+1).longitude()-GN.get(i).longitude()==0)angleX=0;
 				else
 				angleX=Math.acos((GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
-				dx = speed/Math.cos(angleX);
-				dy = speed/Math.cos(angleX);
-				
 			}
+		
+			else {
+				if(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()==0)angleX=0;
+				else
+				angleX=Math.acos((GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()));
+			}
+				dx = speed/Math.cos(Math.toRadians(angleX));
+				dy = speed/Math.cos(Math.toRadians(angleX));
 		}
 	}
+	
 }
 
 // 이륙시에 공항에 신호보내기

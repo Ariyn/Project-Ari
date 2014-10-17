@@ -308,12 +308,11 @@ public class Engine extends Thread{
 			FlyingplaneList.add(testP);
 			
 		}
+		
 		for(Plane pn : FlyingplaneList){
-			
 			for(Airport ap : airportList){
 				if(ap.getString("Name").equals(pn.startSpot) ){
-					System.out.println("lksdmcl;sdjc; : "+ap.getString("Name"));
-					
+
 					ap.SetPlane(pn);
 					ap.setGraph();
 					pn.setRoot(ap.getGraph());
