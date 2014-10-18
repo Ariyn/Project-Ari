@@ -292,7 +292,7 @@ public class Plane {
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
-					System.out.println("여기의 angleX 값은 ????? "+angleX);
+					//System.out.println("여기의 angleX 값은 ????? "+angleX);
 				}
 			}
 			
@@ -301,7 +301,7 @@ public class Plane {
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()) );
-					System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+				//	System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
 				}
 			}
 		
@@ -310,12 +310,12 @@ public class Plane {
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-					System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
+				//	System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
 				}
 			}
 				dx = speed/Math.cos(angleX);
 				dy = speed/Math.cos(angleX);
-				System.out.println("asddfasdf : "+angleX);
+			//	System.out.println("asddfasdf : "+angleX);
 				//System.out.println("!!!??!?!?!?dddddfff!!!!!!!!    dz : "+dz);
 		}
 	}
