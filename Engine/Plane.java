@@ -279,13 +279,22 @@ public class Plane {
 					System.out.println("여기의 angleX 값은 ????? "+angleX);
 				}
 			}
+			
+			else if(startSpot.equals("Narita")&& latitude==GN.get(GN.size()-i-2).latitude() && longitude==GN.get(GN.size()-i-2).longitude()) {
+				if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
+					angleX=0;
+				else{
+					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
+					System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+				}
+			}
 		
 			else {
 				if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-					System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+					System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
 				}
 			}
 				dx = speed/Math.cos(angleX);
