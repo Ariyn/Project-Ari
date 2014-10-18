@@ -237,7 +237,12 @@ public class Engine extends Thread{
 	
 	public void run() {
 		while(true){
+			
 			for(Plane i : FlyingplaneList) {
+				for(Airport ap : airportList){ // 항상 이륙 실행
+					ap.PlaneLandingTakeOff(i, "TakeOff");
+				}
+				
 				i.Spin();
 				i.Move();
 				System.out.println("running");
@@ -271,7 +276,6 @@ public class Engine extends Thread{
 			for(Plane p : planeTypeList){
 				
 				if(p.getString("Name").equals(cpl.get("modelNumber")) ){
-					
 					testP = p;
 				}
 			}

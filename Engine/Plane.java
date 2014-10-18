@@ -22,7 +22,7 @@ public class Plane {
 	String startSpot, endSpot; // 출발공항, 도착공항
 	double dz = speed*Math.tan(angleY);
 	
-	int status; // 비행기 상태, 0 : 이륙, 1 : 착륙 2: 비행중
+	int status; // 비행기 상태, 0 == 대기, 1 == 이륙 , 2 == 비행중, 3 == 착륙
 	Graph root;
 	ArrayList<GNode> GN = new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
@@ -196,29 +196,40 @@ public class Plane {
 		this.root = g;
 	}
 	
+	public void setStatus(String text){
+		if(text.equals("TakeOff")){
+			status=1;
+		}else if(text.equals("Flying")){
+			status=2;
+		}else if(text.equals("Landing")){
+			status=3;
+		}
+	}
+	
 	public void Move(){
-		if (status==0){ //이륙 
-			System.out.println("Flying!!!"+speed);
+		if (status==1){ //이륙 
+			System.out.println("TakeOff!!! "+speed);
 			x=x+dx;
 			System.out.println("Plane in class dx: "+dx);
 			System.out.println("Plane in class x: "+x);
 			altitude=altitude+(long)dz;
-			if(altitude>=1300)status=2;
+			if(altitude>=1300)setStatus("Flying");
 		}
 		else if(status==2){ // 비행중
-			System.out.println("HAHAHAHAHAHAH"+GN.size());
+			System.out.println("Flying!!! "+speed);
+			System.out.println("HAHAHAHAHAHAH "+GN.size());
 			x=x+dx;
-
 			y=y+dy;
-			 if(GN.get(GN.size()-1).latitude()==latitude && GN.get(GN.size()-1).longitude()==longitude)
-				 status=1;
-			 
-
+			
+			if(GN.get(GN.size()-1).latitude()==latitude && GN.get(GN.size()-1).longitude()==longitude){
+				setStatus("Landing");
+			}
 		}
-		else { // 착륙
+		else if(status==3){ // 착륙
 			x=x+dx;
 			altitude=altitude-(long)dz;
 		}
+		
 		if(x>=500){
 			latitude+=1;
 			x-=1000;
@@ -269,6 +280,7 @@ public class Plane {
 		
 		return sign;
 	}
+	
 	public void Spin(){
 		for(int i=0; i<GN.size()-1; i++){
 			if(startSpot.equals("Dalars") && latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()){
@@ -291,7 +303,7 @@ public class Plane {
 				dx = speed/Math.cos(angleX);
 				dy = speed/Math.cos(angleX);
 				System.out.println("asddfasdf : "+angleX);
-				
+				//System.out.println("!!!??!?!?!?dddddfff!!!!!!!!    dz : "+dz);
 		}
 	}
 	
