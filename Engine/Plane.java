@@ -292,8 +292,8 @@ public class Plane {
 				}
 			}
 			
-			else if(startSpot.equals("Narita")&& latitude==GN.get(GN.size()-i-2).latitude() && longitude==GN.get(GN.size()-i-2).longitude()) {
-				if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
+			else if(startSpot.equals("Narita")&& latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()) {
+				if(GN.get(i+1).longitude() == GN.get(i).longitude())
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
@@ -302,7 +302,18 @@ public class Plane {
 			}
 		
 			else {
-				if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
+			/*	if(startSpot.equals("Narita")&&GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
+					angleX=0;
+				else{
+					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
+					System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
+				}
+				if(startSpot.equals("Dalars") &&GN.get(i+1).longitude() == GN.get(i).longitude())
+					angleX=0;
+				else{
+					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
+					System.out.println("여기의 angleX 값은 s.s.s.s. "+angleX);*/
+				if(GN.get(GN.size()-i-1).longitude()==GN.get(GN.size()-i-2).longitude())
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
