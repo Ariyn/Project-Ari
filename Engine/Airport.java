@@ -149,7 +149,7 @@ public class Airport {
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
-			if(x>=500)
+			if(t>=500)
 				latitude=latitude+1;
 			g.AddVertex(t,0,latitude,longitude,r);
 		}
