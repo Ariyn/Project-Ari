@@ -103,15 +103,22 @@ public class Airport {
 		return aa;
 	}
 	
-	public void PlaneLanding(Plane pl){ // ºñÇà±â ÀÌÂø·ú
-		Node<?> hp = q.<Plane>Pop();
-		if(q1.<Plane>Push(pl)==true){
-			System.out.println("PlaneLanding : "+pl);
-			planeList.remove(pl);
-		}
-
-		if(hp !=null){
-			System.out.println("PlaneTakeOff : " +hp.toString());
+	public void PlaneLandingTakeOff(Plane pl, String text){ // ºñÇà±â ÀÌÂø·ú
+		
+		if(text.equals("Landing")){
+			if(q1.Push(pl)==true){
+				System.out.println("PlaneLanding : "+pl.getString("Name"));
+				planeList.remove(pl);
+			}
+		}else{
+			
+			if(planeList.contains(pl)){
+				planeList.get(planeList.indexOf(pl));
+				planeList.remove(pl);
+				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
+				pl.setStatus("TakeOff"); // ºñÇà±â ÀÌ·ú
+			}
+			
 		}
 	}
 
