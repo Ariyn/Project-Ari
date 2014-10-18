@@ -116,6 +116,8 @@ public class Airport {
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
+				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
+				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
 				pl.setStatus("TakeOff"); // ºñÇà±â ÀÌ·ú
 			}
 			
@@ -136,10 +138,11 @@ public class Airport {
 	}
 	
 	public void setGraph(){
-		if(name.equals("Dalars"))
+		if(name.equals("Dalars")){
 			CreatGraph(aa);
-		else
+		}else if(name.equals("Narita")){
 			CreatGraph2(aa);
+		}
 		
 		CreatLine(aa);
 	}
@@ -159,6 +162,10 @@ public class Airport {
 		g.AddVertex(0,0,880,880,1311);
 		g.AddVertex(0,0,1141,618,1311);
 		g.AddVertex(0,0,1403,357,1311);
+		
+		for(GNode ggn : g.vertex){
+			System.out.println("graph altitude : "+ggn.altitude() + " longitude : " + ggn.longitude() + " latitude : "+ggn.latitude());
+		}
 	}
 	
 	public void CreatLine(Graph g){
@@ -179,6 +186,11 @@ public class Airport {
 		g.AddVertex(0,0,1141,618,1300);
 		g.AddVertex(0,0,880,880,1300);
 		g.AddVertex(0,0,618,1141,1300);
-		g.AddVertex(0,0,357,1403,1300);		
+		g.AddVertex(0,0,357,1403,1300);
+		
+		for(GNode ggn : g.vertex){
+			System.out.println("graph2 altitude : "+ggn.altitude() + " longitude : " + ggn.longitude() + " latitude : "+ggn.latitude());
+		}
 	}
+	
 }
