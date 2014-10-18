@@ -27,7 +27,7 @@ public class Main {
 			JSONObject jsonObject2 = (JSONObject) fpText;
 		
 			eng.setData(jsonObject);
-			eng.createPlane(jsonObject);
+			eng.createPlane(jsonObject2);
 			
 			
 			

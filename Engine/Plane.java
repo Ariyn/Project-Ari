@@ -22,7 +22,7 @@ public class Plane {
 	String startSpot, endSpot; // 출발공항, 도착공항
 	double dz = speed*Math.tan(angleY);
 	
-	int status; // 비행기 상태, 0 == 대기, 1 == 이륙 , 2 == 비행중, 3 == 착륙
+	int status = 0; // 비행기 상태, 0 == 대기, 1 == 이륙 , 2 == 비행중, 3 == 착륙
 	Graph root;
 	ArrayList<GNode> GN = new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
@@ -98,7 +98,7 @@ public class Plane {
 		case "CodeName":
 			return codeName;
 		default:
-			return " ";
+			return "string default";
 		}
 
 	}
@@ -207,6 +207,9 @@ public class Plane {
 	}
 	
 	public void Move(){
+		
+		Spin();
+		
 		if (status==1){ //이륙 
 			System.out.println("TakeOff!!! "+speed);
 			x=x+dx;
@@ -233,6 +236,7 @@ public class Plane {
 		if(x>=500){
 			latitude+=1;
 			x-=1000;
+			System.out.println("지금은 이륙중인가 비행중인가?!!?!??");
 		}else if(x<=-500){
 			latitude-=1;
 			x+=1000;
@@ -288,7 +292,7 @@ public class Plane {
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
-					System.out.println("여기의 angleX 값은 ????? "+angleX);
+					//System.out.println("여기의 angleX 값은 ????? "+angleX);
 				}
 			}
 			
@@ -296,8 +300,8 @@ public class Plane {
 				if(GN.get(i+1).longitude() == GN.get(i).longitude())
 					angleX=0;
 				else{
-					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-					System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()) );
+				//	System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
 				}
 			}
 		
@@ -317,12 +321,12 @@ public class Plane {
 					angleX=0;
 				else{
 					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-					System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
+				//	System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
 				}
 			}
 				dx = speed/Math.cos(angleX);
 				dy = speed/Math.cos(angleX);
-				System.out.println("asddfasdf : "+angleX);
+			//	System.out.println("asddfasdf : "+angleX);
 				//System.out.println("!!!??!?!?!?dddddfff!!!!!!!!    dz : "+dz);
 		}
 	}

@@ -100,7 +100,6 @@
 	{
 		"A330":
 		{
-			"Company":"airbus",
 			"Name":"A330",
 			
 			"FuelTank":139090,
@@ -130,7 +129,6 @@
 		
 		"MIG-29":
 		{
-			"Company":"MIG",
 			"Name":"MIG-29",
 			"FuelTank":300,
 			"MaxSpeed":70,
@@ -172,7 +170,7 @@
 			}
 			"graph":{
 				"startSpot":"Narita",
-				"endSpot":"Dalras"
+				"endSpot":"Dalars"
 			}
 		}
 		

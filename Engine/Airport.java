@@ -116,6 +116,8 @@ public class Airport {
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
+				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
+				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
 				pl.setStatus("TakeOff"); // ºñÇà±â ÀÌ·ú
 			}
 			
@@ -136,11 +138,7 @@ public class Airport {
 	}
 	
 	public void setGraph(){
-		if(name.equals("Dalars"))
-			CreatGraph(aa);
-		else
-			CreatGraph2(aa);
-		
+		CreatGraph(aa);	
 		CreatLine(aa);
 	}
 	
@@ -151,34 +149,35 @@ public class Airport {
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
+			if(x>=500)
+				latitude=latitude+1;
 			g.AddVertex(t,0,latitude,longitude,r);
 		}
-		
-		g.AddVertex(0,0,357,1403,1311);
-		g.AddVertex(0,0,618,1141,1311);
-		g.AddVertex(0,0,880,880,1311);
-		g.AddVertex(0,0,1141,618,1311);
-		g.AddVertex(0,0,1403,357,1311);
+		if(name.equals("Dalars"))
+		{
+			g.AddVertex(0,0,357,1403,1311);
+			g.AddVertex(0,0,618,1141,1311);
+			g.AddVertex(0,0,880,880,1311);
+			g.AddVertex(0,0,1141,618,1311);
+			g.AddVertex(0,0,1403,357,1311);
+		}
+		else if(name.equals("Narita"))
+		{
+			g.AddVertex(0,0,1403,357,1300);
+			g.AddVertex(0,0,1141,618,1300);
+			g.AddVertex(0,0,880,880,1300);
+			g.AddVertex(0,0,618,1141,1300);
+			g.AddVertex(0,0,357,1403,1300);
+				
+		}
+		for(GNode ggn : g.vertex){
+			System.out.println("graph altitude : "+ggn.altitude() + " longitude : " + ggn.longitude() + " latitude : "+ggn.latitude());
+		}
 	}
 	
 	public void CreatLine(Graph g){
 		for(int i =0; i<g.vertex.size()-1;i++){
 			g.VertexSetEdges(g.vertex.get(i), g.vertex.get(i+1));
 		}
-	}
-	
-	public void CreatGraph2(Graph g){
-		long t = 0;
-		long r = 0;
-		for(int i=0; i<runways[0].runwaysNode.size();i++){
-			t=runways[0].runwaysNode.get(i).x;
-			r=runways[0].runwaysNode.get(i).z;
-			g.AddVertex(t,0,latitude,longitude,r);
-		}
-		g.AddVertex(0,0,1403,357,1300);
-		g.AddVertex(0,0,1141,618,1300);
-		g.AddVertex(0,0,880,880,1300);
-		g.AddVertex(0,0,618,1141,1300);
-		g.AddVertex(0,0,357,1403,1300);		
 	}
 }

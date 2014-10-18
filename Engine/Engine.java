@@ -163,7 +163,7 @@ public class Engine extends Thread{
 		@SuppressWarnings("unchecked")
 		Set<String> keys = (Set<String>)data.keySet();
 		List<String> lonList = Arrays.asList("FuelTank", "BodyWeight", "MTOW", "MTOW_MaxDistance", "MaxSpeed", "CrusingSpeed");
-		List<String> strList = Arrays.asList("Company", "Name");
+		List<String> strList = Arrays.asList("Name");
 		List<String> douList = Arrays.asList("WingLength", "Length", "Height", "WingAngle",
 											 "BodyWidth");
 		
@@ -243,7 +243,6 @@ public class Engine extends Thread{
 					ap.PlaneLandingTakeOff(i, "TakeOff");
 				}
 				
-				i.Spin();
 				i.Move();
 				System.out.println("running");
 				System.out.println(i.getString("Name")+"-x : "+i.getDouble("x"));
@@ -282,11 +281,11 @@ public class Engine extends Thread{
 
 			for(String k : keys){
 				switch(k){
-				case "modelNumber":
+				case "CodeName":
 					testP.set(k, cpl.get(k).toString());
 					break;
 					
-				case "company":
+				case "Company":
 					testP.set(k, cpl.get(k).toString());
 					break;
 					
