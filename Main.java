@@ -10,12 +10,8 @@ import org.json.simple.parser.*;
 public class Main {
 	
 	public static void main(String argv[]){
-		
-		
-		Main mai = new Main(); // 메인 클래스
-//		TestGraphics g = new TestGraphics();
-		
 		Engine eng = Engine.getInstance();
+		eng.setFrame();
 		JSONParser parser = new JSONParser();
 		
 		try{
@@ -27,7 +23,7 @@ public class Main {
 			JSONObject jsonObject2 = (JSONObject) fpText;
 		
 			eng.setData(jsonObject);
-			eng.createPlane(jsonObject2);
+			eng.createPlane(jsonObject);
 			
 			
 			
@@ -40,6 +36,7 @@ public class Main {
 		}
 		
 		eng.start();
+
 	}
 	
 }

@@ -9,6 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Engine extends Thread{
+	
+	TestGraphics frame;
 
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
@@ -158,7 +160,7 @@ public class Engine extends Thread{
 		
 		while(this._thread){
 			for(Plane i : FlyingplaneList) {
-				for(Airport ap : airportList){ // Ç×»ó ÀÌ·ú ½ÇÇà
+				for(Airport ap : airportList){ // ï¿½×»ï¿½ ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½
 					ap.PlaneLandingTakeOff(i, "TakeOff");
 				}
 				
@@ -169,6 +171,8 @@ public class Engine extends Thread{
 				}
 				
 				i.Move();
+				
+				
 				System.out.println("running");
 				System.out.println(i.getString("Name")+ "-latitude : "+i.getDouble("Latitude"));
 				System.out.println(i.getString("Name")+ "-longitude : "+i.getDouble("Longitude"));
@@ -184,6 +188,7 @@ public class Engine extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			this.frame.repaint();
 		}
 	}
 	
@@ -202,7 +207,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	public void createPlane(JSONObject data){ // °øÇ×¿¡ ½ÇÁ¦ ºñÇà±â »ý¼º
+	public void createPlane(JSONObject data){ // ï¿½ï¿½ï¿½×¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
 		Plane testP = null;
@@ -263,5 +268,9 @@ public class Engine extends Thread{
 				}
 			}
 		}
+	}
+	
+	public void setFrame() {
+		this.frame = new TestGraphics(this.FlyingplaneList);
 	}
 }
