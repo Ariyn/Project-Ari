@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class Airport {
 	
 	String name; // 공항명
-	long latitude, longitude, altitude = 0; // 공항의 위도, 경도
+	double latitude, longitude, altitude = 0; // 공항의 위도, 경도
 	double x, y;
 	
 	int maximum_airplane; // 비행기 최대 재적 가능 수
@@ -43,12 +43,6 @@ public class Airport {
 
 	public void set(String s, long l){
 		switch(s){
-		case "Latitude":
-			latitude=l;
-			break;
-		case "Longitude":
-			longitude=l;
-			break;
 		case"MaxAirplane":
 			maximum_airplane=(int)l;
 			break;
@@ -63,6 +57,12 @@ public class Airport {
 		case "y":
 			y=l;
 			break;
+		case "Latitude":
+			latitude=l;
+			break;
+		case "Longitude":
+			longitude=l;
+			break;
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class Airport {
 		}
 	}
 	
-	public long getLong(String s){
+	public double getDouble(String s){
 		switch(s){
 		case "Latitude":
 			return latitude;
@@ -145,7 +145,7 @@ public class Airport {
 	public void CreatGraph(Graph g){
 		long t = 0;
 		long r = 0;
-		long lati = latitude;
+		double lati = latitude;
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;

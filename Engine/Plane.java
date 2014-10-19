@@ -17,7 +17,7 @@ public class Plane {
 	double dx,dy;
 	
 	double angleX=0,angleY=0; //Math.toRadians(30); //기울기
-	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선) 
+	double latitude, longitude, altitude; // 위도(가로선), 경도(세로선) 
 	
 	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
 	String startSpot, endSpot; // 출발공항, 도착공항
@@ -55,12 +55,6 @@ public class Plane {
 
 	public long getLong(String s){
 		switch(s){
-		case "Latitude":
-			return latitude;
-		case "Longitude":
-			return longitude;
-		case "Altitude":
-			return altitude;
 		case "FuelTank":
 			return fuelTank;
 		default:
@@ -78,6 +72,12 @@ public class Plane {
 			return x;
 		case "y" :
 			return y;
+		case "Latitude":
+			return latitude;
+		case "Longitude":
+			return longitude;
+		case "Altitude":
+			return altitude;
 		default:
 			return 0;
 		}
@@ -109,16 +109,6 @@ public class Plane {
 	public void set(String s, long l){
 		switch(s)
 		{
-		case "Latitude":
-			latitude=l;
-			break;
-		case "Longitude":
-			longitude=l;
-			break;
-		case "Altitude":
-			altitude=l;
-			z=altitude;
-			break;
 		case "FuelTank":
 			fuelTank=(int)l;
 			break;
@@ -169,6 +159,16 @@ public class Plane {
 				break;
 			case "Height":
 				height=l;
+				break;
+			case "Latitude":
+				latitude=l;
+				break;
+			case "Longitude":
+				longitude=l;
+				break;
+			case "Altitude":
+				altitude=l;
+				z=altitude;
 				break;
 		}
 	}
@@ -227,7 +227,7 @@ public class Plane {
 			System.out.println("Plane in class x: "+x);
 			y+=dy;
 			z=z+dz;
-			altitude = (long)z;
+			altitude =z;
 			if(altitude>=1300)setStatus("Flying");
 		}
 		else if(status==2){ // 비행중
@@ -246,7 +246,7 @@ public class Plane {
 		}
 		else if(status==3){ // 착륙
 			x=x+dx;
-			altitude=altitude-(long)dz;
+			altitude=altitude-dz;
 		}
 		
 		if(x>=500){
