@@ -12,7 +12,7 @@ public class Plane {
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
-	double speed=4.4; // 최고속도, 고도,속도
+	double speed=1.4; // 최고속도, 고도,속도
 	
 	//double x,y,z; // 좌표  
 	double dx=0,dy=0;
