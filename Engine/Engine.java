@@ -13,7 +13,9 @@ public class Engine extends Thread{
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
 	ArrayList <Plane> FlyingplaneList = new ArrayList<Plane>();	
-
+	
+	boolean _thread = true;
+	
 	private static Engine instance = new Engine();
 	private Engine(){}
 	public static Engine getInstance(){
@@ -154,11 +156,16 @@ public class Engine extends Thread{
 	public void run() {
 		FlyingplaneList.remove(1);
 		
-		while(true){
-			
+		while(this._thread){
 			for(Plane i : FlyingplaneList) {
 				for(Airport ap : airportList){ // 항상 이륙 실행
 					ap.PlaneLandingTakeOff(i, "TakeOff");
+				}
+				
+				if(i.getStatus()==3){
+					FlyingplaneList.remove(FlyingplaneList.indexOf(i));
+					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					this.pause();
 				}
 				
 				i.Move();
@@ -172,6 +179,7 @@ public class Engine extends Thread{
 			
 			try {
 				Thread.sleep(17);
+				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -179,6 +187,20 @@ public class Engine extends Thread{
 		}
 	}
 	
+	public synchronized void pause(){
+		if(this._thread){
+			this._thread = false;
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			this._thread = true;
+			this.notify();
+		}
+	}
 	
 	public void createPlane(JSONObject data){ // 공항에 실제 비행기 생성
 		

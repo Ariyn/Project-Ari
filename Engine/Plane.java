@@ -12,7 +12,7 @@ public class Plane {
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
-	double speed=2.4; // 최고속도, 고도,속도
+	double speed=4.4; // 최고속도, 고도,속도
 	
 	//double x,y,z; // 좌표  
 	double dx=0,dy=0;
@@ -85,12 +85,9 @@ public class Plane {
 			return 0;
 		}
 	}
-	public int getInt(String s){
-		switch(s){
-	
-		default:
-			return 0;
-		}
+	public int getStatus(){
+		
+		return status;
 	}
 
 	public String getString(String s){
@@ -267,7 +264,6 @@ public class Plane {
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
-			
 		}
 		
 //		if(x>=500){
