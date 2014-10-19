@@ -102,9 +102,9 @@ public class Engine extends Thread{
 					double lon = (double)a.get("Longitude");
 					
 					newAirport.set("Latitude", (long) Math.floor(lat));
-					newAirport.set("x", Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
+					newAirport.set("x", Math.floor((lat-Math.floor(lat))*10000.0)/10.0-500);
 					newAirport.set("Longitude", (long) Math.floor(lon));
-					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0);
+					newAirport.set("y", Math.floor((lon-Math.floor(lon))*10000.0)/10.0-500);
 //					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
 
@@ -236,6 +236,8 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
+		FlyingplaneList.remove(1);
+		
 		while(true){
 			
 			for(Plane i : FlyingplaneList) {
@@ -246,10 +248,12 @@ public class Engine extends Thread{
 				i.Move();
 				System.out.println("running");
 				System.out.println(i.getString("Name")+"-x : "+i.getDouble("x"));
+				System.out.println(i.getString("Name")+"-y : "+i.getDouble("y"));
 				System.out.println(i.getString("Name")+ "-latitude : "+i.getLong("Latitude"));
 				System.out.println(i.getString("Name")+ "-longitude : "+i.getLong("Longitude"));
 				System.out.println(i.getString("Name")+ "-altitude : "+i.getLong("Altitude"));
 				System.out.println();
+				
 			}
 			
 			try {
@@ -319,6 +323,7 @@ public class Engine extends Thread{
 					ap.SetPlane(pn);
 					ap.setGraph();
 					pn.setRoot(ap.getGraph());
+					pn.Spin();
 				}
 			}
 		}

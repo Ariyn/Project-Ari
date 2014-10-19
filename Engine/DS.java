@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 class GNode implements Cloneable
 {
+	static int LONG = 0, LATI=1, ALT =2;
 	private ArrayList<GNode> _vertex;
 	private ArrayList<Double> _edge;
 	
@@ -62,6 +63,17 @@ class GNode implements Cloneable
 	}
 	public double y() {
 		return this.y;
+	}
+	public double coordinate(int type){
+		double retVal = 0;
+		if(type == GNode.LONG) {
+			retVal = this.longitude+(this.y+500)/1000.0;
+		} else if(type == GNode.LATI) {
+			retVal = this.latitude+(this.x+500)/1000.0;
+		}else if(type == GNode.ALT){
+			retVal = altitude;
+		}
+		return retVal;
 	}
 }
 

@@ -5,7 +5,7 @@
 		{
 			"name":"Dalars",
 			"companies":{"KAL":10, "AA":50},
-			"position":{"Latitude":357.63889, "Longitude":1403.91667},
+			"position":{"Latitude":1403.91667, "Longitude":357.63889},
 			"runways":
 			[
 				{
@@ -14,12 +14,12 @@
 					"nodes":
 					[
 						{
-							"x":0,
+							"x":100,
 							"y":0,
 							"z":0
 						},
 						{
-							"x":300,
+							"x":700,
 							"y":0,
 							"z":0
 						},

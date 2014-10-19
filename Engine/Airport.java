@@ -145,25 +145,29 @@ public class Airport {
 	public void CreatGraph(Graph g){
 		long t = 0;
 		long r = 0;
-		
+		long lati = latitude;
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
-			if(t>=500)
-				latitude=latitude+1;
-			g.AddVertex(t,0,latitude,longitude,r);
+			System.out.println("r = "+r);
+			if(t>=500){
+				lati=latitude+1;
+				t-=1000;
+			}
+			g.AddVertex(t,0,lati,longitude,r);
 		}
 		if(name.equals("Dalars"))
 		{
-			g.AddVertex(0,0,357,1403,1311);
-			g.AddVertex(0,0,618,1141,1311);
-			g.AddVertex(0,0,880,880,1311);
-			g.AddVertex(0,0,1141,618,1311);
+			//g.AddVertex(0,0,357,1403,1311);
+			g.AddVertex(0,0,500,1100,1311);
+			g.AddVertex(0,0,1000,1200,1311);
+			g.AddVertex(0,0,1200,800,1311);
 			g.AddVertex(0,0,1403,357,1311);
+
 		}
 		else if(name.equals("Narita"))
 		{
-			g.AddVertex(0,0,1403,357,1300);
+			//g.AddVertex(0,0,1403,357,1300);
 			g.AddVertex(0,0,1141,618,1300);
 			g.AddVertex(0,0,880,880,1300);
 			g.AddVertex(0,0,618,1141,1300);

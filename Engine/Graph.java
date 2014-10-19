@@ -20,11 +20,12 @@ public class Graph {
 	
 	public Dictionary<String, Object> getNextNode() {
 		Dictionary<String, Object> retVal = new Hashtable();
-		retVal.put("Latitude", this.vertex.get(1).latitude());
-		retVal.put("x", this.vertex.get(1).x());
-		
-		retVal.put("Longitude", this.vertex.get(1).longitude());
-		retVal.put("y", this.vertex.get(1).y());
+		if(this.vertex.size() <= 1){
+			retVal.put("next", Boolean.FALSE);
+		} else {
+			retVal.put("next", Boolean.TRUE);
+			retVal.put("node", this.vertex.get(1));
+		}
 		
 		return retVal;
 	}

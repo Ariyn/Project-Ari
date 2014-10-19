@@ -2,6 +2,7 @@ package Engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.List;
 
 public class Plane {
@@ -10,21 +11,21 @@ public class Plane {
 
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
-	long maxspeed, crusingSpeed, speed=100; // 최고속도, 고도,속도
+	long maxspeed, crusingSpeed, speed=300; // 최고속도, 고도,속도
 	
-	double x,y; // 좌표  
+	double x,y,z; // 좌표  
 	double dx,dy;
 	
-	double angleX=0,angleY=Math.toRadians(30); //기울기
-	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선)
+	double angleX=0,angleY=0; //Math.toRadians(30); //기울기
+	long latitude, longitude, altitude; // 위도(가로선), 경도(세로선) 
 	
 	String name, codeName, company;//비행기이름, 비행기코드명, 회사명
 	String startSpot, endSpot; // 출발공항, 도착공항
-	double dz = speed*Math.tan(angleY);
+	double dz = 0; //speed*Math.tan(angleY);
 	
 	int status = 0; // 비행기 상태, 0 == 대기, 1 == 이륙 , 2 == 비행중, 3 == 착륙
 	Graph root;
-	ArrayList<GNode> GN = new ArrayList<GNode>();
+//	ArrayList<GNode> GN = new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
 	
@@ -116,6 +117,7 @@ public class Plane {
 			break;
 		case "Altitude":
 			altitude=l;
+			z=altitude;
 			break;
 		case "FuelTank":
 			fuelTank=(int)l;
@@ -190,9 +192,6 @@ public class Plane {
 	}
 	
 	public void setRoot(Graph g){
-		for(GNode gn : g.vertex){
-			GN.add(gn);
-		}
 		this.root = g;
 	}
 	
@@ -207,25 +206,42 @@ public class Plane {
 	}
 	
 	public void Move(){
-		
-		Spin();
+		if(this.passed(0)) {
+			this.root.nextNode();
+			Spin();
+		}
+		if(this.passed(1)) {
+			this.dx = 0;
+		} 
+		if(this.passed(2)) {
+			this.dy = 0;
+		}
+		if(this.passed(3)) {
+			this.dz = 0;
+		}
 		
 		if (status==1){ //이륙 
 			System.out.println("TakeOff!!! "+speed);
 			x=x+dx;
 			System.out.println("Plane in class dx: "+dx);
 			System.out.println("Plane in class x: "+x);
-			altitude=altitude+(long)dz;
+			y+=dy;
+			z=z+dz;
+			altitude = (long)z;
 			if(altitude>=1300)setStatus("Flying");
 		}
 		else if(status==2){ // 비행중
-			System.out.println("Flying!!! "+speed);
-			System.out.println("HAHAHAHAHAHAH "+GN.size());
-			x=x+dx;
-			y=y+dy;
+			System.out.println("Flying!!! "+speed+"  "+dx);
+
+			x+=dx;
+			y+=dy;
 			
-			if(GN.get(GN.size()-1).latitude()==latitude && GN.get(GN.size()-1).longitude()==longitude){
+//			if(GN.get(GN.size()-1).latitude()==latitude && GN.get(GN.size()-1).longitude()==longitude){
+			Dictionary<String, Object> dic = this.root.getNextNode();
+			
+			if(dic.get("next") == Boolean.FALSE){
 				setStatus("Landing");
+				this.status = 3;
 			}
 		}
 		else if(status==3){ // 착륙
@@ -236,10 +252,11 @@ public class Plane {
 		if(x>=500){
 			latitude+=1;
 			x-=1000;
-			System.out.println("지금은 이륙중인가 비행중인가?!!?!??");
+			System.out.println("넘어감 "+x);
 		}else if(x<=-500){
 			latitude-=1;
 			x+=1000;
+			System.out.println("뒤돌아감 "+x);
 		}
 		
 		if(y>=500){
@@ -286,51 +303,173 @@ public class Plane {
 	}
 	
 	public void Spin(){
-		for(int i=0; i<GN.size()-1; i++){
-			if(startSpot.equals("Dalars") && latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()){
-				if(GN.get(i+1).longitude() == GN.get(i).longitude())
-					angleX=0;
-				else{
-					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
-					//System.out.println("여기의 angleX 값은 ????? "+angleX);
-				}
-			}
+		Dictionary<String, Object> dic = this.root.getNextNode();
+		double speedP=0;
+		double rz=0;
+		if(dic.get("next") == Boolean.FALSE) {
 			
-			else if(startSpot.equals("Narita")&& latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()) {
-				if(GN.get(i+1).longitude() == GN.get(i).longitude())
-					angleX=0;
-				else{
-					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()) );
-				//	System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+		} else {
+			GNode next = (GNode) dic.get("node");
+			
+				System.out.println("this.Coor : "+this.coordinate(GNode.LONG)+", "+this.coordinate(GNode.LATI)+" "+this.coordinate(GNode.ALT) +
+						"\t\tnext.Coor : "+next.coordinate(GNode.LONG)+", "+next.coordinate(GNode.LATI) + " " +next.coordinate(GNode.ALT) );
+				if(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT) == 0){
+					rz=0;
+				}else{
+					rz=Math.pow(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT), 2);
 				}
-			}
-		
-			else {
-			/*	if(startSpot.equals("Narita")&&GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
-					angleX=0;
-				else{
-					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-					System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
+				speedP = Math.sqrt(Math.pow((next.coordinate(GNode.LATI)-this.coordinate(GNode.LATI)), 2) + Math.pow((next.coordinate(GNode.LONG)-this.coordinate(GNode.LONG)), 2));
+				
+				System.out.println(next.coordinate(GNode.ALT)+","+this.coordinate(GNode.ALT));
+				System.out.println("speedP : "+speedP+",\t\t\taltitude :"+Math.abs(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT)));
+				
+				angleY=Math.atan2(Math.abs(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT)), speedP);
+				angleX=Math.atan2(Math.abs(next.coordinate(GNode.LONG)-this.coordinate(GNode.LONG)), Math.abs(next.coordinate(GNode.LATI)-this.coordinate(GNode.LATI)));
+				
+				
+				System.out.println("angle X = "+angleX+"      "+Math.toDegrees(angleX));
+				System.out.println("angle Y = "+angleY+"      "+Math.toDegrees(angleY));
+				
+				
+				
+				dx = (speed*Math.cos(angleY)*Math.cos(angleX) * 10);
+				dy = (speed*Math.cos(angleY)*Math.sin(angleX) * 10);
+				dz = speed*Math.sin(angleY);
+				if(dx >= 1000) {
+					dx -= 1000;
 				}
-				if(startSpot.equals("Dalars") &&GN.get(i+1).longitude() == GN.get(i).longitude())
-					angleX=0;
-				else{
-					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()));
-					System.out.println("여기의 angleX 값은 s.s.s.s. "+angleX);*/
-				if(GN.get(GN.size()-i-1).longitude()==GN.get(GN.size()-i-2).longitude())
-					angleX=0;
-				else{
-					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-				//	System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
+				if(dy >= 1000) {
+					dy -= 1000;
 				}
-			}
-				dx = speed/Math.cos(angleX);
-				dy = speed/Math.cos(angleX);
-			//	System.out.println("asddfasdf : "+angleX);
-				//System.out.println("!!!??!?!?!?dddddfff!!!!!!!!    dz : "+dz);
+				System.out.println("dx = "+dx+"      dy = "+dy + "   dz = "+dz);
 		}
+			
+//		for(int i=0; i<GN.size()-1; i++){
+//			
+//			if(startSpot.equals("Dalars") && latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()){
+//				if(GN.get(i+1).longitude() == GN.get(i).longitude())
+//					angleX=0;
+//				else{
+//					
+//					angleX=Math.atan2( (GN.get(i+1).latitude()-GN.get(i).latitude()),(GN.get(i+1).longitude()-GN.get(i).longitude()) );
+//					System.out.println("여기의 angleX 값은 ????? "+angleX);
+//					System.out.println("여기의 그래프 노드 값은?  i+1 == latitude : "+GN.get(i+1).latitude() + " longitude : " + GN.get(i+1).longitude());
+//					System.out.println("여기의 그래프 노드 값은?  i == latitude : "+GN.get(i).latitude() + " longitude : " + GN.get(i).longitude());
+//					System.out.println("gkgkgkgk : "+Math.atan2((GN.get(i+1).latitude()-GN.get(i).latitude()),(GN.get(i+1).longitude()-GN.get(i).longitude())));
+//				}
+//			}
+//			
+//			else if(startSpot.equals("Narita")&& latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()) {
+//				if(GN.get(i+1).longitude() == GN.get(i).longitude())
+//					angleX=0;
+//				else{
+//					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()) );
+//					System.out.println("여기의 angleX 값은 !!!!!! "+angleX);
+//				}
+//			}
+//		
+//			else {
+//				//System.out.println("What the fuck!!!!!");
+//				/*if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
+//					angleX=0;
+//				else{
+//					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
+//				//	System.out.println("여기의 angleX 값은 d.d.d.d.d. "+angleX);
+//				}*/
+//			}
+//				dx = speed/Math.cos(angleX);
+//				dy = speed/Math.cos(angleX);
+//			//	System.out.println("asddfasdf : "+angleX);
+//				//System.out.println("!!!??!?!?!?dddddfff!!!!!!!!    dz : "+dz);
+//		}
+	}
+	public double coordinate(int type){
+		double retVal = 0;
+		if(type == GNode.LONG) {
+			retVal = this.longitude+(this.y+500)/1000.0;
+		} else if(type == GNode.LATI) {
+			retVal = this.latitude+(this.x+500)/1000.0;
+		} else if(type == GNode.ALT) {
+			return this.altitude;
+		}
+		return retVal;
 	}
 	
+	private boolean passed(int type){
+		Dictionary<String, Object> dic = this.root.getNextNode();
+		boolean sucX = false, sucY = false, sucZ = false, suc = false;
+		if(type == 0){
+			if(dic.get("next") == Boolean.TRUE) {
+				GNode next = (GNode) dic.get("node");
+				if(this.dx >= 0) {
+					if(next.coordinate(GNode.LATI) <= this.coordinate(GNode.LATI)) {
+						sucX = true;
+					}
+				} else {
+					if(next.coordinate(GNode.LATI) >= this.coordinate(GNode.LATI)) {
+						sucX = true;
+					}
+				}
+				if(this.dy >= 0 && next.coordinate(GNode.LONG) <= this.coordinate(GNode.LONG)) {
+					sucY = true;
+				} else if(this.dy <= 0 && next.coordinate(GNode.LONG) >= this.coordinate(GNode.LONG)) {
+					sucY = true;
+				}
+				if(this.dz >= 0) {
+					if(next.coordinate(GNode.ALT) <= this.coordinate(GNode.ALT)) {
+						sucZ = true;
+					}
+				} else {
+					if(next.coordinate(GNode.ALT) >= this.coordinate(GNode.ALT)) {
+						sucZ = true;
+					}
+				}
+			}
+			return sucX & sucY & sucZ;
+		} else if(type == 1) {
+			if(dic.get("next") == Boolean.TRUE) {
+				GNode next = (GNode) dic.get("node");
+				if(this.dx >= 0) {
+					if(next.coordinate(GNode.LATI) <= this.coordinate(GNode.LATI)) {
+						suc = true;
+					}
+				} else {
+					if(next.coordinate(GNode.LATI) >= this.coordinate(GNode.LATI)) {
+						suc = true;
+					}
+				}
+			}
+		} else if(type == 2) {
+			if(dic.get("next") == Boolean.TRUE) {
+				GNode next = (GNode) dic.get("node");
+				if(this.dy >= 0) {
+					if(next.coordinate(GNode.LONG) <= this.coordinate(GNode.LONG)) {
+						suc = true;
+					}
+				} else {
+					if(next.coordinate(GNode.LONG) >= this.coordinate(GNode.LONG)) {
+						suc = true;
+					}
+				}
+			}
+		}  else if(type == 3) {
+			if(dic.get("next") == Boolean.TRUE) {
+				GNode next = (GNode) dic.get("node");
+				if(this.dz >= 0) {
+					if(next.coordinate(GNode.ALT) <= this.coordinate(GNode.ALT)) {
+						suc = true;
+						this.z = next.altitude();
+					}
+				} else {
+					if(next.coordinate(GNode.ALT) >= this.coordinate(GNode.ALT)) {
+						suc = true;
+						this.z = next.altitude();
+					}
+				}
+			}
+		}
+		return suc;
+	}
 }
 
 // 이륙시에 공항에 신호보내기
