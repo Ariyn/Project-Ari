@@ -21,12 +21,9 @@ class GNode implements Cloneable
 	private ArrayList<GNode> _vertex;
 	private ArrayList<Double> _edge;
 	
-	private double x, y;
 	private double altitude, latitude, longitude;
 	
-	public GNode(double x, double y, double lat, double lon, double alt) {
-		this.x = x;
-		this.y = y;
+	public GNode(double lat, double lon, double alt) {
 		
 		this.altitude=alt;
 		this.latitude=lat;
@@ -58,20 +55,15 @@ class GNode implements Cloneable
 	public double longitude() {
 		return this.longitude;
 	}
-	public double x() {
-		return this.x;
-	}
-	public double y() {
-		return this.y;
-	}
+
 	public double coordinate(int type){
 		double retVal = 0;
 		if(type == GNode.LONG) {
-			retVal = this.longitude+(this.y+500)/1000.0;
+			retVal = this.longitude;
 		} else if(type == GNode.LATI) {
-			retVal = this.latitude+(this.x+500)/1000.0;
+			retVal = this.latitude;
 		}else if(type == GNode.ALT){
-			retVal = altitude;
+			retVal = this.altitude;
 		}
 		return retVal;
 	}

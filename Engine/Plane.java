@@ -11,10 +11,12 @@ public class Plane {
 
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
-	long maxspeed, crusingSpeed, speed=300; // 최고속도, 고도,속도
+	long maxspeed, crusingSpeed;
+	double speed=2.4; // 최고속도, 고도,속도
 	
-	double x,y,z; // 좌표  
-	double dx,dy;
+	//double x,y,z; // 좌표  
+	double dx=0,dy=0;
+	double ddx=0, ddy=0, ddz=0;
 	
 	double angleX=0,angleY=0; //Math.toRadians(30); //기울기
 	double latitude, longitude, altitude; // 위도(가로선), 경도(세로선) 
@@ -68,10 +70,10 @@ public class Plane {
 			return maxspeed;
 		case "speed":
 			return speed;
-		case "x" :
+		/*case "x" :
 			return x;
 		case "y" :
-			return y;
+			return y;*/
 		case "Latitude":
 			return latitude;
 		case "Longitude":
@@ -124,9 +126,6 @@ public class Plane {
 		case "Maxspeed":
 			maxspeed=l;
 			break;
-		case "Speed":
-			speed=l;
-			break;
 		case "CrusingSpeed":
 			crusingSpeed = l;
 			break;
@@ -136,12 +135,12 @@ public class Plane {
 	public void set(String s, double l){
 		switch(s)
 		{
-			case "x":
-				x=l;
-				break;
-			case "y":
-				y=l;
-				break;
+//			case "x":
+//				x=l;
+//				break;
+//			case "y":
+//				y=l;
+//				break;
 			case "Length":
 				length = l;
 				break;
@@ -168,7 +167,10 @@ public class Plane {
 				break;
 			case "Altitude":
 				altitude=l;
-				z=altitude;
+				//z=altitude;
+				break;
+			case "Speed":
+				speed=l;
 				break;
 		}
 	}
@@ -211,61 +213,68 @@ public class Plane {
 			Spin();
 		}
 		if(this.passed(1)) {
+			this.ddx = this.dx;
 			this.dx = 0;
 		} 
 		if(this.passed(2)) {
+			this.ddy = this.dy;
 			this.dy = 0;
 		}
 		if(this.passed(3)) {
+			this.ddz = this.dz;
 			this.dz = 0;
 		}
 		
 		if (status==1){ //이륙 
 			System.out.println("TakeOff!!! "+speed);
-			x=x+dx;
+			latitude+=dx;
+			longitude+=dy;
+			altitude+=dz;
+			
 			System.out.println("Plane in class dx: "+dx);
-			System.out.println("Plane in class x: "+x);
-			y+=dy;
-			z=z+dz;
-			altitude =z;
+			System.out.println("Plane in class dy: "+dy);
+			System.out.println("Plane in class dz: "+dz);
 			if(altitude>=1300)setStatus("Flying");
 		}
 		else if(status==2){ // 비행중
-			System.out.println("Flying!!! "+speed+"  "+dx);
+			System.out.println("Flying!!! "+speed);
 
-			x+=dx;
-			y+=dy;
+			latitude+=dx;
+			longitude+=dy;
 			
-//			if(GN.get(GN.size()-1).latitude()==latitude && GN.get(GN.size()-1).longitude()==longitude){
+			System.out.println("Plane in class dx: "+dx);
+			System.out.println("Plane in class dy: "+dy);
+			System.out.println("Plane in class dz: "+dz);
+			
 			Dictionary<String, Object> dic = this.root.getNextNode();
 			
 			if(dic.get("next") == Boolean.FALSE){
 				setStatus("Landing");
-				this.status = 3;
 			}
 		}
 		else if(status==3){ // 착륙
-			x=x+dx;
-			altitude=altitude-dz;
+			latitude+=dx;
+			longitude+=dy;
+			altitude+=dz;
 		}
 		
-		if(x>=500){
-			latitude+=1;
-			x-=1000;
-			System.out.println("넘어감 "+x);
-		}else if(x<=-500){
-			latitude-=1;
-			x+=1000;
-			System.out.println("뒤돌아감 "+x);
-		}
-		
-		if(y>=500){
-			longitude+=1;
-			y-=1000;
-		}else if(y<=-500){
-			longitude-=1;
-			y+=1000;
-		}
+//		if(x>=500){
+//			latitude+=1;
+//			x-=1000;
+//			System.out.println("넘어감 "+x);
+//		}else if(x<=-500){
+//			latitude-=1;
+//			x+=1000;
+//			System.out.println("뒤돌아감 "+x);
+//		}
+//		
+//		if(y>=500){
+//			longitude+=1;
+//			y-=1000;
+//		}else if(y<=-500){
+//			longitude-=1;
+//			y+=1000;
+//		}
 	}
 
 	public void Fuel(){
@@ -311,13 +320,14 @@ public class Plane {
 		} else {
 			GNode next = (GNode) dic.get("node");
 			
-				System.out.println("this.Coor : "+this.coordinate(GNode.LONG)+", "+this.coordinate(GNode.LATI)+" "+this.coordinate(GNode.ALT) +
-						"\t\tnext.Coor : "+next.coordinate(GNode.LONG)+", "+next.coordinate(GNode.LATI) + " " +next.coordinate(GNode.ALT) );
+				System.out.println("this.Coor : "+this.coordinate(GNode.LATI)+", "+this.coordinate(GNode.LONG)+" "+this.coordinate(GNode.ALT) +
+						"\t\tnext.Coor : "+next.coordinate(GNode.LATI)+", "+next.coordinate(GNode.LONG) + " " +next.coordinate(GNode.ALT) );
 				if(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT) == 0){
 					rz=0;
 				}else{
 					rz=Math.pow(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT), 2);
 				}
+				
 				speedP = Math.sqrt(Math.pow((next.coordinate(GNode.LATI)-this.coordinate(GNode.LATI)), 2) + Math.pow((next.coordinate(GNode.LONG)-this.coordinate(GNode.LONG)), 2));
 				
 				System.out.println(next.coordinate(GNode.ALT)+","+this.coordinate(GNode.ALT));
@@ -330,17 +340,20 @@ public class Plane {
 				System.out.println("angle X = "+angleX+"      "+Math.toDegrees(angleX));
 				System.out.println("angle Y = "+angleY+"      "+Math.toDegrees(angleY));
 				
-				
-				
-				dx = (speed*Math.cos(angleY)*Math.cos(angleX) * 10);
-				dy = (speed*Math.cos(angleY)*Math.sin(angleX) * 10);
+				dx = speed*Math.cos(angleY)*Math.cos(angleX);
+				dy = speed*Math.cos(angleY)*Math.sin(angleX);
 				dz = speed*Math.sin(angleY);
-				if(dx >= 1000) {
-					dx -= 1000;
+				
+				if(this.coordinate(GNode.LATI)>next.coordinate(GNode.LATI)){
+					dx = -dx;
 				}
-				if(dy >= 1000) {
-					dy -= 1000;
-				}
+				
+//				if(dx >= 1000) {
+//					dx -= 1000;
+//				}
+//				if(dy >= 1000) {
+//					dy -= 1000;
+//				}
 				System.out.println("dx = "+dx+"      dy = "+dy + "   dz = "+dz);
 		}
 			
@@ -386,9 +399,9 @@ public class Plane {
 	public double coordinate(int type){
 		double retVal = 0;
 		if(type == GNode.LONG) {
-			retVal = this.longitude+(this.y+500)/1000.0;
+			retVal = this.longitude;
 		} else if(type == GNode.LATI) {
-			retVal = this.latitude+(this.x+500)/1000.0;
+			retVal = this.latitude;
 		} else if(type == GNode.ALT) {
 			return this.altitude;
 		}
@@ -401,30 +414,58 @@ public class Plane {
 		if(type == 0){
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
-				if(this.dx >= 0) {
+				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG));
+				if(this.dx > 0) {
 					if(next.coordinate(GNode.LATI) <= this.coordinate(GNode.LATI)) {
 						sucX = true;
 					}
-				} else {
+				} else if(this.dx < 0){
 					if(next.coordinate(GNode.LATI) >= this.coordinate(GNode.LATI)) {
 						sucX = true;
+						System.out.println("여기다가 이걸 하라고??");
+					}
+				} else if(this.dx==0){
+					if(ddx>0 && next.coordinate(GNode.LATI) > this.coordinate(GNode.LATI)){
+						sucX = true;
+					} else if(ddx<0 && next.coordinate(GNode.LATI) < this.coordinate(GNode.LATI)){
+						sucX = true;
+					}
+					System.out.println("이게 나오겠지 -> next :"+next.coordinate(GNode.LATI)+ " this : " + this.coordinate(GNode.LATI));
+				}
+				
+				if(this.dy > 0 && next.coordinate(GNode.LONG) <= this.coordinate(GNode.LONG)) {
+					sucY = true;
+				} else if(this.dy < 0 && next.coordinate(GNode.LONG) >= this.coordinate(GNode.LONG)) {
+					sucY = true;
+				} else if(dy==0){
+					if(ddy>0 && next.coordinate(GNode.LONG) > this.coordinate(GNode.LONG)){
+						sucY = true;
+					} else if(ddy<0 && next.coordinate(GNode.LONG) < this.coordinate(GNode.LONG)){
+						sucY = true;
+					}else if(next.coordinate(GNode.LONG) == this.coordinate(GNode.LONG)){
+						sucY=true;
 					}
 				}
-				if(this.dy >= 0 && next.coordinate(GNode.LONG) <= this.coordinate(GNode.LONG)) {
-					sucY = true;
-				} else if(this.dy <= 0 && next.coordinate(GNode.LONG) >= this.coordinate(GNode.LONG)) {
-					sucY = true;
-				}
-				if(this.dz >= 0) {
+				
+				if(this.dz > 0) {
 					if(next.coordinate(GNode.ALT) <= this.coordinate(GNode.ALT)) {
 						sucZ = true;
 					}
-				} else {
+				} else if(this.dz < 0){
 					if(next.coordinate(GNode.ALT) >= this.coordinate(GNode.ALT)) {
 						sucZ = true;
 					}
+				} else if(this.dz ==0){
+					if(ddz>0 && next.coordinate(GNode.ALT) > this.coordinate(GNode.ALT)){
+						sucZ = true;
+					} else if(ddz<0 && next.coordinate(GNode.ALT) < this.coordinate(GNode.ALT)){
+						sucZ = true;
+					} else if(next.coordinate(GNode.ALT) == this.coordinate(GNode.ALT)){
+						sucZ=true;
+					}
 				}
 			}
+			System.out.println("sucX : " +sucX + " sucY : "+sucY + " sucZ : "+ sucZ);
 			return sucX & sucY & sucZ;
 		} else if(type == 1) {
 			if(dic.get("next") == Boolean.TRUE) {
@@ -458,12 +499,12 @@ public class Plane {
 				if(this.dz >= 0) {
 					if(next.coordinate(GNode.ALT) <= this.coordinate(GNode.ALT)) {
 						suc = true;
-						this.z = next.altitude();
+						this.altitude = next.altitude();
 					}
 				} else {
 					if(next.coordinate(GNode.ALT) >= this.coordinate(GNode.ALT)) {
 						suc = true;
-						this.z = next.altitude();
+						this.altitude = next.altitude();
 					}
 				}
 			}

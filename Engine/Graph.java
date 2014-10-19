@@ -8,10 +8,10 @@ public class Graph {
 	public GNode head;
 	public ArrayList<GNode> vertex = new ArrayList<GNode>();
 
-	public void AddVertex(double x, double y, double lat, double lon, double alt) {
+	public void AddVertex(double lat, double lon, double alt) {
 
 		//Longitude
-		GNode g = new GNode(x,y, lat,lon,alt);
+		GNode g = new GNode(lat,lon,alt);
 		
 		if(this.head == null)
 			this.head = g;	
