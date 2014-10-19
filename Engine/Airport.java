@@ -7,8 +7,8 @@ import java.util.LinkedList;
 public class Airport {
 	
 	String name; // 공항명
-	long latitude, longitude, altitude = 0; // 공항의 위도, 경도
-	double x, y;
+	double latitude, longitude, altitude = 0; // 공항의 위도, 경도
+	//double x, y;
 	
 	int maximum_airplane; // 비행기 최대 재적 가능 수
 	//long[] runways = new long[1];// 활주로 길이
@@ -43,12 +43,6 @@ public class Airport {
 
 	public void set(String s, long l){
 		switch(s){
-		case "Latitude":
-			latitude=l;
-			break;
-		case "Longitude":
-			longitude=l;
-			break;
 		case"MaxAirplane":
 			maximum_airplane=(int)l;
 			break;
@@ -57,11 +51,17 @@ public class Airport {
 	
 	public void set(String s, double l){
 		switch(s){
-		case "x":
+		/*case "x":
 			x=l;
 			break;
 		case "y":
 			y=l;
+			break;*/
+		case "Latitude":
+			latitude=l;
+			break;
+		case "Longitude":
+			longitude=l;
 			break;
 		}
 	}
@@ -74,7 +74,7 @@ public class Airport {
 		}
 	}
 	
-	public long getLong(String s){
+	public double getDouble(String s){
 		switch(s){
 		case "Latitude":
 			return latitude;
@@ -116,6 +116,8 @@ public class Airport {
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
+				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
+				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
 				pl.setStatus("TakeOff"); // 비행기 이륙
 			}
 			
@@ -124,8 +126,8 @@ public class Airport {
 
 	public void Data(){ // 공항 정보 출력
 		System.out.println("Airport name: "+name);
-		System.out.println("Airport latitude: "+latitude+" x:"+x);
-		System.out.println("Airport Longitude: "+longitude+" y:"+y);
+		System.out.println("Airport latitude: "+latitude);
+		System.out.println("Airport Longitude: "+longitude);
 		
 	}
 
@@ -136,49 +138,46 @@ public class Airport {
 	}
 	
 	public void setGraph(){
-		if(name.equals("Dalars"))
-			CreatGraph(aa);
-		else
-			CreatGraph2(aa);
-		
+		CreatGraph(aa);	
 		CreatLine(aa);
 	}
 	
 	public void CreatGraph(Graph g){
-		long t = 0;
-		long r = 0;
-		
+		double t = 0, r = 0;
+		//double lati = latitude;
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
-			g.AddVertex(t,0,latitude,longitude,r);
+			System.out.println("r = "+r);
+			
+			g.AddVertex(latitude + t/1000, longitude, r);
 		}
-		
-		g.AddVertex(0,0,357,1403,1311);
-		g.AddVertex(0,0,618,1141,1311);
-		g.AddVertex(0,0,880,880,1311);
-		g.AddVertex(0,0,1141,618,1311);
-		g.AddVertex(0,0,1403,357,1311);
+		if(name.equals("Dalars"))
+		{
+			//g.AddVertex(0,0,357,1403,1311);
+			g.AddVertex(1300,500,1300);
+			g.AddVertex(1000,800,1300);
+			g.AddVertex(800,1050,1300);
+			g.AddVertex(358,1430,1300);
+
+		}
+		else if(name.equals("Narita"))
+		{
+			//g.AddVertex(0,0,1403,357,1300);
+			g.AddVertex(1141,618,1300);
+			g.AddVertex(880,880,1300);
+			g.AddVertex(618,1141,1300);
+			g.AddVertex(357,1403,1300);
+				
+		}
+		for(GNode ggn : g.vertex){
+			System.out.println(" latitude : "+ggn.latitude() +" longitude : " + ggn.longitude() + " altitude : "+ggn.altitude());
+		}
 	}
 	
 	public void CreatLine(Graph g){
 		for(int i =0; i<g.vertex.size()-1;i++){
 			g.VertexSetEdges(g.vertex.get(i), g.vertex.get(i+1));
 		}
-	}
-	
-	public void CreatGraph2(Graph g){
-		long t = 0;
-		long r = 0;
-		for(int i=0; i<runways[0].runwaysNode.size();i++){
-			t=runways[0].runwaysNode.get(i).x;
-			r=runways[0].runwaysNode.get(i).z;
-			g.AddVertex(t,0,latitude,longitude,r);
-		}
-		g.AddVertex(0,0,1403,357,1300);
-		g.AddVertex(0,0,1141,618,1300);
-		g.AddVertex(0,0,880,880,1300);
-		g.AddVertex(0,0,618,1141,1300);
-		g.AddVertex(0,0,357,1403,1300);		
 	}
 }

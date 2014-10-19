@@ -3,11 +3,9 @@
 	[
 		{
 			"modelNumber":"A330",
-			"company":"aa",
-			"codeName":"aa012",
+			"Company":"aa",
+			"CodeName":"aa012",
 			"coordinate":{
-				"x":0,
-				"y":0,
 				"longitude":0,
 				"latitude":0
 			}
@@ -19,11 +17,9 @@
 		
 		{
 			"modelNumber":"MIG-29",
-			"company":"RA",
-			"codeName":"RA-0024",
+			"Company":"RA",
+			"CodeName":"RA-0024",
 			"coordinate":{
-				"x":0,
-				"y":0,
 				"longitude":0,
 				"latitude":0
 			}

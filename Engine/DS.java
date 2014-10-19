@@ -17,15 +17,13 @@ import java.util.ArrayList;
 
 class GNode implements Cloneable
 {
+	static int LONG = 0, LATI=1, ALT =2;
 	private ArrayList<GNode> _vertex;
 	private ArrayList<Double> _edge;
 	
-	private double x, y;
-	private long altitude, latitude, longitude;
+	private double altitude, latitude, longitude;
 	
-	public GNode(double x, double y, long lat, long lon, long alt) {
-		this.x = x;
-		this.y = y;
+	public GNode(double lat, double lon, double alt) {
 		
 		this.altitude=alt;
 		this.latitude=lat;
@@ -47,21 +45,27 @@ class GNode implements Cloneable
 
 	}
 		
-	public long altitude() {
+	public double altitude() {
 		return this.altitude;
 	}
 	
-	public long latitude() {
+	public double latitude() {
 		return this.latitude;
 	}
-	public long longitude() {
+	public double longitude() {
 		return this.longitude;
 	}
-	public double x() {
-		return this.x;
-	}
-	public double y() {
-		return this.y;
+
+	public double coordinate(int type){
+		double retVal = 0;
+		if(type == GNode.LONG) {
+			retVal = this.longitude;
+		} else if(type == GNode.LATI) {
+			retVal = this.latitude;
+		}else if(type == GNode.ALT){
+			retVal = this.altitude;
+		}
+		return retVal;
 	}
 }
 

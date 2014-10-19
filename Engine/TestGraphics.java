@@ -15,6 +15,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,12 +25,12 @@ public class TestGraphics extends Frame implements MouseListener, MouseMotionLis
 	ImagePanel imagePanel;
 	private int originX, originY;
 	
-	public TestGraphics(){
+	public TestGraphics(ArrayList<Plane> p){
 		addMouseListener(this);
 	    addMouseMotionListener(this);
-		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg");
+		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg", p);
 		this.add(this.imagePanel);
-		setSize(500, 500);
+		setSize(900, 900);
 		setVisible(true);         // "super" Frame shows
 	}
 	
@@ -85,19 +86,20 @@ public class TestGraphics extends Frame implements MouseListener, MouseMotionLis
 }
 
 class ImagePanel extends JPanel{
-
+	private ArrayList<Plane> planes;
+	
     private BufferedImage image;
     private int x, y, screenWidth, screenHeight;
     private int P2LX=1850, P2LY=1300;
     private int decPixWid, decPixHei;
-    private int scale = 2;
+    private int scale = 1;
 
-    public ImagePanel(String path) {
-       
+    public ImagePanel(String path, ArrayList<Plane> p) {
+        this.planes = p;
         this.x=0;
         this.y=0;
-        this.screenHeight = 500;
-        this.screenWidth = 500;
+        this.screenHeight = 900;
+        this.screenWidth = 900;
         
         try {                
         	image = ImageIO.read(new File(path));
@@ -139,11 +141,17 @@ class ImagePanel extends JPanel{
         
         g.drawImage(image, -this.x*this.scale, -this.y*this.scale, image.getWidth()*this.scale, image.getHeight()*this.scale, null); // see javadoc for more info on the parameters
         g.setColor(new Color(0, 255, 0));
-        
-        g.drawLine(300-this.x*this.scale, 300-this.y*this.scale, 302-this.x*this.scale, 302-this.y*this.scale);
-        g.drawString("KAL123", 300-this.x*this.scale, 300-this.y*this.scale);
-        
+       
+        this.drawPlane(g);
         this.drawLines(g);
+    }
+    public void drawPlane(Graphics g) {
+    	for(Plane i : this.planes) {
+    		int _x = (int)(i.latitude*360/this.image.getWidth()), _y = (int)(i.longitude *360/this.image.getHeight());
+    		System.out.println("pixel = "+(_x-this.x*this.scale)+"    "+(_y-this.y*this.scale));
+	    	g.drawLine(_x-this.x*this.scale, _y-this.y*this.scale, _x+2-this.x*this.scale, _y+2-this.y*this.scale);
+	        g.drawString("KAL123", _x-this.x*this.scale, _y-this.y*this.scale);
+    	}
     }
     
     public void drawLines(Graphics g) {

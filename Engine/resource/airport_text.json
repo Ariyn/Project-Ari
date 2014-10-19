@@ -5,7 +5,7 @@
 		{
 			"name":"Dalars",
 			"companies":{"KAL":10, "AA":50},
-			"position":{"Latitude":357.63889, "Longitude":1403.91667},
+			"position":{"Latitude":1403.91667, "Longitude":357.63889},
 			"runways":
 			[
 				{
@@ -14,12 +14,12 @@
 					"nodes":
 					[
 						{
-							"x":0,
+							"x":100,
 							"y":0,
 							"z":0
 						},
 						{
-							"x":300,
+							"x":400,
 							"y":0,
 							"z":0
 						},
@@ -34,7 +34,7 @@
 							"z":300
 						},
 						{
-							"x":2500,
+							"x":2200,
 							"y":0,
 							"z":1200
 						},
@@ -51,7 +51,7 @@
 		"Narita":
 		{
 			"name":"Narita",
-			"position":{"Latitude":1403.91667, "Longitude":357.63889},
+			"position":{"Latitude":1004.91667, "Longitude":457.63889},
 			"runways":
 			[
 				{
@@ -100,7 +100,6 @@
 	{
 		"A330":
 		{
-			"Company":"airbus",
 			"Name":"A330",
 			
 			"FuelTank":139090,
@@ -130,7 +129,6 @@
 		
 		"MIG-29":
 		{
-			"Company":"MIG",
 			"Name":"MIG-29",
 			"FuelTank":300,
 			"MaxSpeed":70,
@@ -172,7 +170,7 @@
 			}
 			"graph":{
 				"startSpot":"Narita",
-				"endSpot":"Dalras"
+				"endSpot":"Dalars"
 			}
 		}
 		
