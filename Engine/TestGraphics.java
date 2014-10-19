@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,10 +20,10 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-public class TestGraphics extends Frame implements MouseListener, MouseMotionListener{
+public class TestGraphics extends Frame implements MouseListener, MouseMotionListener, MouseWheelListener{
 	ImagePanel imagePanel;
 	private int originX, originY;
-
+	
 	public TestGraphics(){
 		addMouseListener(this);
 	    addMouseMotionListener(this);
@@ -73,6 +75,12 @@ public class TestGraphics extends Frame implements MouseListener, MouseMotionLis
 		
 	}
 
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		System.out.println(e.getScrollType() +", "+ e.getScrollAmount());
+		
+	}
+
 
 }
 
@@ -80,6 +88,9 @@ class ImagePanel extends JPanel{
 
     private BufferedImage image;
     private int x, y, screenWidth, screenHeight;
+    private int P2LX=1850, P2LY=1300;
+    private int decPixWid, decPixHei;
+    private int scale = 2;
 
     public ImagePanel(String path) {
        
@@ -90,6 +101,9 @@ class ImagePanel extends JPanel{
         
         try {                
         	image = ImageIO.read(new File(path));
+        	decPixWid = image.getWidth()/36;
+        	decPixHei = (int)(image.getHeight()/18*1.3);
+        	
         	System.out.println(image);
         } catch (IOException ex) {
             // handle exception...
@@ -123,11 +137,25 @@ class ImagePanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        g.drawImage(image, -this.x, -this.y, null); // see javadoc for more info on the parameters
+        g.drawImage(image, -this.x*this.scale, -this.y*this.scale, image.getWidth()*this.scale, image.getHeight()*this.scale, null); // see javadoc for more info on the parameters
         g.setColor(new Color(0, 255, 0));
         
-        g.drawLine(300-this.x, 300-this.y, 302-this.x, 302-this.y);
-        g.drawString("KAL123", 300-this.x, 300-this.y);
+        g.drawLine(300-this.x*this.scale, 300-this.y*this.scale, 302-this.x*this.scale, 302-this.y*this.scale);
+        g.drawString("KAL123", 300-this.x*this.scale, 300-this.y*this.scale);
+        
+        this.drawLines(g);
+    }
+    
+    public void drawLines(Graphics g) {
+    	for(int i=-14;i<22;i++){
+	    	g.drawLine((this.P2LX-this.x+this.decPixWid*i)*this.scale, -this.y*this.scale, (this.P2LX-this.x+this.decPixWid*i)*this.scale, (this.image.getHeight()-this.y)*this.scale);
+    	}
+    	for(int i=-9;i<9;i++)
+    		g.drawLine(-this.x*this.scale, (this.P2LY-this.y+this.decPixHei*i)*this.scale, (this.image.getWidth()-this.x)*this.scale, (this.P2LY-this.y+this.decPixHei*i)*this.scale);
+    }
+    
+    public void scaleTo(int scale) {
+    	this.scale = scale;
     }
     
 }
