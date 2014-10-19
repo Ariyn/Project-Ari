@@ -158,7 +158,7 @@ public class Airport {
 			g.AddVertex(1300,500,1300);
 			g.AddVertex(1000,800,1300);
 			g.AddVertex(800,1050,1300);
-			g.AddVertex(357,1430,1300);
+			g.AddVertex(358,1430,1300);
 
 		}
 		else if(name.equals("Narita"))

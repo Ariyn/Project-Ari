@@ -27,6 +27,7 @@ public class Plane {
 	
 	int status = 0; // 비행기 상태, 0 == 대기, 1 == 이륙 , 2 == 비행중, 3 == 착륙
 	Graph root;
+	Graph root1 = new Graph();
 //	ArrayList<GNode> GN = new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
@@ -195,6 +196,16 @@ public class Plane {
 	
 	public void setRoot(Graph g){
 		this.root = g;
+		
+		this.root1.AddVertex(357.881,1430,1300);
+		this.root1.AddVertex(357.42,1430,1200);
+		this.root1.AddVertex(356.5,1430,500);
+		this.root1.AddVertex(356,1430,200);
+		this.root1.AddVertex(355.5,1430,0);
+		
+		for(int i =0; i<root1.vertex.size()-1;i++){
+			root1.VertexSetEdges(root1.vertex.get(i), root1.vertex.get(i+1));
+		}
 	}
 	
 	public void setStatus(String text){
@@ -248,14 +259,15 @@ public class Plane {
 			
 			Dictionary<String, Object> dic = this.root.getNextNode();
 			
-			if(dic.get("next") == Boolean.FALSE){
-				setStatus("Landing");
-			}
+//			if(dic.get("next") == Boolean.FALSE){
+//				setStatus("Landing");
+//			}
 		}
 		else if(status==3){ // 착륙
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
+			
 		}
 		
 //		if(x>=500){
@@ -430,6 +442,7 @@ public class Plane {
 					} else if(ddx<0 && next.coordinate(GNode.LATI) < this.coordinate(GNode.LATI)){
 						sucX = true;
 					}
+					System.out.println("d이걸로 보라고 : "+ddx);
 					System.out.println("이게 나오겠지 -> next :"+next.coordinate(GNode.LATI)+ " this : " + this.coordinate(GNode.LATI));
 				}
 				
@@ -466,6 +479,10 @@ public class Plane {
 				}
 			}
 			System.out.println("sucX : " +sucX + " sucY : "+sucY + " sucZ : "+ sucZ);
+			if(dic.get("next") == Boolean.FALSE){
+				setStatus("Landing");
+				root=root1;
+			}
 			return sucX & sucY & sucZ;
 		} else if(type == 1) {
 			if(dic.get("next") == Boolean.TRUE) {
