@@ -148,11 +148,11 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-		FlyingplaneList.remove(1);
 		
 		while(this._thread){
 			for(Plane i : FlyingplaneList) {
 				for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
+					
 					ap.PlaneLandingTakeOff(i, "TakeOff");
 				}
 				

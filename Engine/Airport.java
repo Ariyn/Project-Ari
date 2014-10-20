@@ -17,7 +17,7 @@ public class Airport {
 
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
-	ArrayList <Plane> planeList = new ArrayList<Plane>();	
+	ArrayList <Plane> planeList = new ArrayList<Plane>();
 	
 	Queue<Plane> q = new LinkedList<Plane>();
 	Queue<Plane> q1 = new LinkedList<Plane>();
@@ -87,15 +87,22 @@ public class Airport {
 		return aa;
 	}
 
-	public void PlaneLandingTakeOff(Plane pl, String text){
+
+	@SuppressWarnings("null")
+	public void PlaneLandingTakeOff(Plane pl, String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
+		Plane pp = null;
 		if(text.equals("Landing")){
-			if(q1.add(pl)==true){
+			if(q1.offer(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
 				planeList.remove(pl);
 			}
 		}else{
-			Plane pp = q.poll();
-			if(planeList.contains(pl)&&pp!=null){
+			if(pp == null){
+				pp = q.poll();
+			}else if(pp.getStatus()==2){
+				pp = q.poll();
+			}
+			if(planeList.contains(pl)&&pp==pl ){
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
@@ -103,7 +110,6 @@ public class Airport {
 				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
 				pl.setStatus("TakeOff");
 			}
-			
 		}
 	}
 
