@@ -32,8 +32,6 @@ public class Engine extends Thread{
 		
 		for(String i:keys){
 			Airport newAirport = new Airport();
-
-			//newAirport.planeList = this.planeList;
 			
 			@SuppressWarnings("unchecked")
 			JSONObject _data = (JSONObject)data.get(i);
@@ -53,7 +51,6 @@ public class Engine extends Thread{
 					
 					newAirport.set("Latitude", lat);
 					newAirport.set("Longitude", lon);
-//					System.out.println(Math.floor((lat-Math.floor(lat))*10000.0)/10.0);
 					break;
 
 				case "runways":
@@ -123,22 +120,17 @@ public class Engine extends Thread{
 			Set<String> _keys = (Set<String>)_data.keySet();
 
 			for(String e:_keys){
-//				System.out.println(e+" "+_data.get(e));
 				if(lonList.contains(e)) {
 					newPlane.set(e, (long)_data.get(e));
-//					System.out.println(e+" "+(long)_data.get(e));
 				} else if(strList.contains(e)) {
 					newPlane.set(e, (String)_data.get(e));
-//					System.out.println(e+" "+_data.get(e));
 				} else if(douList.contains(e)) {
-//					System.out.println(e+" "+_data.get(e));
 					newPlane.set(e, (double)_data.get(e));
 				}
 			}
 			
 			newPlane.Data();
 			this.planeTypeList.add(newPlane);
-//			System.out.println(newPlane);
 		}
 	}
 	

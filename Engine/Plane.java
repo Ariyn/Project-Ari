@@ -6,33 +6,27 @@ import java.util.Dictionary;
 import java.util.List;
 
 public class Plane {
-	double weight, length, height, wingAngle; // 占쏙옙占쏙옙, 占쏙옙占쏙옙
+	double weight, length, height, wingAngle;
 	double wingLength, bodyWidth;
 
-	long fuelTank, fuel=100; // 占쏙옙占쏙옙占쌍대량, 占쏙옙占써량(%)
+	long fuelTank, fuel=100;
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
 	
-	double speed=0.6; // 최고속도, 고도,속도
+	double speed=0.6;
 	
 	double dx=0,dy=0;
 	double ddx=0, ddy=0, ddz=0;
 	
-	double angleX=0,angleY=0; //Math.toRadians(30); //占쏙옙占쏙옙
-	double latitude, longitude, altitude; // 占쏙옙占쏙옙(占쏙옙占싸쇽옙), 占썸도(占쏙옙占싸쇽옙) 
+	double angleX=0,angleY=0; //Math.toRadians(30);
+	double latitude, longitude, altitude; 
 	
-	String name, codeName, company;//占쏙옙占쏙옙占쏙옙見占�, 占쏙옙占쏙옙占쏙옙湄占쏙옙, 회占쏙옙占�
-	String startSpot, endSpot; // 占쏙옙煞占쏙옙占�, 占쏙옙占쏙옙占쏙옙占�
+	String name, codeName, company;
+	String startSpot, endSpot;
 	double dz = 0; //speed*Math.tan(angleY);
 	
-	int status = 0; // 占쏙옙占쏙옙占� 占쏙옙占쏙옙, 0 == 占쏙옙占�, 1 == 占싱뤄옙 , 2 == 占쏙옙占쏙옙占쏙옙, 3 == 占쏙옙占�
+	int status = 0;
 	Graph root;
-//	ArrayList<GNode> GN = new ArrayList<GNode>();
-	// 占쏙옙占쏙옙占쏙옙 占썸도占쏙옙 3600占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌩곤옙占쏙옙 占쏙옙표 0占쏙옙占쏙옙 占쏙옙占쏙옙 占승울옙占� +-500占쏙옙 占쌀댐옙占싼댐옙
-	// 占쏙옙표占쏙옙 +-500占쏙옙 占십곤옙占싹몌옙 占쏙옙占쏙옙 占실댐옙 占썸도占쏙옙 占쏙옙占쏙옙占싼댐옙.
-	
-	//getter
-	
 
 	public Plane(){
 		
@@ -70,10 +64,6 @@ public class Plane {
 			return maxspeed;
 		case "speed":
 			return speed;
-		/*case "x" :
-			return x;
-		case "y" :
-			return y;*/
 		case "Latitude":
 			return latitude;
 		case "Longitude":
@@ -132,12 +122,6 @@ public class Plane {
 	public void set(String s, double l){
 		switch(s)
 		{
-//			case "x":
-//				x=l;
-//				break;
-//			case "y":
-//				y=l;
-//				break;
 			case "Length":
 				length = l;
 				break;
@@ -164,7 +148,6 @@ public class Plane {
 				break;
 			case "Altitude":
 				altitude=l;
-				//z=altitude;
 				break;
 			case "Speed":
 				speed=l;
@@ -224,7 +207,7 @@ public class Plane {
 			this.dz = 0;
 		}
 		
-		if (status==1){ //占싱뤄옙 
+		if (status==1){ 
 			System.out.println("TakeOff!!! "+speed);
 			latitude+=dx;
 			longitude+=dy;
@@ -235,7 +218,7 @@ public class Plane {
 			System.out.println("Plane in class dz: "+dz);
 			if(altitude>=13)setStatus("Flying");
 		}
-		else if(status==2){ // 占쏙옙占쏙옙占쏙옙
+		else if(status==2){
 			System.out.println("Flying!!! "+speed);
 
 			latitude+=dx;
@@ -246,45 +229,19 @@ public class Plane {
 			System.out.println("Plane in class dz: "+dz);
 			
 			Dictionary<String, Object> dic = this.root.getNextNode();
-			
-//			if(dic.get("next") == Boolean.FALSE){
-//				setStatus("Landing");
-//			}
 		}
-		else if(status==3){ // 占쏙옙占�
+		else if(status==3){
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
 		}
-		
-//		if(x>=500){
-//			latitude+=1;
-//			x-=1000;
-//			System.out.println("占싼어감 "+x);
-//		}else if(x<=-500){
-//			latitude-=1;
-//			x+=1000;
-//			System.out.println("占쌘듸옙占싣곤옙 "+x);
-//		}
-//		
-//		if(y>=500){
-//			longitude+=1;
-//			y-=1000;
-//		}else if(y<=-500){
-//			longitude-=1;
-//			y+=1000;
-//		}
 	}
 
 	public void Fuel(){
 		fuel-=(4/fuelTank)*100;
 	}
-/*	public void Search(){ // 占쌍븝옙 占쏙옙占쏙옙占� 탐占쏙옙(占쌍븝옙占쌓뤄옙占쏙옙占쏙옙 탐占쏙옙占싼댐옙)
-		
-	}*/
-	
 
-	public void Data(){ // 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占쏙옙占�
+	public void Data(){
 		System.out.println("Airplane name: "+name);
 		System.out.println("Airplane company: "+company);
 		System.out.println("Airplane weight : "+bodyWeight/1000+"T");
@@ -292,19 +249,16 @@ public class Plane {
 		System.out.println("Airplane fuelTank : "+fuelTank+"L");
 
 	}
-	public void Data2(){ //占실시곤옙占쏙옙占쏙옙 占쌕뀐옙占� 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
+	public void Data2(){
 		System.out.println("Airplane fuel: "+fuel+"%");
 		System.out.println("Airplane Maxspeed: "+maxspeed*10+"m/s");
 		System.out.println("Airplane speed: "+speed*10+"m/s");
 		System.out.println("Airplane altitude: "+altitude+"m");
 		System.out.println("Airplane latitude: "+latitude);
 		System.out.println("Airplane Longitude: "+longitude);
-		if(status==0)System.out.println("占싱뤄옙");
-		else if(status==1)System.out.println("占쏙옙占�");
-		else System.out.println("占쏙옙占쏙옙占쏙옙");
 	}
 	
-	public boolean LandingSign(){ // 占쏙옙占쌓울옙 占쏙옙占� 占썬가 占쏙옙청
+	public boolean LandingSign(){
 		boolean sign = false;
 		
 		return sign;
@@ -352,54 +306,8 @@ public class Plane {
 				if(this.coordinate(GNode.ALT)>next.coordinate(GNode.ALT)){
 					dz = -dz;
 				}
-				
-//				if(dx >= 1000) {
-//					dx -= 1000;
-//				}
-//				if(dy >= 1000) {
-//					dy -= 1000;
-//				}
 				System.out.println("dx = "+dx+"      dy = "+dy + "   dz = "+dz);
 		}
-			
-//		for(int i=0; i<GN.size()-1; i++){
-//			
-//			if(startSpot.equals("Dalars") && latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()){
-//				if(GN.get(i+1).longitude() == GN.get(i).longitude())
-//					angleX=0;
-//				else{
-//					
-//					angleX=Math.atan2( (GN.get(i+1).latitude()-GN.get(i).latitude()),(GN.get(i+1).longitude()-GN.get(i).longitude()) );
-//					System.out.println("占쏙옙占쏙옙占쏙옙 angleX 占쏙옙占쏙옙 ????? "+angleX);
-//					System.out.println("占쏙옙占쏙옙占쏙옙 占쌓뤄옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙?  i+1 == latitude : "+GN.get(i+1).latitude() + " longitude : " + GN.get(i+1).longitude());
-//					System.out.println("占쏙옙占쏙옙占쏙옙 占쌓뤄옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙?  i == latitude : "+GN.get(i).latitude() + " longitude : " + GN.get(i).longitude());
-//					System.out.println("gkgkgkgk : "+Math.atan2((GN.get(i+1).latitude()-GN.get(i).latitude()),(GN.get(i+1).longitude()-GN.get(i).longitude())));
-//				}
-//			}
-//			
-//			else if(startSpot.equals("Narita")&& latitude==GN.get(i).latitude() && longitude==GN.get(i).longitude()) {
-//				if(GN.get(i+1).longitude() == GN.get(i).longitude())
-//					angleX=0;
-//				else{
-//					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()) );
-//					System.out.println("占쏙옙占쏙옙占쏙옙 angleX 占쏙옙占쏙옙 !!!!!! "+angleX);
-//				}
-//			}
-//		
-//			else {
-//				//System.out.println("What the fuck!!!!!");
-//				/*if(GN.get(GN.size()-i-1).longitude() == GN.get(GN.size()-i-2).longitude())
-//					angleX=0;
-//				else{
-//					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-//				//	System.out.println("占쏙옙占쏙옙占쏙옙 angleX 占쏙옙占쏙옙 d.d.d.d.d. "+angleX);
-//				}*/
-//			}
-//				dx = speed/Math.cos(angleX);
-//				dy = speed/Math.cos(angleX);
-//			//	System.out.println("asddfasdf : "+angleX);
-//				//System.out.println("!!!??!?!?!?dddddfff!!!!!!!!    dz : "+dz);
-//		}
 	}
 	public double coordinate(int type){
 		double retVal = 0;
@@ -419,7 +327,7 @@ public class Plane {
 		if(type == 0){
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
-				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
+				System.out.println(next.coordinate(GNode.LATI)+ " <- �엫�씪�엫�씪�씪 -> " +next.coordinate(GNode.LONG) +" �엫�씪�엫�씪�씪33 : " + next.coordinate(GNode.ALT));
 
 				if(this.dx > 0) {
 					if(next.coordinate(GNode.LATI) <= this.coordinate(GNode.LATI)) {
@@ -522,6 +430,3 @@ public class Plane {
 		return suc;
 		}
 }
-
-// 占싱뤄옙첼占� 占쏙옙占쌓울옙 占쏙옙호占쏙옙占쏙옙占쏙옙
-// 占쏙옙占쏙옙占쏙옙 占쏙옙호占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹곤옙 占쏙옙호占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙綬몌옙占� 탐占쏙옙
