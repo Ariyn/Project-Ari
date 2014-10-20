@@ -188,7 +188,7 @@ public class Engine extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//this.frame.repaint();
+			this.frame.repaint();
 		}
 	}
 	

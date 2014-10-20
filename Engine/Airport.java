@@ -152,10 +152,10 @@ public class Airport {
 		{
 			//g.AddVertex(0,0,357,1403,1311);
 
-			g.AddVertex(1300,400,13);
+			g.AddVertex(2750,400,13);
 			g.AddVertex(1500,300,13);
 			g.AddVertex(800,600,13);
-			g.AddVertex(358,1330,13);
+			g.AddVertex(1004,457,13);
 
 
 		}
@@ -163,10 +163,10 @@ public class Airport {
 		{
 			//g.AddVertex(0,0,1403,357,1300);
 
-			g.AddVertex(2700,360,13);
-			g.AddVertex(2400,450,13);
-			g.AddVertex(1700,500,13);
+			g.AddVertex(1100,500,13);
 			g.AddVertex(1500,450,13);
+			g.AddVertex(2000,400,13);
+			g.AddVertex(2700,360,13);
 				
 		}
 		for(GNode ggn : g.vertex){

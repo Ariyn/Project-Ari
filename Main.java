@@ -11,7 +11,7 @@ public class Main {
 	
 	public static void main(String argv[]){
 		Engine eng = Engine.getInstance();
-		//eng.setFrame();
+		
 		JSONParser parser = new JSONParser();
 		
 		try{
@@ -32,9 +32,9 @@ public class Main {
 		}catch(ParseException e){
 			e.printStackTrace();
 		}
-		
+		eng.setFrame();
 		eng.start();
-
+		
 	}
 	
 }
