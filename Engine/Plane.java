@@ -6,30 +6,30 @@ import java.util.Dictionary;
 import java.util.List;
 
 public class Plane {
-	double weight, length, height, wingAngle; // ¹«°Ô, ±æÀÌ
+	double weight, length, height, wingAngle; // å ì™ì˜™å ì™ì˜™, å ì™ì˜™å ì™ì˜™
 	double wingLength, bodyWidth;
 
-	long fuelTank, fuel=100; // ¿¬·áÃÖ´ë·®, ¿¬·á·®(%)
+	long fuelTank, fuel=100; // å ì™ì˜™å ì™ì˜™å ìŒëŒ€ëŸ‰, å ì™ì˜™å ì¨ëŸ‰(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
-	double speed=0.6; // ÃÖ°í¼Óµµ, °íµµ,¼Óµµ
 	
-	//double x,y,z; // ÁÂÇ¥ 
+	double speed=0.6; // ìµœê³ ì†ë„, ê³ ë„,ì†ë„
+	
 	double dx=0,dy=0;
 	double ddx=0, ddy=0, ddz=0;
 	
-	double angleX=0,angleY=0; //Math.toRadians(30); //±â¿ï±â
-	double latitude, longitude, altitude; // À§µµ(°¡·Î¼±), °æµµ(¼¼·Î¼±) 
+	double angleX=0,angleY=0; //Math.toRadians(30); //å ì™ì˜™å ì™ì˜™
+	double latitude, longitude, altitude; // å ì™ì˜™å ì™ì˜™(å ì™ì˜™å ì‹¸ì‡½ì˜™), å ì¸ë„(å ì™ì˜™å ì‹¸ì‡½ì˜™) 
 	
-	String name, codeName, company;//ºñÇà±âÀÌ¸§, ºñÇà±âÄÚµå¸í, È¸»ç¸í
-	String startSpot, endSpot; // Ãâ¹ß°øÇ×, µµÂø°øÇ×
+	String name, codeName, company;//å ì™ì˜™å ì™ì˜™å ì™ì˜™è¦‹å ï¿½, å ì™ì˜™å ì™ì˜™å ì™ì˜™æ¹„å ì™ì˜™, íšŒå ì™ì˜™å ï¿½
+	String startSpot, endSpot; // å ì™ì˜™ç…å ì™ì˜™å ï¿½, å ì™ì˜™å ì™ì˜™å ì™ì˜™å ï¿½
 	double dz = 0; //speed*Math.tan(angleY);
 	
-	int status = 0; // ºñÇà±â »óÅÂ, 0 == ´ë±â, 1 == ÀÌ·ú , 2 == ºñÇàÁß, 3 == Âø·ú
+	int status = 0; // å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™, 0 == å ì™ì˜™å ï¿½, 1 == å ì‹±ë¤„ì˜™ , 2 == å ì™ì˜™å ì™ì˜™å ì™ì˜™, 3 == å ì™ì˜™å ï¿½
 	Graph root;
 //	ArrayList<GNode> GN = new ArrayList<GNode>();
-	// À§µµ¿Í °æµµ¸¦ 3600À¸·Î ³ª´«ÈÄ Áß°£À» ÁÂÇ¥ 0À¸·Î ÁöÁ¤ ÁÂ¿ì·Î +-500¾¿ ÇÒ´çÇÑ´Ù
-	// ÁÂÇ¥°¡ +-500¸¦ ÃÊ°úÇÏ¸é À§µµ ¶Ç´Â °æµµ¸¦ º¯°æÇÑ´Ù.
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì¸ë„å ì™ì˜™ 3600å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ©ê³¤ì˜™å ì™ì˜™ å ì™ì˜™í‘œ 0å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ìŠ¹ìš¸ì˜™å ï¿½ +-500å ì™ì˜™ å ìŒ€ëŒì˜™å ì‹¼ëŒì˜™
+	// å ì™ì˜™í‘œå ì™ì˜™ +-500å ì™ì˜™ å ì‹­ê³¤ì˜™å ì‹¹ëªŒì˜™ å ì™ì˜™å ì™ì˜™ å ì‹¤ëŒì˜™ å ì¸ë„å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¼ëŒì˜™.
 	
 	//getter
 	
@@ -224,7 +224,7 @@ public class Plane {
 			this.dz = 0;
 		}
 		
-		if (status==1){ //ÀÌ·ú 
+		if (status==1){ //å ì‹±ë¤„ì˜™ 
 			System.out.println("TakeOff!!! "+speed);
 			latitude+=dx;
 			longitude+=dy;
@@ -235,7 +235,7 @@ public class Plane {
 			System.out.println("Plane in class dz: "+dz);
 			if(altitude>=13)setStatus("Flying");
 		}
-		else if(status==2){ // ºñÇàÁß
+		else if(status==2){ // å ì™ì˜™å ì™ì˜™å ì™ì˜™
 			System.out.println("Flying!!! "+speed);
 
 			latitude+=dx;
@@ -251,7 +251,7 @@ public class Plane {
 //				setStatus("Landing");
 //			}
 		}
-		else if(status==3){ // Âø·ú
+		else if(status==3){ // å ì™ì˜™å ï¿½
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
@@ -260,11 +260,11 @@ public class Plane {
 //		if(x>=500){
 //			latitude+=1;
 //			x-=1000;
-//			System.out.println("³Ñ¾î°¨ "+x);
+//			System.out.println("å ì‹¼ì–´ê° "+x);
 //		}else if(x<=-500){
 //			latitude-=1;
 //			x+=1000;
-//			System.out.println("µÚµ¹¾Æ°¨ "+x);
+//			System.out.println("å ìŒ˜ë“¸ì˜™å ì‹£ê³¤ì˜™ "+x);
 //		}
 //		
 //		if(y>=500){
@@ -279,12 +279,12 @@ public class Plane {
 	public void Fuel(){
 		fuel-=(4/fuelTank)*100;
 	}
-/*	public void Search(){ // ÁÖº¯ ºñÇà±â Å½»ö(ÁÖº¯±×·¡ÇÁ¸¦ Å½»öÇÑ´Ù)
+/*	public void Search(){ // å ìŒë¸ì˜™ å ì™ì˜™å ì™ì˜™å ï¿½ íƒå ì™ì˜™(å ìŒë¸ì˜™å ìŒ“ë¤„ì˜™å ì™ì˜™å ì™ì˜™ íƒå ì™ì˜™å ì‹¼ëŒì˜™)
 		
 	}*/
 	
 
-	public void Data(){ // ºñÇà±â Á¤º¸ Ãâ·Â
+	public void Data(){ // å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½
 		System.out.println("Airplane name: "+name);
 		System.out.println("Airplane company: "+company);
 		System.out.println("Airplane weight : "+bodyWeight/1000+"T");
@@ -292,19 +292,19 @@ public class Plane {
 		System.out.println("Airplane fuelTank : "+fuelTank+"L");
 
 	}
-	public void Data2(){ //½Ç½Ã°£À¸·Î ¹Ù²î´Â ºñÇà±â µ¥ÀÌÅÍ
+	public void Data2(){ //å ì‹¤ì‹œê³¤ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ•ë€ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™
 		System.out.println("Airplane fuel: "+fuel+"%");
 		System.out.println("Airplane Maxspeed: "+maxspeed*10+"m/s");
 		System.out.println("Airplane speed: "+speed*10+"m/s");
 		System.out.println("Airplane altitude: "+altitude+"m");
 		System.out.println("Airplane latitude: "+latitude);
 		System.out.println("Airplane Longitude: "+longitude);
-		if(status==0)System.out.println("ÀÌ·ú");
-		else if(status==1)System.out.println("Âø·ú");
-		else System.out.println("ºñÇàÁß");
+		if(status==0)System.out.println("å ì‹±ë¤„ì˜™");
+		else if(status==1)System.out.println("å ì™ì˜™å ï¿½");
+		else System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™");
 	}
 	
-	public boolean LandingSign(){ // °øÇ×¿¡ Âø·ú Çã°¡ ½ÅÃ»
+	public boolean LandingSign(){ // å ì™ì˜™å ìŒ“ìš¸ì˜™ å ì™ì˜™å ï¿½ å ì¬ê°€ å ì™ì˜™ì²­
 		boolean sign = false;
 		
 		return sign;
@@ -341,7 +341,7 @@ public class Plane {
 				
 				dx = speed*Math.cos(angleY)*Math.cos(angleX);
 				dy = speed*Math.cos(angleY)*Math.sin(angleX);
-				dz = speed*Math.sin(angleY);
+				dz = speed*Math.sin(angleY)*10;
 				
 				if(this.coordinate(GNode.LATI)>next.coordinate(GNode.LATI)){
 					dx = -dx;
@@ -370,9 +370,9 @@ public class Plane {
 //				else{
 //					
 //					angleX=Math.atan2( (GN.get(i+1).latitude()-GN.get(i).latitude()),(GN.get(i+1).longitude()-GN.get(i).longitude()) );
-//					System.out.println("¿©±âÀÇ angleX °ªÀº ????? "+angleX);
-//					System.out.println("¿©±âÀÇ ±×·¡ÇÁ ³ëµå °ªÀº?  i+1 == latitude : "+GN.get(i+1).latitude() + " longitude : " + GN.get(i+1).longitude());
-//					System.out.println("¿©±âÀÇ ±×·¡ÇÁ ³ëµå °ªÀº?  i == latitude : "+GN.get(i).latitude() + " longitude : " + GN.get(i).longitude());
+//					System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™ angleX å ì™ì˜™å ì™ì˜™ ????? "+angleX);
+//					System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ“ë¤„ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™?  i+1 == latitude : "+GN.get(i+1).latitude() + " longitude : " + GN.get(i+1).longitude());
+//					System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ“ë¤„ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™?  i == latitude : "+GN.get(i).latitude() + " longitude : " + GN.get(i).longitude());
 //					System.out.println("gkgkgkgk : "+Math.atan2((GN.get(i+1).latitude()-GN.get(i).latitude()),(GN.get(i+1).longitude()-GN.get(i).longitude())));
 //				}
 //			}
@@ -382,7 +382,7 @@ public class Plane {
 //					angleX=0;
 //				else{
 //					angleX=Math.acos( (GN.get(i+1).latitude()-GN.get(i).latitude())/(GN.get(i+1).longitude()-GN.get(i).longitude()) );
-//					System.out.println("¿©±âÀÇ angleX °ªÀº !!!!!! "+angleX);
+//					System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™ angleX å ì™ì˜™å ì™ì˜™ !!!!!! "+angleX);
 //				}
 //			}
 //		
@@ -392,7 +392,7 @@ public class Plane {
 //					angleX=0;
 //				else{
 //					angleX=Math.acos( (GN.get(GN.size()-i-1).latitude()-GN.get(GN.size()-i-2).latitude())/(GN.get(GN.size()-i-1).longitude()-GN.get(GN.size()-i-2).longitude()) );
-//				//	System.out.println("¿©±âÀÇ angleX °ªÀº d.d.d.d.d. "+angleX);
+//				//	System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™ angleX å ì™ì˜™å ì™ì˜™ d.d.d.d.d. "+angleX);
 //				}*/
 //			}
 //				dx = speed/Math.cos(angleX);
@@ -419,7 +419,8 @@ public class Plane {
 		if(type == 0){
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
-				System.out.println(next.coordinate(GNode.LATI)+ " <- ¶ö¶ó¶ö¶ó¶ó -> " +next.coordinate(GNode.LONG) +" ¶ö¶ó¶ö¶ó¶ó33 : " + next.coordinate(GNode.ALT));
+				System.out.println(next.coordinate(GNode.LATI)+ " <- ë„ë¼ë„ë¼ë¼ -> " +next.coordinate(GNode.LONG) +" ë„ë¼ë„ë¼ë¼33 : " + next.coordinate(GNode.ALT));
+
 				if(this.dx > 0) {
 					if(next.coordinate(GNode.LATI) <= this.coordinate(GNode.LATI)) {
 						sucX = true;
@@ -427,7 +428,6 @@ public class Plane {
 				} else if(this.dx < 0){
 					if(next.coordinate(GNode.LATI) >= this.coordinate(GNode.LATI)) {
 						sucX = true;
-						System.out.println("¿©±â´Ù°¡ ÀÌ°É ÇÏ¶ó°í??");
 					}
 				} else if(this.dx==0){
 					if(ddx>0 && next.coordinate(GNode.LATI) > this.coordinate(GNode.LATI)){
@@ -437,7 +437,6 @@ public class Plane {
 					} else if(next.coordinate(GNode.LATI) == this.coordinate(GNode.LATI)){
 						sucX = true;
 					}
-					System.out.println("dÀÌ°É·Î º¸¶ó°í ddx : "+ddx + "  ddy : " + ddy);
 				}
 				
 				if(this.dy > 0 && next.coordinate(GNode.LONG) <= this.coordinate(GNode.LONG)) {
@@ -521,8 +520,8 @@ public class Plane {
 			}
 		}
 		return suc;
-	}
+		}
 }
 
-// ÀÌ·ú½Ã¿¡ °øÇ×¿¡ ½ÅÈ£º¸³»±â
-// °øÇ×Àº ½ÅÈ£¸¦ ¹ŞÁö ¾ÊÀº ºñÇà±â´Â ¹«½ÃÇÏ°í ½ÅÈ£¸¦ º¸³½ ºñÇà±â¸¸À» Å½»ö
+// å ì‹±ë¤„ì˜™ì²¼å ï¿½ å ì™ì˜™å ìŒ“ìš¸ì˜™ å ì™ì˜™í˜¸å ì™ì˜™å ì™ì˜™å ì™ì˜™
+// å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™í˜¸å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¹ê³¤ì˜™ å ì™ì˜™í˜¸å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ç¶¬ëªŒì˜™å ï¿½ íƒå ì™ì˜™

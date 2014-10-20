@@ -137,18 +137,26 @@ class ImagePanel extends JPanel{
     
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+//        super.paintComponent(g);
         
-        g.drawImage(image, -this.x*this.scale, -this.y*this.scale, image.getWidth()*this.scale, image.getHeight()*this.scale, null); // see javadoc for more info on the parameters
-        g.setColor(new Color(0, 255, 0));
+        BufferedImage bufferedImage = new BufferedImage(900, 900, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = bufferedImage.createGraphics();
+        
+        g2d.drawImage(image, -this.x*this.scale, -this.y*this.scale, image.getWidth()*this.scale, image.getHeight()*this.scale, null); // see javadoc for more info on the parameters
+        g2d.setColor(new Color(0, 255, 0));
        
-        this.drawPlane(g);
-        this.drawLines(g);
+        this.drawPlane(g2d);
+        this.drawLines(g2d);
+
+        Graphics2D g2dComponent = (Graphics2D) g;
+        g2dComponent.drawImage(bufferedImage, null, 0, 0);  
+        
+       
     }
     public void drawPlane(Graphics g) {
     	for(Plane i : this.planes) {
-    		int _x = (int)(i.latitude*360/this.image.getWidth()), _y = (int)(i.longitude *360/this.image.getHeight());
-    		System.out.println("pixel = "+(_x-this.x*this.scale)+"    "+(_y-this.y*this.scale));
+    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
+//    		System.out.println("pixel = "+(_x-this.x*this.scale)+"    "+(_y-this.y*this.scale));
 	    	g.drawLine(_x-this.x*this.scale, _y-this.y*this.scale, _x+2-this.x*this.scale, _y+2-this.y*this.scale);
 	        g.drawString("KAL123", _x-this.x*this.scale, _y-this.y*this.scale);
     	}
@@ -165,5 +173,12 @@ class ImagePanel extends JPanel{
     public void scaleTo(int scale) {
     	this.scale = scale;
     }
-    
+    private int setLati(double lati) {
+    	int a = (int)((lati*4500/3600.0)+1850)%4550;
+    	return a;
+    }
+    private int setLong(double longs) {
+    	int a = (int)(longs*(-13/8.0))+1300;
+    	return a;
+    }
 }

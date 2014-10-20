@@ -2,33 +2,33 @@ package Engine;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+import java.util.Queue;
 
 public class Airport {
 	
-	String name; // °øÇ×¸í
-	double latitude, longitude, altitude = 0; // °øÇ×ÀÇ À§µµ, °æµµ
+	String name; // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™ï§ëš¯ì‚•
+	double latitude, longitude, altitude = 0; // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•, ï¿½ëœï¿½ëœ½ï¿½ë£„
 	//double x, y;
 	
-	int maximum_airplane; // ºñÇà±â ÃÖ´ë ÀçÀû °¡´É ¼ö
-	//long[] runways = new long[1];// È°ÁÖ·Î ±æÀÌ
+	int maximum_airplane; // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë™‡ï¿½ë™‹ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•
+	//long[] runways = new long[1];// ï¿½ì†¢ï¿½ëœï¿½ë™‡ï§Œê¾©ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•
 	
 	
 	
-	runwayNode[] runways = new runwayNode[1]; //È°ÁÖ·Î
+	runwayNode[] runways = new runwayNode[1]; //ï¿½ì†¢ï¿½ëœï¿½ë™‡ï§Œê¾©ì‚•
 	
 	
 	Graph aa = new Graph();
-	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // È°ÁÖ·Î ³ëµå
+	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // ï¿½ì†¢ï¿½ëœï¿½ë™‡ï§Œê¾©ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½
 	
-	// ºñÇà±â ÀÌÂø·úÀº Çã°¡ ÈÄ ÀÌÂø·ú °¡´É Çã°¡ ¸Ş¼Òµå¿¡¼­´Â Å¥¿¡ ºñÇà±â °´Ã¼µéÀ» Áı¾î³Ö¾î ¼øÂ÷ÀûÀ¸·Î Çã°¡½ÃÅ²´Ù.
-	// ºñÇà±â °´Ã¼´Â ¸®½ºÆ®¿¡ ÀúÀå
+	// ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ëœ«åª›ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ëœ«åª›ï¿½ ï¿½ëœï¿½ë™£ï¿½ëƒ¼ï¿½ë±¶ï¿½ë¿‰ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ê±§ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï§£ë‹·ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™‡ï¿½ë¼²ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ëœ«åª›ï¿½ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ê¶“ï¿½ëœï¿½ë£ï¿½ì‚•.
+	// ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï§£ë‹·ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ë“ƒï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•
 	
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 	
-	PlaneQueue q = new PlaneQueue();
+	Queue<Plane> q = new LinkedList<Plane>();
 	PlaneQueue q1 = new PlaneQueue();
 	//Plane p = new Plane();
 
@@ -103,8 +103,8 @@ public class Airport {
 		return aa;
 	}
 	
-	public void PlaneLandingTakeOff(Plane pl, String text){ // ºñÇà±â ÀÌÂø·ú
-		
+	public void PlaneLandingTakeOff(Plane pl, String text){ // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½
+		Plane pp = q.poll();
 		if(text.equals("Landing")){
 			if(q1.Push(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
@@ -112,29 +112,30 @@ public class Airport {
 			}
 		}else{
 			
-			if(planeList.contains(pl)){
+			if(planeList.contains(pl)&&pp!=null){
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
 				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
 				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
-				pl.setStatus("TakeOff"); // ºñÇà±â ÀÌ·ú
+				pl.setStatus("TakeOff"); // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë–›ï§Œê¾©ì‚•
 			}
 			
 		}
 	}
 
-	public void Data(){ // °øÇ× Á¤º¸ Ãâ·Â
+	public void Data(){ // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½
 		System.out.println("Airport name: "+name);
 		System.out.println("Airport latitude: "+latitude);
 		System.out.println("Airport Longitude: "+longitude);
 		
 	}
 
-	public void SetPlane(Plane pl){ // ºñÇà±â °øÇ×¿¡ »ı¼º
+	public void SetPlane(Plane pl){ // ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœå ï¿½ ï¿½ëœï¿½ë£ï¿½ì‚•ï¿½ëœï¿½ë™ï¿½ìŠ±ï¿½ì‚• ï¿½ëœï¿½ë£ï¿½ì‚•
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
 		planeList.add(pl);
+		q.offer(pl);
 	}
 	
 	public void setGraph(){
@@ -155,19 +156,22 @@ public class Airport {
 		if(name.equals("Dalars"))
 		{
 			//g.AddVertex(0,0,357,1403,1311);
+
 			g.AddVertex(1300,400,13);
 			g.AddVertex(1500,300,13);
 			g.AddVertex(800,600,13);
 			g.AddVertex(358,1330,13);
 
+
 		}
 		else if(name.equals("Narita"))
 		{
 			//g.AddVertex(0,0,1403,357,1300);
-			g.AddVertex(1141,618,13);
-			g.AddVertex(880,880,13);
-			g.AddVertex(618,1141,13);
-			g.AddVertex(357,1403,13);
+
+			g.AddVertex(2700,360,13);
+			g.AddVertex(2400,450,13);
+			g.AddVertex(1700,500,13);
+			g.AddVertex(1500,450,13);
 				
 		}
 		for(GNode ggn : g.vertex){

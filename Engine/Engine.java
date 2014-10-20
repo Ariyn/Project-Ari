@@ -160,7 +160,7 @@ public class Engine extends Thread{
 		
 		while(this._thread){
 			for(Plane i : FlyingplaneList) {
-				for(Airport ap : airportList){ // 占쌓삼옙 占싱뤄옙 占쏙옙占쏙옙
+				for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
 					ap.PlaneLandingTakeOff(i, "TakeOff");
 				}
 				
@@ -207,7 +207,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	public void createPlane(JSONObject data){ // 占쏙옙占쌓울옙 占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙
+	public void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
 		Plane testP = null;
