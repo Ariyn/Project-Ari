@@ -11,7 +11,7 @@ public class Main {
 	
 	public static void main(String argv[]){
 		Engine eng = Engine.getInstance();
-		eng.setFrame();
+		//eng.setFrame();
 		JSONParser parser = new JSONParser();
 		
 		try{

@@ -150,24 +150,24 @@ public class Airport {
 			r=runways[0].runwaysNode.get(i).z;
 			System.out.println("r = "+r);
 			
-			g.AddVertex(latitude + t/1000, longitude, r);
+			g.AddVertex(latitude + t/1000, longitude,r);
 		}
 		if(name.equals("Dalars"))
 		{
 			//g.AddVertex(0,0,357,1403,1311);
-			g.AddVertex(1300,400,1300);
-			g.AddVertex(1500,300,1300);
-			g.AddVertex(800,600,1300);
-			g.AddVertex(358,1330,1300);
+			g.AddVertex(1300,400,13);
+			g.AddVertex(1500,300,13);
+			g.AddVertex(800,600,13);
+			g.AddVertex(358,1330,13);
 
 		}
 		else if(name.equals("Narita"))
 		{
 			//g.AddVertex(0,0,1403,357,1300);
-			g.AddVertex(1141,618,1300);
-			g.AddVertex(880,880,1300);
-			g.AddVertex(618,1141,1300);
-			g.AddVertex(357,1403,1300);
+			g.AddVertex(1141,618,13);
+			g.AddVertex(880,880,13);
+			g.AddVertex(618,1141,13);
+			g.AddVertex(357,1403,13);
 				
 		}
 		for(GNode ggn : g.vertex){

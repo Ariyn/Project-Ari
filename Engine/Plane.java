@@ -12,9 +12,9 @@ public class Plane {
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
-	double speed=3.4; // 최고속도, 고도,속도
+	double speed=0.6; // 최고속도, 고도,속도
 	
-	//double x,y,z; // 좌표  
+	//double x,y,z; // 좌표 
 	double dx=0,dy=0;
 	double ddx=0, ddy=0, ddz=0;
 	
@@ -27,7 +27,6 @@ public class Plane {
 	
 	int status = 0; // 비행기 상태, 0 == 대기, 1 == 이륙 , 2 == 비행중, 3 == 착륙
 	Graph root;
-	Graph root1 = new Graph();
 //	ArrayList<GNode> GN = new ArrayList<GNode>();
 	// 위도와 경도를 3600으로 나눈후 중간을 좌표 0으로 지정 좌우로 +-500씩 할당한다
 	// 좌표가 +-500를 초과하면 위도 또는 경도를 변경한다.
@@ -194,15 +193,7 @@ public class Plane {
 	public void setRoot(Graph g){
 		this.root = g;
 		
-		this.root1.AddVertex(357.881,1430,1300);
-		this.root1.AddVertex(357.42,1430,1200);
-		this.root1.AddVertex(356.5,1430,500);
-		this.root1.AddVertex(356,1430,200);
-		this.root1.AddVertex(355.5,1430,0);
 		
-		for(int i =0; i<root1.vertex.size()-1;i++){
-			root1.VertexSetEdges(root1.vertex.get(i), root1.vertex.get(i+1));
-		}
 	}
 	
 	public void setStatus(String text){
@@ -242,7 +233,7 @@ public class Plane {
 			System.out.println("Plane in class dx: "+dx);
 			System.out.println("Plane in class dy: "+dy);
 			System.out.println("Plane in class dz: "+dz);
-			if(altitude>=1300)setStatus("Flying");
+			if(altitude>=13)setStatus("Flying");
 		}
 		else if(status==2){ // 비행중
 			System.out.println("Flying!!! "+speed);
@@ -358,6 +349,9 @@ public class Plane {
 				if(this.coordinate(GNode.LONG)>next.coordinate(GNode.LONG)){
 					dy = -dy;
 				}
+				if(this.coordinate(GNode.ALT)>next.coordinate(GNode.ALT)){
+					dz = -dz;
+				}
 				
 //				if(dx >= 1000) {
 //					dx -= 1000;
@@ -425,7 +419,7 @@ public class Plane {
 		if(type == 0){
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
-				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG));
+				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
 				if(this.dx > 0) {
 					if(next.coordinate(GNode.LATI) <= this.coordinate(GNode.LATI)) {
 						sucX = true;
@@ -439,6 +433,8 @@ public class Plane {
 					if(ddx>0 && next.coordinate(GNode.LATI) > this.coordinate(GNode.LATI)){
 						sucX = true;
 					} else if(ddx<0 && next.coordinate(GNode.LATI) < this.coordinate(GNode.LATI)){
+						sucX = true;
+					} else if(next.coordinate(GNode.LATI) == this.coordinate(GNode.LATI)){
 						sucX = true;
 					}
 					System.out.println("d이걸로 보라고 ddx : "+ddx + "  ddy : " + ddy);
@@ -479,7 +475,6 @@ public class Plane {
 			System.out.println("sucX : " +sucX + " sucY : "+sucY + " sucZ : "+ sucZ);
 			if(dic.get("next") == Boolean.FALSE){
 				setStatus("Landing");
-				root=root1;
 			}
 			return sucX & sucY & sucZ;
 		} else if(type == 1) {
@@ -492,6 +487,7 @@ public class Plane {
 				} else {
 					if(next.coordinate(GNode.LATI) >= this.coordinate(GNode.LATI)) {
 						suc = true;
+						System.out.println("3333333333");
 					}
 				}
 			}
@@ -517,7 +513,7 @@ public class Plane {
 						this.altitude = next.altitude();
 					}
 				} else {
-					if(next.coordinate(GNode.ALT) >= this.coordinate(GNode.ALT)) {
+					if(next.coordinate(GNode.ALT) <= this.coordinate(GNode.ALT)) {
 						suc = true;
 						this.altitude = next.altitude();
 					}
