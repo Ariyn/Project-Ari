@@ -525,7 +525,7 @@ public class Plane {
 			}
 		}
 		return suc;
-	}
+		}
 }
 
 // �̷�ÿ� ���׿� ��ȣ������
