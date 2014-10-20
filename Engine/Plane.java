@@ -525,7 +525,7 @@ public class Plane {
 			}
 		}
 		return suc;
-	}
+		}
 }
 
 // 이륙시에 공항에 신호보내기

@@ -2,33 +2,33 @@ package Engine;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+import java.util.Queue;
 
 public class Airport {
 	
-	String name; // ���׸�
-	double latitude, longitude, altitude = 0; // ������ ����, �浵
+	String name; // 占쏙옙占쌓몌옙
+	double latitude, longitude, altitude = 0; // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙, 占썸도
 	//double x, y;
 	
-	int maximum_airplane; // ����� �ִ� ���� ���� ��
-	//long[] runways = new long[1];// Ȱ�ַ� ����
+	int maximum_airplane; // 占쏙옙占쏙옙占� 占쌍댐옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙
+	//long[] runways = new long[1];// 활占쌍뤄옙 占쏙옙占쏙옙
 	
 	
 	
-	runwayNode[] runways = new runwayNode[1]; //Ȱ�ַ�
+	runwayNode[] runways = new runwayNode[1]; //활占쌍뤄옙
 	
 	
 	Graph aa = new Graph();
-	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // Ȱ�ַ� ���
+	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활占쌍뤄옙 占쏙옙占�
 	
-	// ����� ������� �㰡 �� ����� ���� �㰡 �޼ҵ忡���� ť�� ����� ��ü���� ���־� ���������� �㰡��Ų��.
-	// ����� ��ü�� ����Ʈ�� ����
+	// 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占� 占썬가 占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占썬가 占쌨소드에占쏙옙占쏙옙 큐占쏙옙 占쏙옙占쏙옙占� 占쏙옙체占쏙옙占쏙옙 占쏙옙占쌍억옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占썬가占쏙옙킨占쏙옙.
+	// 占쏙옙占쏙옙占� 占쏙옙체占쏙옙 占쏙옙占쏙옙트占쏙옙 占쏙옙占쏙옙
 	
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 	
-	PlaneQueue q = new PlaneQueue();
+	Queue<Plane> q = new LinkedList<Plane>();
 	PlaneQueue q1 = new PlaneQueue();
 	//Plane p = new Plane();
 
@@ -103,8 +103,8 @@ public class Airport {
 		return aa;
 	}
 	
-	public void PlaneLandingTakeOff(Plane pl, String text){ // ����� �����
-		
+	public void PlaneLandingTakeOff(Plane pl, String text){ // 占쏙옙占쏙옙占� 占쏙옙占쏙옙占�
+		Plane pp = q.poll();
 		if(text.equals("Landing")){
 			if(q1.Push(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
@@ -112,29 +112,30 @@ public class Airport {
 			}
 		}else{
 			
-			if(planeList.contains(pl)){
+			if(planeList.contains(pl)&&pp!=null){
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
 				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
 				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
-				pl.setStatus("TakeOff"); // ����� �̷�
+				pl.setStatus("TakeOff"); // 占쏙옙占쏙옙占� 占싱뤄옙
 			}
 			
 		}
 	}
 
-	public void Data(){ // ���� ���� ���
+	public void Data(){ // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 		System.out.println("Airport name: "+name);
 		System.out.println("Airport latitude: "+latitude);
 		System.out.println("Airport Longitude: "+longitude);
 		
 	}
 
-	public void SetPlane(Plane pl){ // ����� ���׿� ��
+	public void SetPlane(Plane pl){ // 占쏙옙占쏙옙占� 占쏙옙占쌓울옙 占쏙옙
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
 		planeList.add(pl);
+		q.offer(pl);
 	}
 	
 	public void setGraph(){
@@ -164,10 +165,10 @@ public class Airport {
 		else if(name.equals("Narita"))
 		{
 			//g.AddVertex(0,0,1403,357,1300);
-			g.AddVertex(1141,618,1300);
-			g.AddVertex(880,880,1300);
-			g.AddVertex(618,1141,1300);
-			g.AddVertex(357,1403,1300);
+			g.AddVertex(2700,360,1300);
+			g.AddVertex(2400,450,1300);
+			g.AddVertex(1700,500,1300);
+			g.AddVertex(1500,450,1300);
 				
 		}
 		for(GNode ggn : g.vertex){
