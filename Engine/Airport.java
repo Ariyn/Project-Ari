@@ -6,23 +6,23 @@ import java.util.LinkedList;
 
 public class Airport {
 	
-	String name; // °øÇ×¸í
-	double latitude, longitude, altitude = 0; // °øÇ×ÀÇ À§µµ, °æµµ
+	String name; // ï¿½ï¿½ï¿½×¸ï¿½
+	double latitude, longitude, altitude = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½æµµ
 	//double x, y;
 	
-	int maximum_airplane; // ºñÇà±â ÃÖ´ë ÀçÀû °¡´É ¼ö
-	//long[] runways = new long[1];// È°ÁÖ·Î ±æÀÌ
+	int maximum_airplane; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	//long[] runways = new long[1];// È°ï¿½Ö·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	
 	
-	runwayNode[] runways = new runwayNode[1]; //È°ÁÖ·Î
+	runwayNode[] runways = new runwayNode[1]; //È°ï¿½Ö·ï¿½
 	
 	
 	Graph aa = new Graph();
-	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // È°ÁÖ·Î ³ëµå
+	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // È°ï¿½Ö·ï¿½ ï¿½ï¿½ï¿½
 	
-	// ºñÇà±â ÀÌÂø·úÀº Çã°¡ ÈÄ ÀÌÂø·ú °¡´É Çã°¡ ¸Þ¼Òµå¿¡¼­´Â Å¥¿¡ ºñÇà±â °´Ã¼µéÀ» Áý¾î³Ö¾î ¼øÂ÷ÀûÀ¸·Î Çã°¡½ÃÅ²´Ù.
-	// ºñÇà±â °´Ã¼´Â ¸®½ºÆ®¿¡ ÀúÀå
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ã°¡ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ã°¡ ï¿½Þ¼Òµå¿¡ï¿½ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ã°¡ï¿½ï¿½Å²ï¿½ï¿½.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
@@ -103,7 +103,7 @@ public class Airport {
 		return aa;
 	}
 	
-	public void PlaneLandingTakeOff(Plane pl, String text){ // ºñÇà±â ÀÌÂø·ú
+	public void PlaneLandingTakeOff(Plane pl, String text){ // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		if(text.equals("Landing")){
 			if(q1.Push(pl)==true){
@@ -118,20 +118,20 @@ public class Airport {
 				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
 				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
 				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
-				pl.setStatus("TakeOff"); // ºñÇà±â ÀÌ·ú
+				pl.setStatus("TakeOff"); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½
 			}
 			
 		}
 	}
 
-	public void Data(){ // °øÇ× Á¤º¸ Ãâ·Â
+	public void Data(){ // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		System.out.println("Airport name: "+name);
 		System.out.println("Airport latitude: "+latitude);
 		System.out.println("Airport Longitude: "+longitude);
 		
 	}
 
-	public void SetPlane(Plane pl){ // ºñÇà±â °øÇ×¿¡ »ý¼º
+	public void SetPlane(Plane pl){ // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×¿ï¿½ ï¿½ï¿½
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
 		planeList.add(pl);
@@ -155,10 +155,10 @@ public class Airport {
 		if(name.equals("Dalars"))
 		{
 			//g.AddVertex(0,0,357,1403,1311);
-			g.AddVertex(1300,400,1300);
-			g.AddVertex(1500,300,1300);
-			g.AddVertex(800,600,1300);
-			g.AddVertex(358,1330,1300);
+			g.AddVertex(1500,450,1300);
+			g.AddVertex(1700,500,1300);
+			g.AddVertex(2400,450,1300);
+			g.AddVertex(2700,360,1300);
 
 		}
 		else if(name.equals("Narita"))

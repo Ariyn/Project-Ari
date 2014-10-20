@@ -147,7 +147,7 @@ class ImagePanel extends JPanel{
     }
     public void drawPlane(Graphics g) {
     	for(Plane i : this.planes) {
-    		int _x = (int)(i.latitude*360/this.image.getWidth()), _y = (int)(i.longitude *360/this.image.getHeight());
+    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
     		System.out.println("pixel = "+(_x-this.x*this.scale)+"    "+(_y-this.y*this.scale));
 	    	g.drawLine(_x-this.x*this.scale, _y-this.y*this.scale, _x+2-this.x*this.scale, _y+2-this.y*this.scale);
 	        g.drawString("KAL123", _x-this.x*this.scale, _y-this.y*this.scale);
@@ -165,5 +165,12 @@ class ImagePanel extends JPanel{
     public void scaleTo(int scale) {
     	this.scale = scale;
     }
-    
+    private int setLati(double lati) {
+    	int a = (int)((lati*4500/3600.0)+1850)%4550;
+    	return a;
+    }
+    private int setLong(double longs) {
+    	int a = (int)(longs*(-13/8.0))+1300;
+    	return a;
+    }
 }
