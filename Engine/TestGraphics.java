@@ -155,7 +155,6 @@ class ImagePanel extends JPanel{
     public void drawPlane(Graphics g) {
     	for(Plane i : this.planes) {
     		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
-//    		System.out.println("pixel = "+(_x-this.x*this.scale)+"    "+(_y-this.y*this.scale));
 	    	g.drawLine(_x-this.x*this.scale, _y-this.y*this.scale, _x+2-this.x*this.scale, _y+2-this.y*this.scale);
 	        g.drawString(""+i.getString("Name"), _x-this.x*this.scale, _y-this.y*this.scale);
     	}

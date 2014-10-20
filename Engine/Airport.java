@@ -6,21 +6,14 @@ import java.util.Queue;
 
 public class Airport {
 	
-	String name; // �뜝�룞�삕�뜝�뙎紐뚯삕
-	double latitude, longitude, altitude = 0; // �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕, �뜝�뜽�룄
-	//double x, y;
+	String name;
+	double latitude, longitude, altitude = 0;
 	
-	int maximum_airplane; // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�뙇�뙋�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕
-	//long[] runways = new long[1];// �솢�뜝�뙇琉꾩삕 �뜝�룞�삕�뜝�룞�삕
+	int maximum_airplane;
 	
-	
-	
-	runwayNode[] runways = new runwayNode[1]; //�솢�뜝�뙇琉꾩삕
-	
+	runwayNode[] runways = new runwayNode[1];
 	
 	Graph aa = new Graph();
-	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // �솢�뜝�뙇琉꾩삕 �뜝�룞�삕�뜝占�
-	
 
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
@@ -94,6 +87,7 @@ public class Airport {
 		return aa;
 	}
 
+
 	@SuppressWarnings("null")
 	public void PlaneLandingTakeOff(Plane pl, String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
 		Plane pp = null;
@@ -119,14 +113,14 @@ public class Airport {
 		}
 	}
 
-	public void Data(){ // �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占�
+	public void Data(){
 		System.out.println("Airport name: "+name);
 		System.out.println("Airport latitude: "+latitude);
 		System.out.println("Airport Longitude: "+longitude);
 		
 	}
 
-	public void SetPlane(Plane pl){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕
+	public void SetPlane(Plane pl){
 		pl.set("Longitude",this.longitude);
 		pl.set("Latitude",this.latitude);
 		planeList.add(pl);
@@ -140,27 +134,26 @@ public class Airport {
 	
 	public void CreatGraph(Graph g){
 		double t = 0, r = 0;
-		//double lati = latitude;
 		for(int i=0; i<runways[0].runwaysNode.size();i++){
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
-			System.out.println("r = "+r);
-			
 			g.AddVertex(latitude + t/1000, longitude,r);
 		}
 		if(name.equals("Dalars"))
 		{
+
 			//g.AddVertex(0,0,357,1403,1311);
 
 			g.AddVertex(2750,400,13);
+
 			g.AddVertex(1500,300,13);
 			g.AddVertex(800,600,13);
 			g.AddVertex(1004,457,13);
 
-
 		}
 		else if(name.equals("Narita"))
 		{
+
 			//g.AddVertex(0,0,1403,357,1300);
 
 			g.AddVertex(1100,500,13);
