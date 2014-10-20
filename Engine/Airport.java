@@ -6,31 +6,23 @@ import java.util.Queue;
 
 public class Airport {
 	
-	String name; // 占쏙옙占쌓몌옙
-	double latitude, longitude, altitude = 0; // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙, 占썸도
+	String name;
+	double latitude, longitude, altitude = 0;
 	//double x, y;
 	
-	int maximum_airplane; // 占쏙옙占쏙옙占� 占쌍댐옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙
-	//long[] runways = new long[1];// 활占쌍뤄옙 占쏙옙占쏙옙
+	int maximum_airplane;
 	
-	
-	
-	runwayNode[] runways = new runwayNode[1]; //활占쌍뤄옙
+	runwayNode[] runways = new runwayNode[1];
 	
 	
 	Graph aa = new Graph();
-	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // 활占쌍뤄옙 占쏙옙占�
-	
-	// 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占� 占썬가 占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占썬가 占쌨소드에占쏙옙占쏙옙 큐占쏙옙 占쏙옙占쏙옙占� 占쏙옙체占쏙옙占쏙옙 占쏙옙占쌍억옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占썬가占쏙옙킨占쏙옙.
-	// 占쏙옙占쏙옙占� 占쏙옙체占쏙옙 占쏙옙占쏙옙트占쏙옙 占쏙옙占쏙옙
-	
+
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 	
 	Queue<Plane> q = new LinkedList<Plane>();
-	PlaneQueue q1 = new PlaneQueue();
-	//Plane p = new Plane();
+	Queue<Plane> q1 = new LinkedList<Plane>();
 
 	public void setRunways(long num, long length, ArrayList nodes){
 		runways[0] = new runwayNode();
@@ -51,12 +43,6 @@ public class Airport {
 	
 	public void set(String s, double l){
 		switch(s){
-		/*case "x":
-			x=l;
-			break;
-		case "y":
-			y=l;
-			break;*/
 		case "Latitude":
 			latitude=l;
 			break;
@@ -103,15 +89,14 @@ public class Airport {
 		return aa;
 	}
 	
-	public void PlaneLandingTakeOff(Plane pl, String text){ // 占쏙옙占쏙옙占� 占쏙옙占쏙옙占�
-		Plane pp = q.poll();
+	public void PlaneLandingTakeOff(Plane pl, String text){
 		if(text.equals("Landing")){
-			if(q1.Push(pl)==true){
+			if(q1.add(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
 				planeList.remove(pl);
 			}
 		}else{
-			
+			Plane pp = q.poll();
 			if(planeList.contains(pl)&&pp!=null){
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
