@@ -295,7 +295,7 @@ public class Plane {
 				
 				dx = speed*Math.cos(angleY)*Math.cos(angleX);
 				dy = speed*Math.cos(angleY)*Math.sin(angleX);
-				dz = speed*Math.sin(angleY)*10;
+				dz = speed*Math.sin(angleY);
 				
 				if(this.coordinate(GNode.LATI)>next.coordinate(GNode.LATI)){
 					dx = -dx;
