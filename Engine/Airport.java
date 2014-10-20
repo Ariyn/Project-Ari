@@ -155,10 +155,10 @@ public class Airport {
 		if(name.equals("Dalars"))
 		{
 			//g.AddVertex(0,0,357,1403,1311);
-			g.AddVertex(1300,500,1300);
-			g.AddVertex(1000,800,1300);
-			g.AddVertex(800,1050,1300);
-			g.AddVertex(358,1430,1300);
+			g.AddVertex(1300,400,1300);
+			g.AddVertex(1500,300,1300);
+			g.AddVertex(800,600,1300);
+			g.AddVertex(358,1330,1300);
 
 		}
 		else if(name.equals("Narita"))

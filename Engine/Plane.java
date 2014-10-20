@@ -12,7 +12,7 @@ public class Plane {
 	long fuelTank, fuel=100; // 연료최대량, 연료량(%)
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
-	double speed=1.4; // 최고속도, 고도,속도
+	double speed=3.4; // 최고속도, 고도,속도
 	
 	//double x,y,z; // 좌표  
 	double dx=0,dy=0;
@@ -355,6 +355,9 @@ public class Plane {
 				if(this.coordinate(GNode.LATI)>next.coordinate(GNode.LATI)){
 					dx = -dx;
 				}
+				if(this.coordinate(GNode.LONG)>next.coordinate(GNode.LONG)){
+					dy = -dy;
+				}
 				
 //				if(dx >= 1000) {
 //					dx -= 1000;
@@ -438,20 +441,19 @@ public class Plane {
 					} else if(ddx<0 && next.coordinate(GNode.LATI) < this.coordinate(GNode.LATI)){
 						sucX = true;
 					}
-					System.out.println("d이걸로 보라고 : "+ddx);
-					System.out.println("이게 나오겠지 -> next :"+next.coordinate(GNode.LATI)+ " this : " + this.coordinate(GNode.LATI));
+					System.out.println("d이걸로 보라고 ddx : "+ddx + "  ddy : " + ddy);
 				}
 				
 				if(this.dy > 0 && next.coordinate(GNode.LONG) <= this.coordinate(GNode.LONG)) {
 					sucY = true;
 				} else if(this.dy < 0 && next.coordinate(GNode.LONG) >= this.coordinate(GNode.LONG)) {
 					sucY = true;
-				} else if(dy==0){
+				} else if(this.dy==0){
 					if(ddy>0 && next.coordinate(GNode.LONG) > this.coordinate(GNode.LONG)){
 						sucY = true;
 					} else if(ddy<0 && next.coordinate(GNode.LONG) < this.coordinate(GNode.LONG)){
 						sucY = true;
-					}else if(next.coordinate(GNode.LONG) == this.coordinate(GNode.LONG)){
+					} else if(next.coordinate(GNode.LONG) == this.coordinate(GNode.LONG)){
 						sucY=true;
 					}
 				}
