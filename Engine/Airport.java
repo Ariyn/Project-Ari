@@ -21,16 +21,13 @@ public class Airport {
 	Graph aa = new Graph();
 	//ArrayList<rNode> runwaysNode = new ArrayList<rNode>(); // �솢�뜝�뙇琉꾩삕 �뜝�룞�삕�뜝占�
 	
-	// �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�뜫媛� �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�뜫媛� �뜝�뙣�냼�뱶�뿉�뜝�룞�삕�뜝�룞�삕 �걧�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕泥닷뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�뙇�뼲�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�뜫媛��뜝�룞�삕�궓�뜝�룞�삕.
-	// �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕泥닷뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�듃�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
-	
+
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
 	ArrayList <Plane> planeList = new ArrayList<Plane>();	
 	
 	Queue<Plane> q = new LinkedList<Plane>();
-	PlaneQueue q1 = new PlaneQueue();
-	//Plane p = new Plane();
+	Queue<Plane> q1 = new LinkedList<Plane>();
 
 	public void setRunways(long num, long length, ArrayList nodes){
 		runways[0] = new runwayNode();
@@ -51,12 +48,6 @@ public class Airport {
 	
 	public void set(String s, double l){
 		switch(s){
-		/*case "x":
-			x=l;
-			break;
-		case "y":
-			y=l;
-			break;*/
 		case "Latitude":
 			latitude=l;
 			break;
@@ -102,16 +93,16 @@ public class Airport {
 		
 		return aa;
 	}
-	
+
 	public void PlaneLandingTakeOff(Plane pl, String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
-		Plane pp = q.poll();
+
 		if(text.equals("Landing")){
-			if(q1.Push(pl)==true){
+			if(q1.add(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
 				planeList.remove(pl);
 			}
 		}else{
-			
+			Plane pp = q.poll();
 			if(planeList.contains(pl)&&pp!=null){
 				planeList.get(planeList.indexOf(pl));
 				planeList.remove(pl);
