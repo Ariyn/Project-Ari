@@ -170,6 +170,7 @@ public class Plane {
 			break;
 		case "CodeName":
 			codeName = str;
+			break;
 		}
 	}
 	

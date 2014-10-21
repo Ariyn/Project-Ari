@@ -18,6 +18,8 @@ public class Engine extends Thread{
 	
 	boolean _thread = true;
 	
+	Graph allGraph = new Graph();
+	
 	private static Engine instance = new Engine();
 	private Engine(){}
 	public static Engine getInstance(){
@@ -161,7 +163,6 @@ public class Engine extends Thread{
 					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+ap.getString("Name"));
 					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+i.getString("Name"));
 				}
-				
 				i.Move();
 				
 				System.out.println("running");
@@ -217,9 +218,10 @@ public class Engine extends Thread{
 			Set<String> keys = (Set<String>)cpl.keySet();
 			
 			for(Plane p : planeTypeList){
-				
 				if(p.getString("Name").equals(cpl.get("modelNumber")) ){
 					testP = p;
+					System.out.println("Name==modelNumber Plane : "+testP.getString("Name"));
+					System.out.println("Name==modelNumber Plane : "+cpl.get("CodeName"));
 				}
 			}
 
@@ -254,12 +256,15 @@ public class Engine extends Thread{
 			}
 			FlyingplaneList.add(testP);
 			
+			for(Plane ikdj : FlyingplaneList){
+				System.out.println("인터넷이 안되겠지 "+ikdj.getString("CodeName"));
+			}
 		}
 		
 		for(Plane pn : FlyingplaneList){
 			for(Airport ap : airportList){
 				if(ap.getString("Name").equals(pn.startSpot) ){
-					System.out.println("Set "+pn.getString("Name"));
+					System.out.println("Set "+pn.getString("CodeName"));
 					ap.SetPlane(pn);
 					ap.setGraph();
 					pn.setRoot(ap.getGraph());
@@ -271,5 +276,26 @@ public class Engine extends Thread{
 	
 	public void setFrame() {
 		this.frame = new TestGraphics(this.FlyingplaneList);
+	}
+	
+	public void allGraphCreate(){
+		allGraph.AddVertex(2750,400,13);
+		
+		allGraph.AddVertex(1004,457,13);
+		
+		allGraph.AddVertex(1100,500,13);
+		
+		allGraph.AddVertex(1500,450,13);
+		allGraph.AddVertex(2000,400,13);
+		
+		allGraph.AddVertex(2700,360,13);
+		
+		allGraph.VertexSetEdges(allGraph.vertex.get(0), allGraph.vertex.get(4));
+		allGraph.VertexSetEdges(allGraph.vertex.get(4), allGraph.vertex.get(3));
+		allGraph.VertexSetEdges(allGraph.vertex.get(3), allGraph.vertex.get(1));
+		
+		allGraph.VertexSetEdges(allGraph.vertex.get(2), allGraph.vertex.get(3));
+		allGraph.VertexSetEdges(allGraph.vertex.get(3), allGraph.vertex.get(4));
+		allGraph.VertexSetEdges(allGraph.vertex.get(4), allGraph.vertex.get(5));
 	}
 }
