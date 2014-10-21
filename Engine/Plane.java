@@ -1,11 +1,8 @@
 package Engine;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Dictionary;
-import java.util.List;
 
-public class Plane {
+public class Plane implements Cloneable{
 	double weight, length, height, wingAngle;
 	double wingLength, bodyWidth;
 
@@ -31,6 +28,14 @@ public class Plane {
 	public Plane(){
 		
 
+	}
+	public Plane clone(){  
+	    try{  
+	        return (Plane)super.clone();  
+	    }catch(Exception e){ 
+	    	e.printStackTrace();
+	        return null; 
+	    }
 	}
 	
 	public Plane(Plane type){
