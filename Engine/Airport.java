@@ -45,9 +45,11 @@ public class Airport {
 		switch(s){
 		case "Latitude":
 			latitude=l;
+			System.out.printf("%s's latitude changed %f", this.name, this.latitude);
 			break;
 		case "Longitude":
 			longitude=l;
+			System.out.printf("%s's longitude changed %f", this.name, this.longitude);
 			break;
 		}
 	}
@@ -86,35 +88,66 @@ public class Airport {
 	
 	public Graph getGraph(){
 		
-		return aa;
+		return aa.clone();
 	}
-
-
-	@SuppressWarnings("null")
-	public void PlaneLandingTakeOff(Plane pl, String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
+	
+	public Plane PlaneLandingTakeOff(String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
+		Plane i = null;
 		
-		if(text.equals("Landing")){
-			if(q1.offer(pl)==true){
-				System.out.println("PlaneLanding : "+pl.getString("Name"));
-				pl.setRoot(bb);
-			}
-		}else{
-			if(pp == null){
-				pp = q.poll();
+
+		System.out.println("");
+		System.out.println(this.name);
+			
+		if(pp == null) {
+			this.pp = this.q.poll();
+			if(pp != null)
+				pp.setStatus("TakeOff");
+			i=pp;
+		}
+		else {
+			System.out.println("testForPlaneTakeoff"+this.pp.codeName+"\t\t"+this.pp + "\t" +this.q +"\t"+this.planeList);
+			if(pp.getStatus() == 2) {
+				this.planeList.remove( this.planeList.indexOf( this.pp ) );
+				this.pp = this.q.poll();
+
 				
-			}else if(pp.getStatus()==2){
-				pp = q.poll();
-			}
-			if(planeList.contains(pl)&&pp==pl ){
-				planeList.get(planeList.indexOf(pl));
-				planeList.remove(pl);
-				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
-				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
-				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
-				pl.setStatus("TakeOff");
+				if(pp != null) {
+					pp.setStatus("TakeOff");
+				}
+				i=pp;
 			}
 		}
+		if(i != null && i.codeName.equals("AA013"))
+			System.out.println(i.root.head);
+		
+		return i;
 	}
+
+//	@SuppressWarnings("null")
+//	public int PlaneLandingTakeOff(Plane pl, String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
+//		int retVal =0;
+//		if(text.equals("Landing")){
+//			if(q1.offer(pl)==true){
+//				System.out.println("PlaneLanding : "+pl.getString("Name"));
+//				planeList.remove(pl);
+//			}
+//		}else{
+//			if(pp == null || pp.getStatus()==2){
+//				pp = q.poll();
+//				if(pp != null)
+//					retVal = 1;				
+//			}
+//			if(planeList.contains(pl)&&pp==pl ){
+//				planeList.get(planeList.indexOf(pl));
+//				planeList.remove(pl);
+//				System.out.println("PlaneTakeOff : " +pl.getString("CodeName"));
+//				System.out.println("what the PlaneTakeOff : " +pl.getString("Name"));
+//				System.out.println("what the PlaneTakeOff company : " +pl.getString("Company"));
+//				pl.setStatus("TakeOff");
+//			}
+//		}
+//		return retVal;
+//	}
 
 	public void Data(){
 		System.out.println("Airport name: "+name);

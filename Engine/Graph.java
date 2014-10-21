@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class Graph {
+public class Graph implements Cloneable{
 	public GNode head;
 	public ArrayList<GNode> vertex = new ArrayList<GNode>();
 
@@ -17,7 +17,17 @@ public class Graph {
 			this.head = g;	
 		this.vertex.add(g);
 	}
-	
+	public Graph clone(){
+	    try{
+	    	Graph graph = (Graph)super.clone();
+	    	graph.head = this.head.clone();
+	    	graph.vertex = (ArrayList<GNode>) this.vertex.clone();
+	        return graph;
+	    }catch(Exception e){ 
+	    	e.printStackTrace();
+	        return null; 
+	    }
+	}
 	public Dictionary<String, Object> getNextNode() {
 		Dictionary<String, Object> retVal = new Hashtable();
 		if(this.vertex.size() <= 1){

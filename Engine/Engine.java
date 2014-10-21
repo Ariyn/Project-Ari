@@ -1,7 +1,12 @@
 package Engine;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +19,8 @@ public class Engine extends Thread{
 
 	ArrayList <Airport> airportList = new ArrayList<Airport>();
 	ArrayList <Plane> planeTypeList = new ArrayList<Plane>();
-	ArrayList <Plane> FlyingplaneList = new ArrayList<Plane>();	
+	ArrayList <Plane> FlyingplaneList = new ArrayList<Plane>();
+	ArrayList <Plane> FlyingplaneList2 = new ArrayList<Plane>();
 	
 	boolean _thread = true;
 	
@@ -149,47 +155,81 @@ public class Engine extends Thread{
 	}
 	
 	public void run() {
-		int de=9999;
+		int de=8;
 		
 		while(this._thread){
-			if(FlyingplaneList.isEmpty()){
+			if(FlyingplaneList.isEmpty() || this._thread == false){
 				this.pause();
 			}
 			
-			for(Plane i : FlyingplaneList) {
-				for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
-					ap.PlaneLandingTakeOff(i, "TakeOff");
+			for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
+				Plane i = ap.PlaneLandingTakeOff("TakeOff");
+				if(i != null) {
+					i.altitude = ap.altitude;
+					i.longitude = ap.longitude;
+					i.latitude = ap.latitude;
+					
+					if(i.codeName.equals("AA013"))
+						System.out.println("AA013 root"+i.root.head.coordinate(0)+"\t"+i.root.head.coordinate(1)+"\t"+i.root.head.coordinate(2));
+					
+					i.Spin();
+					
+					if(i.codeName.equals("AA013"))
+						System.out.println("AA013 root"+i.root.head.coordinate(0)+"\t"+i.root.head.coordinate(1)+"\t"+i.root.head.coordinate(2));
+
+					
+					this.FlyingplaneList2.add(i);
+//					this.FlyingplaneList.remove(i);
 					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+ap.getString("Name"));
-					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+i.getString("Name"));
+					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+i.getString("CodeName"));
 				}
-				i.Move();
 				
-				System.out.println("running");
-				System.out.println(i.getString("Name")+ "-latitude : "+i.getDouble("Latitude"));
-				System.out.println(i.getString("Name")+ "-longitude : "+i.getDouble("Longitude"));
-				System.out.println(i.getString("Name")+ "-altitude : "+i.getDouble("Altitude"));
-				System.out.println();
+			}
+			
+			for(Plane i : FlyingplaneList2) {
+				
+				i.Move();
+				if(i.codeName.equals("AA013") || i.codeName.equals("AA012")){
+					System.out.println("running \t\t"+i.root);
+
+					Dictionary<String, Object> d = i.root.getNextNode();
+					if(d.get("next") != null && d.get("node") != null)
+						System.out.printf("%s's coordinate = %f, %f, %f\n",
+								i.codeName,
+								((GNode)d.get("node")).coordinate(GNode.LATI),
+								((GNode)d.get("node")).coordinate(GNode.LONG),
+								((GNode)d.get("node")).coordinate(GNode.ALT));
+
+					System.out.println(i.getString("Name")+ "-latitude : "+i.getDouble("Latitude"));
+					System.out.println(i.getString("Name")+ "-longitude : "+i.getDouble("Longitude"));
+					System.out.println(i.getString("Name")+ "-altitude : "+i.getDouble("Altitude"));
+					
+					System.out.printf("%s's coordinate = %f, %f, %f", i.codeName,i.dx,i.dy,i.dz);
+					
+					System.out.println();
+					System.out.println();
+					
+					if(i.codeName.equals("AA013") && i.dx==0){
+						//this.pause();
+					}
+				}
+
 				
 //				if(i.getStatus()==3){
 //					de = FlyingplaneList.indexOf(i);
 //					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
 //				}
 				if(i.getStatus()==3){
-					for(Airport eap : airportList){
-						if(eap.getString("Name").equals(i.getString("EndSpot")) ){
-							eap.PlaneLandingTakeOff(i, "Landing");
-						}
-					}
-					System.out.println("Landing!!!");
-				}
-				if(i.getStatus()==4){
-					de = FlyingplaneList.indexOf(i);
+
+					de = FlyingplaneList2.indexOf(i);
+//					FlyingplaneList.remove(FlyingplaneList.indexOf(i));
 					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				}
 			}
-			if(de!=9999){
-				//FlyingplaneList.remove(de);
-				de=9999;
+			if(de!=8){
+				FlyingplaneList2.remove(de);
+				de=8;
+
 			}
 			try {
 				Thread.sleep(30);
@@ -201,8 +241,11 @@ public class Engine extends Thread{
 			this.frame.repaint();
 		}
 	}
-	
+	public void setRun(boolean r) {
+		this._thread = r;
+	}
 	public synchronized void pause(){
+		System.out.println("engine pause");
 		if(this._thread){
 			this._thread = false;
 			try {
@@ -264,26 +307,57 @@ public class Engine extends Thread{
 				}
 			}
 			FlyingplaneList.add(testP);
-			
-			for(Plane ikdj : FlyingplaneList){
-				System.out.println("인터넷이 안되겠지 "+ikdj.getString("CodeName"));
-			}
+
+			System.out.println("인터넷이 안되겠지 "+testP.getString("CodeName"));
 		}
+
 		
 		for(Plane pn : FlyingplaneList){
 			for(Airport ap : airportList){
 				if(ap.getString("Name").equals(pn.startSpot) ){
 					System.out.println("Set "+pn.getString("CodeName"));
-					ap.SetPlane(pn);
+
+					ap.SetPlane(pn);					
+
 					pn.setRoot(ap.getGraph());
 					pn.Spin();
 				}
 			}
 		}
+		
+		for(Plane pn : FlyingplaneList){
+			if(pn.codeName.equals("AA012")){
+				System.out.println("AA012 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
+				pn.root.nextNode();
+				System.out.println("AA012 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
+			}
+			if(pn.codeName.equals("AA013")) {
+				System.out.println("AA013 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
+			}
+		}
+	}
+	
+	public void save() {
+		File d = new File("src/Engine/resource_temp");
+		if(!d.exists()) {
+			d.mkdir();
+		}
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter("src/Engine/resource_temp/airport_text.json"));
+			out.write("");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	public void setFrame() {
-		this.frame = new TestGraphics(this.FlyingplaneList, this.airportList);
+		this.frame = new TestGraphics(this);
+		this.setList();
+	}
+	public void setList() {
+		this.frame.setList(this.FlyingplaneList2, this.airportList);
 	}
 	
 }
