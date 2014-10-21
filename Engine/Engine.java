@@ -18,8 +18,6 @@ public class Engine extends Thread{
 	
 	boolean _thread = true;
 	
-	Graph allGraph = new Graph();
-	
 	private static Engine instance = new Engine();
 	private Engine(){}
 	public static Engine getInstance(){
@@ -102,6 +100,7 @@ public class Engine extends Thread{
 			}
 			
 			newAirport.Data();
+			newAirport.setGraph();
 			this.airportList.add(newAirport);
 		}
 	}
@@ -149,8 +148,8 @@ public class Engine extends Thread{
 		
 	}
 	
-	public synchronized void run() {
-		int de=8;
+	public void run() {
+		int de=9999;
 		
 		while(this._thread){
 			if(FlyingplaneList.isEmpty()){
@@ -171,15 +170,26 @@ public class Engine extends Thread{
 				System.out.println(i.getString("Name")+ "-altitude : "+i.getDouble("Altitude"));
 				System.out.println();
 				
+//				if(i.getStatus()==3){
+//					de = FlyingplaneList.indexOf(i);
+//					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//				}
 				if(i.getStatus()==3){
+					for(Airport eap : airportList){
+						if(eap.getString("Name").equals(i.getString("EndSpot")) ){
+							eap.PlaneLandingTakeOff(i, "Landing");
+						}
+					}
+					System.out.println("Landing!!!");
+				}
+				if(i.getStatus()==4){
 					de = FlyingplaneList.indexOf(i);
-//					FlyingplaneList.remove(FlyingplaneList.indexOf(i));
 					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				}
 			}
-			if(de!=8){
-				FlyingplaneList.remove(de);
-				de=8;
+			if(de!=9999){
+				//FlyingplaneList.remove(de);
+				de=9999;
 			}
 			try {
 				Thread.sleep(30);
@@ -207,7 +217,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	public synchronized void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
+	public void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
 		Plane testP = null;
@@ -265,7 +275,6 @@ public class Engine extends Thread{
 				if(ap.getString("Name").equals(pn.startSpot) ){
 					System.out.println("Set "+pn.getString("CodeName"));
 					ap.SetPlane(pn);
-					ap.setGraph();
 					pn.setRoot(ap.getGraph());
 					pn.Spin();
 				}
@@ -277,24 +286,4 @@ public class Engine extends Thread{
 		this.frame = new TestGraphics(this.FlyingplaneList, this.airportList);
 	}
 	
-	public void allGraphCreate(){
-		allGraph.AddVertex(2750,400,13);
-		
-		allGraph.AddVertex(1004,457,13);
-		
-		allGraph.AddVertex(1100,500,13);
-		
-		allGraph.AddVertex(1500,450,13);
-		allGraph.AddVertex(2000,400,13);
-		
-		allGraph.AddVertex(2700,360,13);
-		
-		allGraph.VertexSetEdges(allGraph.vertex.get(0), allGraph.vertex.get(4));
-		allGraph.VertexSetEdges(allGraph.vertex.get(4), allGraph.vertex.get(3));
-		allGraph.VertexSetEdges(allGraph.vertex.get(3), allGraph.vertex.get(1));
-		
-		allGraph.VertexSetEdges(allGraph.vertex.get(2), allGraph.vertex.get(3));
-		allGraph.VertexSetEdges(allGraph.vertex.get(3), allGraph.vertex.get(4));
-		allGraph.VertexSetEdges(allGraph.vertex.get(4), allGraph.vertex.get(5));
-	}
 }

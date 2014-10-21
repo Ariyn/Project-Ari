@@ -11,9 +11,10 @@ public class Airport {
 	
 	int maximum_airplane;
 	
-	runwayNode[] runways = new runwayNode[1];
+	runwayNode[] runways = new runwayNode[2];
 	
 	Graph aa = new Graph();
+	Graph bb = new Graph(); // 착륙용 활주로 그래프
 
 	Plane p=new Plane();
 	LinkedList2 nowPlane = new LinkedList2();
@@ -26,7 +27,6 @@ public class Airport {
 
 	public void setRunways(long num, long length, ArrayList nodes){
 		runways[0] = new runwayNode();
-		
 		int number = (int)num;
 		
 		runways[number].length = length;
@@ -96,7 +96,7 @@ public class Airport {
 		if(text.equals("Landing")){
 			if(q1.offer(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
-				planeList.remove(pl);
+				pl.setRoot(bb);
 			}
 		}else{
 			if(pp == null){
@@ -141,6 +141,11 @@ public class Airport {
 			t=runways[0].runwaysNode.get(i).x;
 			r=runways[0].runwaysNode.get(i).z;
 			g.AddVertex(latitude + t/1000, longitude,r);
+		}
+		for(int i=runways[0].runwaysNode.size()-1; i>0;i--){
+			t=runways[0].runwaysNode.get(i).x;
+			r=runways[0].runwaysNode.get(i).z;
+			bb.AddVertex(latitude + t/1000, longitude,r);
 		}
 		if(name.equals("Dalars")){
 			g.AddVertex(2750,400,13);
