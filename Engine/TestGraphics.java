@@ -5,6 +5,7 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.event.MouseEvent;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-public class TestGraphics extends Frame implements MouseListener, MouseMotionListener, MouseWheelListener{
+public class TestGraphics extends JFrame implements MouseListener, MouseMotionListener, MouseWheelListener{
 	ImagePanel imagePanel;
 	private int originX, originY;
 	

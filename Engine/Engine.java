@@ -147,23 +147,22 @@ public class Engine extends Thread{
 		
 	}
 	
-	public void run() {
+	public synchronized void run() {
+		int de=8;
 		
 		while(this._thread){
+			if(FlyingplaneList.isEmpty()){
+				this.pause();
+			}
+			
 			for(Plane i : FlyingplaneList) {
 				for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
-					
 					ap.PlaneLandingTakeOff(i, "TakeOff");
-				}
-				
-				if(i.getStatus()==3){
-					FlyingplaneList.remove(FlyingplaneList.indexOf(i));
-					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					this.pause();
+					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+ap.getString("Name"));
+					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+i.getString("Name"));
 				}
 				
 				i.Move();
-				
 				
 				System.out.println("running");
 				System.out.println(i.getString("Name")+ "-latitude : "+i.getDouble("Latitude"));
@@ -171,8 +170,16 @@ public class Engine extends Thread{
 				System.out.println(i.getString("Name")+ "-altitude : "+i.getDouble("Altitude"));
 				System.out.println();
 				
+				if(i.getStatus()==3){
+					de = FlyingplaneList.indexOf(i);
+//					FlyingplaneList.remove(FlyingplaneList.indexOf(i));
+					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				}
 			}
-			
+			if(de!=8){
+				FlyingplaneList.remove(de);
+				de=8;
+			}
 			try {
 				Thread.sleep(30);
 				
@@ -199,7 +206,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	public void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
+	public synchronized void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
 		Plane testP = null;
@@ -252,7 +259,7 @@ public class Engine extends Thread{
 		for(Plane pn : FlyingplaneList){
 			for(Airport ap : airportList){
 				if(ap.getString("Name").equals(pn.startSpot) ){
-
+					System.out.println("Set "+pn.getString("Name"));
 					ap.SetPlane(pn);
 					ap.setGraph();
 					pn.setRoot(ap.getGraph());

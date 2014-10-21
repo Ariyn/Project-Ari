@@ -21,6 +21,8 @@ public class Airport {
 	
 	Queue<Plane> q = new LinkedList<Plane>();
 	Queue<Plane> q1 = new LinkedList<Plane>();
+	
+	Plane pp = null;
 
 	public void setRunways(long num, long length, ArrayList nodes){
 		runways[0] = new runwayNode();
@@ -90,7 +92,7 @@ public class Airport {
 
 	@SuppressWarnings("null")
 	public void PlaneLandingTakeOff(Plane pl, String text){ // �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝占�
-		Plane pp = null;
+		
 		if(text.equals("Landing")){
 			if(q1.offer(pl)==true){
 				System.out.println("PlaneLanding : "+pl.getString("Name"));
@@ -99,6 +101,7 @@ public class Airport {
 		}else{
 			if(pp == null){
 				pp = q.poll();
+				
 			}else if(pp.getStatus()==2){
 				pp = q.poll();
 			}
@@ -153,8 +156,6 @@ public class Airport {
 		}
 		else if(name.equals("Narita"))
 		{
-
-			//g.AddVertex(0,0,1403,357,1300);
 
 			g.AddVertex(1100,500,13);
 			g.AddVertex(1500,450,13);

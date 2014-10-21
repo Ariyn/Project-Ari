@@ -113,10 +113,6 @@
 			"BodyWidth":5.28,
 			"Height":17.40,
 			
-
-
-			"StartSpot":"Dalars",
-			"EndSpot":"Narita",
 			
 
 			"BodyWeight":119600,
@@ -138,6 +134,7 @@
 				"ARM":3,
 				"Anti Ship Missile":6
 			}
+			
 		}
 	},
 	"Flying_Planes":
@@ -147,11 +144,9 @@
 			"company":"aa",
 			"codeName":"aa012",
 			"coordinate":{
-				"x":0,
-				"y":0,
 				"longitude":0,
 				"latitude":0
-			}
+			},
 			"graph":{
 				"startSpot":"Dalars",
 				"endSpot":"Narita"
@@ -160,14 +155,12 @@
 		
 		{
 			"modelNumber":"MIG-29",
-			"company":"RA",
-			"codeName":"RA-0024",
+			"Company":"RA",
+			"CodeName":"RA-0024",
 			"coordinate":{
-				"x":0,
-				"y":0,
 				"longitude":0,
 				"latitude":0
-			}
+			},
 			"graph":{
 				"startSpot":"Narita",
 				"endSpot":"Dalars"

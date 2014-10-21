@@ -180,6 +180,7 @@ public class Plane {
 	}
 	
 	public void setStatus(String text){
+		System.out.println(name+" SetStatus !!!!");
 		if(text.equals("TakeOff")){
 			status=1;
 		}else if(text.equals("Flying")){
@@ -208,28 +209,28 @@ public class Plane {
 		}
 		
 		if (status==1){ //占싱뤄옙 
-			//System.out.println("TakeOff!!! "+speed);
+			System.out.println("TakeOff!!! "+speed);
 
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
 			
-			//System.out.println("Plane in class dx: "+dx);
-			//System.out.println("Plane in class dy: "+dy);
-			//System.out.println("Plane in class dz: "+dz);
+			System.out.println("Plane in class dx: "+dx);
+			System.out.println("Plane in class dy: "+dy);
+			System.out.println("Plane in class dz: "+dz);
 			if(altitude>=13)setStatus("Flying");
 		}
 
 		else if(status==2){ // 占쏙옙占쏙옙占쏙옙
-			//System.out.println("Flying!!! "+speed);
+			System.out.println("Flying!!! "+speed);
 
 
 			latitude+=dx;
 			longitude+=dy;
 			
-			//System.out.println("Plane in class dx: "+dx);
-			//System.out.println("Plane in class dy: "+dy);
-			//System.out.println("Plane in class dz: "+dz);
+			System.out.println("Plane in class dx: "+dx);
+			System.out.println("Plane in class dy: "+dy);
+			System.out.println("Plane in class dz: "+dz);
 			
 			Dictionary<String, Object> dic = this.root.getNextNode();
 		}
@@ -281,8 +282,8 @@ public class Plane {
 		} else {
 			GNode next = (GNode) dic.get("node");
 			
-				//System.out.println("this.Coor : "+this.coordinate(GNode.LATI)+", "+this.coordinate(GNode.LONG)+" "+this.coordinate(GNode.ALT) +
-						//"\t\tnext.Coor : "+next.coordinate(GNode.LATI)+", "+next.coordinate(GNode.LONG) + " " +next.coordinate(GNode.ALT) );
+				System.out.println("this.Coor : "+this.coordinate(GNode.LATI)+", "+this.coordinate(GNode.LONG)+" "+this.coordinate(GNode.ALT) +
+						"\t\tnext.Coor : "+next.coordinate(GNode.LATI)+", "+next.coordinate(GNode.LONG) + " " +next.coordinate(GNode.ALT) );
 				if(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT) == 0){
 					rz=0;
 				}else{
@@ -291,15 +292,15 @@ public class Plane {
 				
 				speedP = Math.sqrt(Math.pow((next.coordinate(GNode.LATI)-this.coordinate(GNode.LATI)), 2) + Math.pow((next.coordinate(GNode.LONG)-this.coordinate(GNode.LONG)), 2));
 				
-				//System.out.println(next.coordinate(GNode.ALT)+","+this.coordinate(GNode.ALT));
-				//System.out.println("speedP : "+speedP+",\t\t\taltitude :"+Math.abs(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT)));
+				System.out.println(next.coordinate(GNode.ALT)+","+this.coordinate(GNode.ALT));
+				System.out.println("speedP : "+speedP+",\t\t\taltitude :"+Math.abs(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT)));
 				
 				angleY=Math.atan2(Math.abs(next.coordinate(GNode.ALT)-this.coordinate(GNode.ALT)), speedP);
 				angleX=Math.atan2(Math.abs(next.coordinate(GNode.LONG)-this.coordinate(GNode.LONG)), Math.abs(next.coordinate(GNode.LATI)-this.coordinate(GNode.LATI)));
 				
 				
-				//System.out.println("angle X = "+angleX+"      "+Math.toDegrees(angleX));
-				//System.out.println("angle Y = "+angleY+"      "+Math.toDegrees(angleY));
+				System.out.println("angle X = "+angleX+"      "+Math.toDegrees(angleX));
+				System.out.println("angle Y = "+angleY+"      "+Math.toDegrees(angleY));
 				
 				dx = speed*Math.cos(angleY)*Math.cos(angleX);
 				dy = speed*Math.cos(angleY)*Math.sin(angleX);
@@ -336,7 +337,7 @@ public class Plane {
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
 
-				//System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
+				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
 
 
 				if(this.dx > 0) {
