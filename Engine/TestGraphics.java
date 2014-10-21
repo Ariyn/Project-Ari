@@ -30,7 +30,8 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 	private int originX, originY;
 	private Engine eng;
 	
-	public TestGraphics(ArrayList<Plane> p, ArrayList <Airport> ap, Engine eng){
+	
+	public TestGraphics(Engine eng){
 		this.eng = eng;
 		
 
@@ -44,12 +45,15 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 		});
 		addMouseListener(this);
 	    addMouseMotionListener(this);
-		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg", p, ap);
+		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg");
 		this.add(this.imagePanel);
 		setSize(900, 900);
 		setVisible(true);         // "super" Frame shows
 	}
-	
+	public void setList(ArrayList<Plane> p, ArrayList <Airport> ap) {
+//		setList(this.FlyingplaneList, this.airportList);
+		this.imagePanel.setList(p, ap);
+	}
 	public void pause() {
 		System.out.println("inside closing!!!");
 		this.eng.setRun(false);
@@ -116,9 +120,8 @@ class ImagePanel extends JPanel{
     private int decPixWid, decPixHei;
     private int scale = 1;
 
-    public ImagePanel(String path, ArrayList<Plane> p, ArrayList <Airport>ap) {
-        this.planes = p;
-        this.airports = ap;
+    public ImagePanel(String path) {
+        
         this.x=0;
         this.y=0;
         this.screenHeight = 900;
@@ -136,6 +139,12 @@ class ImagePanel extends JPanel{
         	ex.printStackTrace();
         }
     }
+    
+    public void setList(ArrayList<Plane> p, ArrayList <Airport> ap) {
+//		setList(this.FlyingplaneList, this.airportList);
+    	this.planes = p;
+        this.airports = ap;
+	}
     
     public void setScreen(int width, int height){
     	this.screenWidth = width;
@@ -177,18 +186,21 @@ class ImagePanel extends JPanel{
        
     }
     public void drawPlane(Graphics g) {
-    	for(Plane i : this.planes) {
-    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
-
-	    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
-	        g.drawString(""+i.getString("CodeName"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
+    	if(this.planes.size() >= 1){
+    		System.out.println("size "+this.planes.size());
+	    	for(Plane i : this.planes) {
+	    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
+	
+		    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
+		        g.drawString(""+i.getString("CodeName"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
+	    	}
     	}
-    	for(Airport i : this.airports) {
-    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
-	    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
-	        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
-
-    	}
+    	if(this.airports.size() >= 1)
+	    	for(Airport i : this.airports) {
+	    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
+		    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
+		        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
+	    	}
     }
     
     public void drawLines(Graphics g) {

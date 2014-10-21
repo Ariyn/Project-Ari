@@ -215,28 +215,28 @@ public class Plane implements Cloneable{
 		}
 		
 		if (status==1){ //占싱뤄옙 
-			System.out.println("TakeOff!!! "+speed);
+//			System.out.println("TakeOff!!! "+speed);
 
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
 			
-			System.out.println("Plane in class dx: "+dx);
-			System.out.println("Plane in class dy: "+dy);
-			System.out.println("Plane in class dz: "+dz);
+//			System.out.println("Plane in class dx: "+dx);
+//			System.out.println("Plane in class dy: "+dy);
+//			System.out.println("Plane in class dz: "+dz);
 			if(altitude>=13)setStatus("Flying");
 		}
 
 		else if(status==2){ // 占쏙옙占쏙옙占쏙옙
-			System.out.println("Flying!!! "+speed);
+//			System.out.println("Flying!!! "+speed);
 
 
 			latitude+=dx;
 			longitude+=dy;
 			
-			System.out.println("Plane in class dx: "+dx);
-			System.out.println("Plane in class dy: "+dy);
-			System.out.println("Plane in class dz: "+dz);
+//			System.out.println("Plane in class dx: "+dx);
+//			System.out.println("Plane in class dy: "+dy);
+//			System.out.println("Plane in class dz: "+dz);
 			
 			Dictionary<String, Object> dic = this.root.getNextNode();
 		}
@@ -343,7 +343,7 @@ public class Plane implements Cloneable{
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
 
-				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
+//				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
 
 
 				if(this.dx > 0) {

@@ -203,7 +203,7 @@
 		{
 			"modelNumber":"A330",
 			"company":"aa",
-			"codeName":"aa013",
+			"CodeName":"AA013",
 			"coordinate":{
 				"longitude":0,
 				"latitude":0
@@ -226,7 +226,19 @@
 				"endSpot":"Dalars"
 			}
 		},
-		
+		{
+			"modelNumber":"MIG-29",
+			"Company":"RA",
+			"CodeName":"RA-0025",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Narita",
+				"endSpot":"Dalars"
+			}
+		},
 		{
 			"modelNumber":"A330",
 			"Company":"aa",

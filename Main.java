@@ -44,3 +44,13 @@ public class Main {
 	}
 	
 }
+
+/*
+ * A330-latitude : 2700.1559840840687
+	A330-longitude : 360.0
+	A330-altitude : 0.5793694551124018
+	
+	A330-latitude : 2700.6
+	A330-longitude : 360.0
+	A330-altitude : 0.0
+	*/
