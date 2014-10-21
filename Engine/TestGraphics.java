@@ -191,7 +191,7 @@ class ImagePanel extends JPanel{
        
     }
     public void drawPlane(Graphics g) {
-    	if(this.planes.size() >= 1){
+    	if(this.planes != null && this.planes.size() >= 1){
     		System.out.println("size "+this.planes.size());
 	    	for(Plane i : this.planes) {
 	    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);

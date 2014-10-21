@@ -10,7 +10,7 @@ public class Plane implements Cloneable{
 	int bodyWeight, payloadWeight, MTOW, M_maxDistance;
 	long maxspeed, crusingSpeed;
 	
-	double speed=0.6;
+	double speed=5.6;
 	
 	double dx=0,dy=0;
 	double ddx=0, ddy=0, ddz=0;
@@ -92,6 +92,10 @@ public class Plane implements Cloneable{
 			return company;
 		case "CodeName":
 			return codeName;
+		case "StrartSpot":
+			return startSpot;
+		case "EndSpot":
+			return endSpot;
 		default:
 			return "string default";
 		}
@@ -181,8 +185,6 @@ public class Plane implements Cloneable{
 	
 	public void setRoot(Graph g){
 		this.root = g;
-		
-		
 	}
 	
 	public void setStatus(String text){
@@ -240,7 +242,13 @@ public class Plane implements Cloneable{
 			
 			Dictionary<String, Object> dic = this.root.getNextNode();
 		}
+		
 		else if(status==3){
+			
+			System.out.println("Plane in class dx: "+dx);
+			System.out.println("Plane in class dy: "+dy);
+			System.out.println("Plane in class dz: "+dz);
+			
 			latitude+=dx;
 			longitude+=dy;
 			altitude+=dz;
@@ -343,7 +351,10 @@ public class Plane implements Cloneable{
 			if(dic.get("next") == Boolean.TRUE) {
 				GNode next = (GNode) dic.get("node");
 
+
+
 //				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
+
 
 
 				if(this.dx > 0) {
@@ -396,7 +407,7 @@ public class Plane implements Cloneable{
 					}
 				}
 			}
-			//System.out.println("sucX : " +sucX + " sucY : "+sucY + " sucZ : "+ sucZ);
+			System.out.println("sucX : " +sucX + " sucY : "+sucY + " sucZ : "+ sucZ);
 			if(dic.get("next") == Boolean.FALSE){
 				setStatus("Landing");
 			}

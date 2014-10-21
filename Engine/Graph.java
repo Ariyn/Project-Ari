@@ -18,8 +18,13 @@ public class Graph implements Cloneable{
 		this.vertex.add(g);
 	}
 	public Graph clone(){
-	    try{  
-	        return (Graph)super.clone();  
+
+	    try{
+	    	Graph graph = (Graph)super.clone();
+	    	graph.head = this.head.clone();
+	    	graph.vertex = (ArrayList<GNode>) this.vertex.clone();
+	        return graph;
+
 	    }catch(Exception e){ 
 	    	e.printStackTrace();
 	        return null; 

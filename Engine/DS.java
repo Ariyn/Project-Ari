@@ -67,6 +67,14 @@ class GNode implements Cloneable
 		}
 		return retVal;
 	}
+	public GNode clone(){
+	    try{  
+	        return (GNode)super.clone();  
+	    }catch(Exception e){ 
+	    	e.printStackTrace();
+	        return null; 
+	    }
+	}
 }
 
 class CBNode<T> extends Node<T> implements Cloneable

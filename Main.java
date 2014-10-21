@@ -43,7 +43,7 @@ public class Main {
 		eng.setFrame(false);
 		
 		Main.MatrixTime(3000);
-//		eng.start();
+		eng.start();
 		
 	}
 	public static void MatrixTime(int delayTime){
