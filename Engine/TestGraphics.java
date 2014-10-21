@@ -179,13 +179,15 @@ class ImagePanel extends JPanel{
     public void drawPlane(Graphics g) {
     	for(Plane i : this.planes) {
     		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
+
 	    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
-	        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
+	        g.drawString(""+i.getString("CodeName"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
     	}
     	for(Airport i : this.airports) {
     		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
 	    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
 	        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
+
     	}
     }
     

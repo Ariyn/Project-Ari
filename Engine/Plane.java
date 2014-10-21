@@ -175,6 +175,7 @@ public class Plane implements Cloneable{
 			break;
 		case "CodeName":
 			codeName = str;
+			break;
 		}
 	}
 	

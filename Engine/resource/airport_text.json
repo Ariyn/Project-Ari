@@ -51,7 +51,53 @@
 		"Narita":
 		{
 			"name":"Narita",
-			"position":{"Latitude":1004.91667, "Longitude":457.63889},
+			"position":{"Latitude":1404.91667, "Longitude":357.63889},
+			"runways":
+			[
+				{
+					"num":0,
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":0,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":300,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":600,
+							"y":0,
+							"z":1
+						},
+						{
+							"x":1200,
+							"y":0,
+							"z":3
+						},
+						{
+							"x":2500,
+							"y":0,
+							"z":12
+						},
+						{
+							"x":3500,
+							"y":0,
+							"z":13
+						}
+					]
+				}
+			],
+			"maximum_airplane":20
+		},
+		"Incheon":
+		{
+			"name":"Incheon",
+			"position":{"Latitude":1264.51, "Longitude":374.692},
 			"runways":
 			[
 				{
@@ -94,7 +140,9 @@
 			],
 			"maximum_airplane":20
 		}
-	},
+		
+	}
+	
 	
 	"Planes" :
 	{
@@ -141,8 +189,8 @@
 	[
 		{
 			"modelNumber":"A330",
-			"company":"aa",
-			"codeName":"aa012",
+			"Company":"aa",
+			"CodeName":"AA012",
 			"coordinate":{
 				"longitude":0,
 				"latitude":0
@@ -176,6 +224,20 @@
 			"graph":{
 				"startSpot":"Narita",
 				"endSpot":"Dalars"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA034",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
 			}
 		}
 	]
