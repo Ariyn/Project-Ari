@@ -352,6 +352,7 @@ public class Plane implements Cloneable{
 				GNode next = (GNode) dic.get("node");
 
 
+
 //				System.out.println(next.coordinate(GNode.LATI)+ " <- 랄라랄라라 -> " +next.coordinate(GNode.LONG) +" 랄라랄라라33 : " + next.coordinate(GNode.ALT));
 
 

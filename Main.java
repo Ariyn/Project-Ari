@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,8 +16,13 @@ public class Main {
 		JSONParser parser = new JSONParser();
 		
 		try{
-			
-			Object obj = parser.parse(new FileReader("src/Engine/resource/airport_text.json"));
+			Object obj;
+			File d = new File("src/Engine/resource_temp/airport_text.json");
+			if(d.exists()) {
+				 obj = parser.parse(new FileReader("src/Engine/resource_temp/airport_text.json"));
+			} else {
+				 obj = parser.parse(new FileReader("src/Engine/resource/airport_text.json"));
+			}
 			
 			JSONObject jsonObject = (JSONObject) obj;
 		
@@ -38,3 +44,13 @@ public class Main {
 	}
 	
 }
+
+/*
+ * A330-latitude : 2700.1559840840687
+	A330-longitude : 360.0
+	A330-altitude : 0.5793694551124018
+	
+	A330-latitude : 2700.6
+	A330-longitude : 360.0
+	A330-altitude : 0.0
+	*/
