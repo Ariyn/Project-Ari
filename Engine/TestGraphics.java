@@ -26,10 +26,10 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 	ImagePanel imagePanel;
 	private int originX, originY;
 	
-	public TestGraphics(ArrayList<Plane> p){
+	public TestGraphics(ArrayList<Plane> p, ArrayList <Airport> ap){
 		addMouseListener(this);
 	    addMouseMotionListener(this);
-		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg", p);
+		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg", p, ap);
 		this.add(this.imagePanel);
 		setSize(900, 900);
 		setVisible(true);         // "super" Frame shows
@@ -88,6 +88,7 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 
 class ImagePanel extends JPanel{
 	private ArrayList<Plane> planes;
+	private ArrayList<Airport> airports;
 	
     private BufferedImage image;
     private int x, y, screenWidth, screenHeight;
@@ -95,12 +96,14 @@ class ImagePanel extends JPanel{
     private int decPixWid, decPixHei;
     private int scale = 1;
 
-    public ImagePanel(String path, ArrayList<Plane> p) {
+    public ImagePanel(String path, ArrayList<Plane> p, ArrayList <Airport>ap) {
         this.planes = p;
+        this.airports = ap;
         this.x=0;
         this.y=0;
         this.screenHeight = 900;
         this.screenWidth = 900;
+        
         
         try {                
         	image = ImageIO.read(new File(path));
@@ -156,8 +159,13 @@ class ImagePanel extends JPanel{
     public void drawPlane(Graphics g) {
     	for(Plane i : this.planes) {
     		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
-	    	g.drawLine(_x-this.x*this.scale, _y-this.y*this.scale, _x+2-this.x*this.scale, _y+2-this.y*this.scale);
-	        g.drawString(""+i.getString("Name"), _x-this.x*this.scale, _y-this.y*this.scale);
+	    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
+	        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
+    	}
+    	for(Airport i : this.airports) {
+    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
+	    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
+	        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
     	}
     }
     

@@ -219,7 +219,7 @@ public class Engine extends Thread{
 			for(Plane p : planeTypeList){
 				
 				if(p.getString("Name").equals(cpl.get("modelNumber")) ){
-					testP = p;
+					testP = p.clone();
 				}
 			}
 
@@ -270,6 +270,6 @@ public class Engine extends Thread{
 	}
 	
 	public void setFrame() {
-		this.frame = new TestGraphics(this.FlyingplaneList);
+		this.frame = new TestGraphics(this.FlyingplaneList, this.airportList);
 	}
 }
