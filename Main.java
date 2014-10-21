@@ -1,7 +1,9 @@
+import java.awt.Robot;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 import Engine.*;
 
@@ -38,11 +40,21 @@ public class Main {
 		}catch(ParseException e){
 			e.printStackTrace();
 		}
-		eng.setFrame();
-		eng.start();
+		eng.setFrame(false);
+		
+		Main.MatrixTime(3000);
+//		eng.start();
 		
 	}
-	
+	public static void MatrixTime(int delayTime){
+
+	       long saveTime = System.currentTimeMillis();
+	       long currTime = 0;
+
+	       while( currTime - saveTime < delayTime){
+	           currTime = System.currentTimeMillis();
+	       }
+	   }
 }
 
 /*

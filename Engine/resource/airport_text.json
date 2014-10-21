@@ -48,6 +48,192 @@
 			],
 			"maximum_airplane":20
 		},
+		"J.F.K Airport":
+		{
+			"name":"J.F.K",
+			"companies":{"KAL":10, "AA":50},
+			"position":{"Latitude":2860.858139, "Longitude":406.428},
+			"runways":
+			[
+				{
+					"num":0,
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":100,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":400,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":600,
+							"y":0,
+							"z":1
+						},
+						{
+							"x":1200,
+							"y":0,
+							"z":3
+						},
+						{
+							"x":2200,
+							"y":0,
+							"z":12
+						},
+						{
+							"x":3500,
+							"y":0,
+							"z":13
+						}
+					]
+				}
+			],
+			"maximum_airplane":20
+		},
+		"J.F.K Airport":
+		{
+			"name":"J.F.K",
+			"companies":{"KAL":10, "AA":50},
+			"position":{"Latitude":2860.858139, "Longitude":406.428},
+			"runways":
+			[
+				{
+					"num":0,
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":100,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":400,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":600,
+							"y":0,
+							"z":1
+						},
+						{
+							"x":1200,
+							"y":0,
+							"z":3
+						},
+						{
+							"x":2200,
+							"y":0,
+							"z":12
+						},
+						{
+							"x":3500,
+							"y":0,
+							"z":13
+						}
+					]
+				}
+			],
+			"maximum_airplane":20
+		},
+		"Baikonur Cosmodrome":
+		{
+			"name":"Baikonur Cosmodrome",
+			"position":{"Latitude":633.13359, "Longitude":458.589219},
+			"runways":
+			[
+				{
+					"num":0,
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":0,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":300,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":600,
+							"y":0,
+							"z":1
+						},
+						{
+							"x":1200,
+							"y":0,
+							"z":3
+						},
+						{
+							"x":2500,
+							"y":0,
+							"z":12
+						},
+						{
+							"x":3500,
+							"y":0,
+							"z":13
+						}
+					]
+				}
+			],
+			"maximum_airplane":20
+		},
+		"Heathrow Airpor":
+		{
+			"name":"Heathrow",
+			"position":{"Latitude":2.19197, "Longitude":515.11218},
+			"runways":
+			[
+				{
+					"num":0,
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":0,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":300,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":600,
+							"y":0,
+							"z":1
+						},
+						{
+							"x":1200,
+							"y":0,
+							"z":3
+						},
+						{
+							"x":2500,
+							"y":0,
+							"z":12
+						},
+						{
+							"x":3500,
+							"y":0,
+							"z":13
+						}
+					]
+				}
+			],
+			"maximum_airplane":20
+		},
 		"Narita":
 		{
 			"name":"Narita",
@@ -97,7 +283,7 @@
 		"Incheon":
 		{
 			"name":"Incheon",
-			"position":{"Latitude":1264.51, "Longitude":374.692},
+			"position":{"Latitude":1294.51, "Longitude":384.692},
 			"runways":
 			[
 				{
@@ -239,18 +425,6 @@
 				"endSpot":"Dalars"
 			}
 		},
-		{
-			"modelNumber":"A330",
-			"Company":"aa",
-			"CodeName":"AA034",
-			"coordinate":{
-				"longitude":0,
-				"latitude":0
-			},
-			"graph":{
-				"startSpot":"Incheon",
-				"endSpot":"Narita"
-			}
-		}
+		
 	]
 }

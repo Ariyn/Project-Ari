@@ -1,6 +1,7 @@
 package Engine;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,12 +30,12 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 	ImagePanel imagePanel;
 	private int originX, originY;
 	private Engine eng;
+	private boolean type;
 	
-	
-	public TestGraphics(Engine eng){
+	public TestGraphics(Engine eng, boolean type){
 		this.eng = eng;
+		this.type = type;
 		
-
 		addWindowListener(new WindowAdapter() {
 			   public void windowClosing(WindowEvent e) {
 				   System.out.println("closing!!!");
@@ -63,7 +64,7 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		this.imagePanel.moveTo(e.getX()-this.originX, e.getY()-this.originY);
-		System.out.println(e.getX()+" "+e.getY() +",\t\t"+ (this.originX - e.getX()) +" "+ (this.originY-e.getY()));
+//		System.out.println(e.getX()+" "+e.getY() +",\t\t"+ (this.originX - e.getX()) +" "+ (this.originY-e.getY()));
 	}
 
 	@Override
@@ -74,7 +75,9 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		double[] d=this.imagePanel.calcButton(e.getX(), e.getY());
+//		System.out.printf("%d,%d\t\t%f\t%f\n",e.getX(), e.getY(), d[0],d[1]);
+		System.out.printf("g.AddVertex(%f,%f,%d);\n",d[0],d[1],13);
 	}
 
 	@Override
@@ -177,7 +180,9 @@ class ImagePanel extends JPanel{
         
         g2d.drawImage(image, -this.x*this.scale, -this.y*this.scale, image.getWidth()*this.scale, image.getHeight()*this.scale, null); // see javadoc for more info on the parameters
         g2d.setColor(new Color(0, 255, 0));
-       
+        
+        
+        
         this.drawPlane(g2d);
         this.drawLines(g2d);
 
@@ -190,7 +195,7 @@ class ImagePanel extends JPanel{
     		System.out.println("size "+this.planes.size());
 	    	for(Plane i : this.planes) {
 	    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
-	
+	    		g.setFont(new Font("",0,25));
 		    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
 		        g.drawString(""+i.getString("CodeName"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
 	    	}
@@ -198,6 +203,7 @@ class ImagePanel extends JPanel{
     	if(this.airports.size() >= 1)
 	    	for(Airport i : this.airports) {
 	    		int _x = this.setLati(i.latitude), _y = this.setLong(i.longitude);
+	    		g.setFont(new Font("",0,25));
 		    	g.drawRect(_x-this.x*this.scale, _y-this.y*this.scale, 2*this.scale, 2*this.scale);
 		        g.drawString(""+i.getString("Name"), (_x-this.x+6)*this.scale, (_y-this.y+6)*this.scale);
 	    	}
@@ -221,5 +227,27 @@ class ImagePanel extends JPanel{
     private int setLong(double longs) {
     	int a = (int)(longs*(-13/8.0))+1300;
     	return a;
+    }
+   
+    private double setX(int lati) {
+    	double b = lati+this.x;
+    	if(b<this.P2LX)
+    		b = b*(146.0/1850.0) + 217;
+    	else
+    		b = b*(21.0/275.0)-140.4545;
+//    	double a = (lati-1850)*3600.0/4500;
+//    	a = a-this.x*this.scale;
+    	return b;
+    }
+    private double setY(int longs) {
+    	double a = (longs-1300)/(-13/8.0);
+    	a = a-this.y*this.scale;
+    	return a;
+    }
+    
+    public double[] calcButton(int x, int y) {
+    	double[] retVal = {this.setX(x), this.setY(y)};
+   
+    	return retVal;
     }
 }

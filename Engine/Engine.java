@@ -171,14 +171,8 @@ public class Engine extends Thread{
 					i.longitude = ap.longitude;
 					i.latitude = ap.latitude;
 					
-					if(i.codeName.equals("AA013"))
-						System.out.println("AA013 root"+i.root.head.coordinate(0)+"\t"+i.root.head.coordinate(1)+"\t"+i.root.head.coordinate(2));
-					
 					i.Spin();
 					
-					if(i.codeName.equals("AA013"))
-						System.out.println("AA013 root"+i.root.head.coordinate(0)+"\t"+i.root.head.coordinate(1)+"\t"+i.root.head.coordinate(2));
-
 					
 					this.FlyingplaneList2.add(i);
 //					this.FlyingplaneList.remove(i);
@@ -211,8 +205,8 @@ public class Engine extends Thread{
 					System.out.println();
 					System.out.println();
 					
-					if(i.codeName.equals("AA013") && i.dx==0)
-						this.pause();
+//					if(i.codeName.equals("AA013") && i.dx==0)
+//						this.pause();
 				}
 
 				
@@ -345,8 +339,8 @@ public class Engine extends Thread{
 
 	}
 	
-	public void setFrame() {
-		this.frame = new TestGraphics(this);
+	public void setFrame(boolean type) {
+		this.frame = new TestGraphics(this, type);
 		this.setList();
 	}
 	public void setList() {

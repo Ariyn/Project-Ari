@@ -174,10 +174,14 @@ public class Airport {
 			g.AddVertex(latitude + t/1000, longitude,r);
 		}
 		if(name.equals("Dalars")){
-			g.AddVertex(2750,400,13);
+			g.AddVertex(2702,360,13);
+			g.AddVertex(2705,364,13);
+			g.AddVertex(2720,360,13);
+			g.AddVertex(2000,290,13);
 			g.AddVertex(1600,300,13);
 			g.AddVertex(1500,600,13);
 			g.AddVertex(1404,357,13);
+			
 
 		} else if(name.equals("Narita")){
 			g.AddVertex(1410,400,13);
