@@ -179,12 +179,14 @@ class ImagePanel extends JPanel{
         Graphics2D g2d = bufferedImage.createGraphics();
         
         g2d.drawImage(image, -this.x*this.scale, -this.y*this.scale, image.getWidth()*this.scale, image.getHeight()*this.scale, null); // see javadoc for more info on the parameters
+       
+        
+        
         g2d.setColor(new Color(0, 255, 0));
-        
-        
+        this.drawLines(g2d);       
         
         this.drawPlane(g2d);
-        this.drawLines(g2d);
+        
 
         Graphics2D g2dComponent = (Graphics2D) g;
         g2dComponent.drawImage(bufferedImage, null, 0, 0);
@@ -210,6 +212,10 @@ class ImagePanel extends JPanel{
     }
     
     public void drawLines(Graphics g) {
+    	g.setColor(new Color(200, 200, 200, 180));
+        g.fillRect(0, 0, 900, 900);
+        
+        g.setColor(new Color(140, 250, 140, 250));
     	for(int i=-14;i<22;i++){
 	    	g.drawLine((this.P2LX-this.x+this.decPixWid*i)*this.scale, -this.y*this.scale, (this.P2LX-this.x+this.decPixWid*i)*this.scale, (this.image.getHeight()-this.y)*this.scale);
     	}

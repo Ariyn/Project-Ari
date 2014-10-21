@@ -24,8 +24,6 @@ public class Engine extends Thread{
 	
 	boolean _thread = true;
 	
-	Graph allGraph = new Graph();
-	
 	private static Engine instance = new Engine();
 	private Engine(){}
 	public static Engine getInstance(){
@@ -156,7 +154,7 @@ public class Engine extends Thread{
 		
 	}
 	
-	public synchronized void run() {
+	public void run() {
 		int de=8;
 		
 		while(this._thread){
@@ -167,17 +165,25 @@ public class Engine extends Thread{
 			for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
 				Plane i = ap.PlaneLandingTakeOff("TakeOff");
 				if(i != null) {
-					i.altitude = ap.altitude;
-					i.longitude = ap.longitude;
-					i.latitude = ap.latitude;
-					
-					i.Spin();
-					
-					
-					this.FlyingplaneList2.add(i);
-//					this.FlyingplaneList.remove(i);
-					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+ap.getString("Name"));
-					System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+i.getString("CodeName"));
+					if(!i.startSpot.equals("test")){
+						i.altitude = ap.altitude;
+						i.longitude = ap.longitude;
+						i.latitude = ap.latitude;
+						
+						if(i.codeName.equals("AA013"))
+							System.out.println("AA013 root"+i.root.head.coordinate(0)+"\t"+i.root.head.coordinate(1)+"\t"+i.root.head.coordinate(2));
+						
+						i.Spin();
+						
+						if(i.codeName.equals("AA013"))
+							System.out.println("AA013 root"+i.root.head.coordinate(0)+"\t"+i.root.head.coordinate(1)+"\t"+i.root.head.coordinate(2));
+	
+						
+						this.FlyingplaneList2.add(i);
+	//					this.FlyingplaneList.remove(i);
+						System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+ap.getString("Name"));
+						System.out.println(i.getStatus()+"   PlaneLaindingTakeOffEngine : "+i.getString("CodeName"));
+					}
 				}
 				
 			}
@@ -189,7 +195,7 @@ public class Engine extends Thread{
 					System.out.println("running \t\t"+i.root);
 
 					Dictionary<String, Object> d = i.root.getNextNode();
-					if(d.get("next") != null)
+					if(d.get("next") != null && d.get("node") != null)
 						System.out.printf("%s's coordinate = %f, %f, %f\n",
 								i.codeName,
 								((GNode)d.get("node")).coordinate(GNode.LATI),
@@ -205,12 +211,18 @@ public class Engine extends Thread{
 					System.out.println();
 					System.out.println();
 					
-//					if(i.codeName.equals("AA013") && i.dx==0)
-//						this.pause();
+					if(i.codeName.equals("AA013") && i.dx==0){
+						//this.pause();
+					}
 				}
 
 				
+//				if(i.getStatus()==3){
+//					de = FlyingplaneList.indexOf(i);
+//					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//				}
 				if(i.getStatus()==3){
+
 					de = FlyingplaneList2.indexOf(i);
 //					FlyingplaneList.remove(FlyingplaneList.indexOf(i));
 					System.out.println("Bye!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -219,6 +231,7 @@ public class Engine extends Thread{
 			if(de!=8){
 				FlyingplaneList2.remove(de);
 				de=8;
+
 			}
 			try {
 				Thread.sleep(30);
@@ -249,7 +262,7 @@ public class Engine extends Thread{
 		}
 	}
 	
-	public synchronized void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
+	public void createPlane(JSONObject data){ // �뜝�룞�삕�뜝�뙎�슱�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕
 		
 		JSONArray flyingPlane = (JSONArray) data.get("Flying_Planes");
 		Plane testP = null;
@@ -305,22 +318,24 @@ public class Engine extends Thread{
 			for(Airport ap : airportList){
 				if(ap.getString("Name").equals(pn.startSpot) ){
 					System.out.println("Set "+pn.getString("CodeName"));
+
 					ap.SetPlane(pn);					
-					pn.setRoot(ap.getGraph());
+
+					pn.setRoot(ap.getGraph(pn.startSpot, pn.endSpot));
 					pn.Spin();
 				}
 			}
 		}
 		
 		for(Plane pn : FlyingplaneList){
-			if(pn.codeName.equals("AA012")){
-				System.out.println("AA012 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
-				pn.root.nextNode();
-				System.out.println("AA012 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
-			}
-			if(pn.codeName.equals("AA013")) {
-				System.out.println("AA013 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
-			}
+//			if(pn.codeName.equals("AA012")){
+//				System.out.println("AA012 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
+//				pn.root.nextNode();
+//				System.out.println("AA012 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
+//			}
+//			if(pn.codeName.equals("AA013")) {
+//				System.out.println("AA013 root"+pn.root.head.coordinate(0)+"\t"+pn.root.head.coordinate(1)+"\t"+pn.root.head.coordinate(2));
+//			}
 		}
 	}
 	
@@ -339,32 +354,12 @@ public class Engine extends Thread{
 
 	}
 	
-	public void setFrame(boolean type) {
-		this.frame = new TestGraphics(this, type);
+	public void setFrame() {
+		this.frame = new TestGraphics(this, false);
 		this.setList();
 	}
 	public void setList() {
 		this.frame.setList(this.FlyingplaneList2, this.airportList);
 	}
 	
-	public void allGraphCreate(){
-		allGraph.AddVertex(2750,400,13);
-		
-		allGraph.AddVertex(1004,457,13);
-		
-		allGraph.AddVertex(1100,500,13);
-		
-		allGraph.AddVertex(1500,450,13);
-		allGraph.AddVertex(2000,400,13);
-		
-		allGraph.AddVertex(2700,360,13);
-		
-		allGraph.VertexSetEdges(allGraph.vertex.get(0), allGraph.vertex.get(4));
-		allGraph.VertexSetEdges(allGraph.vertex.get(4), allGraph.vertex.get(3));
-		allGraph.VertexSetEdges(allGraph.vertex.get(3), allGraph.vertex.get(1));
-		
-		allGraph.VertexSetEdges(allGraph.vertex.get(2), allGraph.vertex.get(3));
-		allGraph.VertexSetEdges(allGraph.vertex.get(3), allGraph.vertex.get(4));
-		allGraph.VertexSetEdges(allGraph.vertex.get(4), allGraph.vertex.get(5));
-	}
 }

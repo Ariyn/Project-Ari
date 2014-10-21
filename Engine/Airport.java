@@ -95,7 +95,7 @@ public class Airport {
 				g.AddVertex(2720,360,13);
 				g.AddVertex(2000,290,13);
 				g.AddVertex(1600,300,13);
-				g.AddVertex(1500,600,13);
+				g.AddVertex(1500,330,13);
 				g.AddVertex(1404,357,13);
 			} else if(end.equals("Leonardo da Vinci")) {
 				g.AddVertex(2702,360,13);
@@ -104,9 +104,12 @@ public class Airport {
 				g.AddVertex(3700,410,13);
 //				"name":"Leonardo da Vinci",
 //				"position":{"Latitude":130.46238, "Longitude":417.99887},
-			} else if(end.equals("J.F.K")) {
-				g.AddVertex(2860.858139,406.428,13);
+			} else if(end.equals("J.F.K.")) {
+				System.out.println("J.F.K.J.F.K.");
+				g.AddVertex(2702,360,13);
+				g.AddVertex(2860,406,13);
 			} else if(end.equals("Mojave")) {
+				System.out.println("MojaveMojaveMojave");
 				g.AddVertex(2418.4300,350.56235,13);
 //				"name":"Mojave",
 //				"position":{"Latitude":2418.4300, "Longitude":350.56235}
@@ -128,7 +131,14 @@ public class Airport {
 				g.AddVertex(1350, 390, 13);
 				g.AddVertex(1390, 400, 13);
 			}
+		} else if(start.equals("J.F.K.")) {
+			if(end.equals("Leonardo da Vinci")) {
+				g.AddVertex(3000,400,13);
+				g.AddVertex(3400,390,13);
+				g.AddVertex(3700,410,13);
+			}
 		}
+		
 		
 //		"name":"Heathrow",
 //		"position":{"Latitude":2.19197, "Longitude":515.11218},

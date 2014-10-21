@@ -97,7 +97,7 @@
 		},
 		"J.F.K Airport":
 		{
-			"name":"J.F.K",
+			"name":"J.F.K.",
 			"companies":{"KAL":10, "AA":50},
 			"position":{"Latitude":2860.858139, "Longitude":406.428},
 			"runways":
@@ -510,6 +510,32 @@
 				}
 			],
 			"maximum_airplane":20
+		},
+		"test":
+		{
+			"name":"test",
+			"position":{"Latitude":7000.0, "Longitude":7000.0},
+			"runways":
+			[
+				{
+					"num":0,
+					"length":3600,
+					"nodes":
+					[
+						{
+							"x":0,
+							"y":0,
+							"z":0
+						},
+						{
+							"x":0,
+							"y":0,
+							"z":0
+						}
+					]
+				}
+			],
+			"maximum_airplane":20
 		}
 		
 	}
@@ -561,7 +587,7 @@
 		{
 			"modelNumber":"A330",
 			"Company":"aa",
-			"CodeName":"AA012",
+			"CodeName":"AA221",
 			"coordinate":{
 				"longitude":0,
 				"latitude":0
@@ -569,12 +595,40 @@
 			"graph":{
 				"startSpot":"Dalars",
 				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA554",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA019",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"J.F.K."
 			}
 		},
 		{
 			"modelNumber":"A330",
-			"company":"aa",
-			"CodeName":"AA013",
+			"Company":"aa",
+			"CodeName":"AA0223",
 			"coordinate":{
 				"longitude":0,
 				"latitude":0
@@ -584,6 +638,7 @@
 				"endSpot":"Narita"
 			}
 		},
+
 		{
 			"modelNumber":"A330",
 			"company":"aa",
@@ -600,14 +655,581 @@
 		{
 			"modelNumber":"A330",
 			"company":"aa",
-			"CodeName":"AA015",
+			"CodeName":"AA234",
 			"coordinate":{
 				"longitude":0,
 				"latitude":0
 			},
 			"graph":{
-				"startSpot":"J F K",
+				"startSpot":"J.F.K.",
 				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Heathrow"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA221",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA554",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA019",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"J.F.K."
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA0223",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA014",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA234",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"J.F.K.",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Heathrow"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA221",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA554",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA019",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"J.F.K."
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA0223",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA014",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA234",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"J.F.K.",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Heathrow"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA221",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA554",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA019",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"J.F.K."
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA0223",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA014",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA234",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"J.F.K.",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Heathrow"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA221",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA554",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA019",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"J.F.K."
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA0223",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA014",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA234",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"J.F.K.",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Heathrow"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA221",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA554",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA019",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"J.F.K."
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"Company":"aa",
+			"CodeName":"AA0223",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
+
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA014",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"AA234",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"J.F.K.",
+				"endSpot":"Leonardo da Vinci"
+			}
+		},
+		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Narita"
+			}
+		},
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"CodeName":"KAL789",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Incheon",
+				"endSpot":"Heathrow"
 			}
 		},
 		{

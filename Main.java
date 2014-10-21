@@ -40,7 +40,7 @@ public class Main {
 		}catch(ParseException e){
 			e.printStackTrace();
 		}
-		eng.setFrame(false);
+		eng.setFrame();
 		
 		Main.MatrixTime(3000);
 		eng.start();
