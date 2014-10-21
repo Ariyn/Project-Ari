@@ -1,5 +1,9 @@
 package Engine;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -151,9 +155,10 @@ public class Engine extends Thread{
 		int de=8;
 		
 		while(this._thread){
-			if(FlyingplaneList.isEmpty()){
+			if(FlyingplaneList.isEmpty() || this._thread == false){
 				this.pause();
 			}
+			
 			
 			for(Plane i : FlyingplaneList) {
 				for(Airport ap : airportList){ // �뜝�뙎�궪�삕 �뜝�떛琉꾩삕 �뜝�룞�삕�뜝�룞�삕
@@ -190,8 +195,11 @@ public class Engine extends Thread{
 			this.frame.repaint();
 		}
 	}
-	
+	public void setRun(boolean r) {
+		this._thread = r;
+	}
 	public synchronized void pause(){
+		System.out.println("engine pause");
 		if(this._thread){
 			this._thread = false;
 			try {
@@ -269,7 +277,22 @@ public class Engine extends Thread{
 		}
 	}
 	
+	public void save() {
+		File d = new File("src/Engine/resource_temp");
+		if(!d.exists()) {
+			d.mkdir();
+		}
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter("src/Engine/resource_temp/airport_text.json"));
+			out.write("");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	public void setFrame() {
-		this.frame = new TestGraphics(this.FlyingplaneList, this.airportList);
+		this.frame = new TestGraphics(this.FlyingplaneList, this.airportList, this);
 	}
 }

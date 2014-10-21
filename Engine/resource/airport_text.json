@@ -152,7 +152,19 @@
 				"endSpot":"Narita"
 			}
 		},
-		
+		{
+			"modelNumber":"A330",
+			"company":"aa",
+			"codeName":"aa013",
+			"coordinate":{
+				"longitude":0,
+				"latitude":0
+			},
+			"graph":{
+				"startSpot":"Dalars",
+				"endSpot":"Narita"
+			}
+		},
 		{
 			"modelNumber":"MIG-29",
 			"Company":"RA",
@@ -166,6 +178,5 @@
 				"endSpot":"Dalars"
 			}
 		}
-		
 	]
 }

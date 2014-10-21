@@ -13,6 +13,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +28,20 @@ import javax.imageio.ImageIO;
 public class TestGraphics extends JFrame implements MouseListener, MouseMotionListener, MouseWheelListener{
 	ImagePanel imagePanel;
 	private int originX, originY;
+	private Engine eng;
 	
-	public TestGraphics(ArrayList<Plane> p, ArrayList <Airport> ap){
+	public TestGraphics(ArrayList<Plane> p, ArrayList <Airport> ap, Engine eng){
+		this.eng = eng;
+		
+
+		addWindowListener(new WindowAdapter() {
+			   public void windowClosing(WindowEvent e) {
+				   System.out.println("closing!!!");
+
+				   ((TestGraphics) e.getWindow()).pause();
+				   System.exit(3);
+			 }
+		});
 		addMouseListener(this);
 	    addMouseMotionListener(this);
 		this.imagePanel = new ImagePanel("src/Engine/resource/worldmap.jpg", p, ap);
@@ -35,6 +50,12 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 		setVisible(true);         // "super" Frame shows
 	}
 	
+	public void pause() {
+		System.out.println("inside closing!!!");
+		this.eng.setRun(false);
+//		this.eng.save();
+	}
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		this.imagePanel.moveTo(e.getX()-this.originX, e.getY()-this.originY);
@@ -82,7 +103,6 @@ public class TestGraphics extends JFrame implements MouseListener, MouseMotionLi
 		System.out.println(e.getScrollType() +", "+ e.getScrollAmount());
 		
 	}
-
 
 }
 
